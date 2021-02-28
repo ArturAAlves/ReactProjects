@@ -20,11 +20,6 @@ function App() {
         <Route render={() => <h1>ERROR NOT FOUND!!!</h1>} /> */
       </Switch>
 
-      {/* <Route exact path='/Drinks' render={() => <Drinks />} />
-      <Route exact path='/Snacks' render={() => <Snacks />} />
-      <Route exact path='/Sardines' render={() => <Sardines />} />
-      <Route render={() => <h1>ERROR NOT FOUND!!!</h1>} /> */}
-
     </div>
   );
 }
