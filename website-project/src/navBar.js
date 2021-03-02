@@ -33,8 +33,8 @@ export default function NavBar() {
         <ul className={mobile ? "nav-links open" : "nav-links"}>
           <li className={fade()}><NavLink to="/" onClick={handleClick}> Home</NavLink></li>
           <li className={fade()}><NavLink to="/react2" onClick={handleClick}> react 2</NavLink></li>
-          <li className={fade()}><NavLink to="/" onClick={handleClick}> Home</NavLink></li>
-          <li className={fade()}><NavLink to="/" onClick={handleClick}> react 2</NavLink></li>
+          <li className={fade()}><NavLink to="/accordion" onClick={handleClick}> accordion</NavLink></li>
+          <li className={fade()}><NavLink to="/menu" onClick={handleClick}> menu</NavLink></li>
           <NavLink className={`login-button ${fade()}`} to="/login" onClick={handleClick}> Login</NavLink>
           {/* <li className={fade()}><button className="login-button" href="#">Login</button></li> */}
         </ul >
