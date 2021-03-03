@@ -25,16 +25,26 @@ function SideMenu() {
     },
   ]
 
-  const [menu, setMenu] = useState(() => [...menuList]);
+  const [menu, setMenu] = useState(() => [menuList[0]]);
 
+
+
+  let filter = (x) => {
+    let list = menuList.filter((item, i) => {
+      return i === x ? item : ""
+    })
+    return setMenu(list)
+  }
 
   return (
     <div className="sidemenu-container">
       <h2>Side Menu</h2>
       <div className="sidemenu-bar">
-        <button>Button 1</button>
-        <button>Button 2</button>
-        <button>Button 3</button>
+        {
+          menuList.map((item, i) => {
+            return <button onClick={() => filter(i)}>{item.name}</button>
+          })
+        }
         {/* <Switch>
           <Route exact path='/' render={() => <React />} />
           <Route exact path='/react2' render={() => <React2 />} />
@@ -42,7 +52,15 @@ function SideMenu() {
         </Switch> */}
       </div>
       <div className="sidemenu-content">
-        <SideMenuItems />
+        {
+          menu.map(item => {
+            return <SideMenuItems {...item} />
+          })
+
+        }
+
+
+
 
       </div>
 
