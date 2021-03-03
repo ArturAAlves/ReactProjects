@@ -87,25 +87,32 @@ function Menu() {
       type: `food`
     }
   ]
+
+  const categorias = new Set(["all", ...menuList.map(item => (item.type))])
+
   const [menu, setMenu] = useState(() => [...menuList]);
+  const [categories, setCategories] = useState(() => [...categorias]);
 
-  let menuReduced = () => (
-    menu.reduce((acc, curr) => {
-      if (!acc.includes(curr.type)) {
-        acc.push(curr.type)
-      }
-      return acc
-    }, ["All"])
-  )
+  // let menuReduced = () => (
+  //   menu.reduce((acc, curr) => {
+  //     if (!acc.includes(curr.type)) {
+  //       acc.push(curr.type)
+  //     }
+  //     return acc
+  //   }, ["All"])
+  // )
 
-
-  const [categories, setCategories] = useState(() => [...menuReduced()]);
-
-
-
-
-
-  console.log(categories)
+  let filter = (type) => {
+    if (type === "all") {
+      setMenu(oldList => oldList = menuList)
+    }
+    else {
+      let newArr = menuList.filter(items => (
+        items.type === type
+      ))
+      setMenu(oldList => oldList = newArr)
+    }
+  }
 
   return (
     <div className="menu-container">
@@ -113,12 +120,12 @@ function Menu() {
       <div>
         {
           categories.map(item => {
-            return <button>{item}</button>
+            return <button onClick={() => filter(item)}>{item}</button>
           })
         }
-
       </div>
       {
+        //render menuitems
         menu.map(item => {
           return <MenuItem {...item} />
         })
