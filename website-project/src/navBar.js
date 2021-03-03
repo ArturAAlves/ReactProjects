@@ -35,6 +35,7 @@ export default function NavBar() {
           <li className={fade()}><NavLink to="/react2" onClick={handleClick}> react 2</NavLink></li>
           <li className={fade()}><NavLink to="/accordion" onClick={handleClick}> accordion</NavLink></li>
           <li className={fade()}><NavLink to="/menu" onClick={handleClick}> menu</NavLink></li>
+          <li className={fade()}><NavLink to="/sidemenu" onClick={handleClick}> Sidemenu</NavLink></li>
           <NavLink className={`login-button ${fade()}`} to="/login" onClick={handleClick}> Login</NavLink>
           {/* <li className={fade()}><button className="login-button" href="#">Login</button></li> */}
         </ul >

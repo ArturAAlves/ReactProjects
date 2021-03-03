@@ -1,0 +1,32 @@
+.sidemenu-container {
+  position: relative;
+  padding-top: 100px;
+  text-align: center;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  h2 {
+    width: 100%;
+  }
+}
+
+.sidemenu-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+  height: auto;
+  background-color: bisque;
+  button {
+    width: 150px;
+  }
+}
+.sidemenu-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  background-color: rgb(228, 187, 137);
+  height: 150px;
+}
