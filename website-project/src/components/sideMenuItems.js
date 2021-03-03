@@ -1,39 +1,14 @@
-import React, { useState } from 'react';
 import "../css/sidemenu.scss"
 
 
-function SideMenuItems() {
-  const menuList = [
-    {
-      name: "IceCream  Popstickle",
-      description: `Lorem ipsum dolor sit amet consectetur adipisicing elit
-        Magnam porro vel earum animi cupiditate debitis nesciunt similique reprehenderit.`,
-      type: `sweets`
-    },
-    {
-      name: "Raisens",
-      description: `Lorem ipsum dolor sit amet consectetur adipisicing elit
-        Magnam porro vel earum animi cupiditate debitis nesciunt similique reprehenderit.` ,
-      type: `sweets`
-    },
-    {
-      name: "Honey Pancakes",
-      description: `Lorem ipsum dolor sit amet consectetur adipisicing elit
-        Magnam porro vel earum animi cupiditate debitis nesciunt similique reprehenderit.` ,
-      type: `pancakes`
-    },
-  ]
+let SideMenuItems = (data) => {
 
-  const [menu, setMenu] = useState(() => [...menuList]);
-
-
+  console.log(data)
   return (
     <div className="sidemenu-item">
-      <h2>Side Menu</h2>
-
-
-
-
+      <h2>{data.name}</h2>
+      <h5>{data.description}</h5>
+      <h5>{data.type}</h5>
     </div>
   );
 }

@@ -1,0 +1,20 @@
+.slider-container {
+  padding-top: 8vh;
+  height: 100vh;
+  background-color: bisque;
+  display: flex;
+}
+
+.slider-left {
+  width: 15%;
+  background-color: blue;
+}
+
+.slider-center {
+  width: 70%;
+}
+
+.slider-right {
+  background-color: blue;
+  width: 15%;
+}
