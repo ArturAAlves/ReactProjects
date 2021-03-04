@@ -32,6 +32,7 @@ export default function NavBar() {
         </div>
         <ul className={mobile ? "nav-links open" : "nav-links"}>
           <li className={fade()}><NavLink to="/" onClick={handleClick}> Home</NavLink></li>
+          <li className={fade()}><NavLink to="/colorgenerator" onClick={handleClick}>Color Generator</NavLink></li>
           <li className={fade()}><NavLink to="/slider" onClick={handleClick}> Slider</NavLink></li>
           <li className={fade()}><NavLink to="/accordion" onClick={handleClick}> accordion</NavLink></li>
           <li className={fade()}><NavLink to="/menu" onClick={handleClick}> menu</NavLink></li>
