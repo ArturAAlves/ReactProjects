@@ -4,7 +4,8 @@ import './css/App.scss';
 import { Route, Switch } from "react-router-dom";
 
 import React from "./react"
-import ColorGenerator from "./colorgenerator"
+import GroveryBud from "./groceryBud"
+// import ColorGenerator from "./colorgenerator"
 import Slider from "./slider"
 import Accordion from "./accordion"
 import Menu from "./menu"
@@ -18,7 +19,7 @@ function App() {
       <NavBar />
       <Switch>
         <Route exact path='/' render={() => <React />} />
-        <Route exact path='/colorgenerator' render={() => <ColorGenerator />} />
+        <Route exact path='/groceryBud' render={() => <GroveryBud />} />
         <Route exact path='/slider' render={() => <Slider />} />
         <Route exact path='/accordion' render={() => <Accordion />} />
         <Route exact path='/menu' render={() => <Menu />} />

@@ -1,0 +1,46 @@
+.groceryBud-container {
+  position: relative;
+  padding-top: 10vh;
+  height: 90vh;
+  background-color: aquamarine;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.groceryBud {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 450px;
+  width: 30vw;
+}
+
+.groceryBud-header {
+  width: 100%;
+}
+
+.groceryBud-form {
+  display: flex;
+  justify-content: center;
+  input {
+    width: 70%;
+    margin-right: 10px;
+  }
+}
+
+.groceryBud-list {
+  margin-top: 50px;
+}
+// groceryBudItem
+
+.groceryBudItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 450px;
+  width: 30vw;
+}
+.groceryBud-text {
+  width: 70%;
+}
