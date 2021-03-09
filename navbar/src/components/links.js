@@ -5,6 +5,5 @@ export const links =
     { text: "Contact", url: "/contact" },
     { text: "About", url: "/about" },
     { text: "Contact", url: "/contact" },
-    { text: "About", url: "/about" },
   ]
 
