@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import "./css/modal.scss"
+import useToggle from "./hooks/useToggle"
 
 function Modal() {
-  const [modalActive, SetModalActive] = useState(false)
+  const [modalActive, setModalActive] = useToggle()
+  const [teres, setteres] = useState(1)
 
-
-
-
+  console.log(setteres)
   return (
     <div className={modalActive ? "modal-container" : "modal-hiden"}>
-      <button className={modalActive ? "modal-btn-active" : "modal-btn"} onClick={() => SetModalActive(() => !modalActive)}>{modalActive ? "Close" : "Open"}</button>
+      {/* <button className={modalActive ? "modal-btn-active" : "modal-btn"} onClick={() => SetModalActive(() => !modalActive)}>{modalActive ? "Close" : "Open"}</button> */}
+      <button className={modalActive ? "modal-btn-active" : "modal-btn"} onClick={setModalActive}>{modalActive ? "Close" : "Open"} </button>
+
       <div className={modalActive ? "modal-content" : "modal-content-hiden"} >
         <img src="https://thumbs.web.sapo.io/?W=775&H=0&delay_optim=1&webp=1&epic=NjVkxyKRfb43bNHUvHpEq+3kSkGG4/ne+FXX4oDtTVlJx5L2IpcKUwQ9B+zeTOdKlfBeHjvIKr9s9ZbtcGQwf3B9T/04KabHSlKkL8qx/vM+QLM=" alt="wakanda"></img>
         <p>A Disney está a desenvolver para a sua plataforma de streaming uma série de TV inspirada por "Black Panther" que se vai passar no fictício reino africano de Wakanda.
