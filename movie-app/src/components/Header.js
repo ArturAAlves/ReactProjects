@@ -1,9 +1,10 @@
 import React from 'react'
+import "../scss/Header.scss"
 
-export const Header = () => {
+const Header = () => {
     return (
-        <div>
-
-        </div>
+        <div className="header">🎬Enterntainment Hub🎥</div>
     )
 }
+
+export default Header
