@@ -1,6 +1,5 @@
 const MyMessage = ({ message }) => {
-	console.log(message);
-	if (message?.attachments?.length > 0) {
+	if (message.attachments && message.attachments.length > 0) {
 		return (
 			<img
 				src={message.attachments[0].file}
@@ -10,6 +9,7 @@ const MyMessage = ({ message }) => {
 			/>
 		);
 	}
+
 	return (
 		<div
 			className="message"
@@ -17,7 +17,7 @@ const MyMessage = ({ message }) => {
 				float: "right",
 				marginRight: "18px",
 				color: "white",
-				background: "#3b2a50",
+				backgroundColor: "#3B2A50",
 			}}>
 			{message.text}
 		</div>

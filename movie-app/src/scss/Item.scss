@@ -1,0 +1,36 @@
+.item-component {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 18%;
+	height: auto;
+	margin: 10px;
+}
+
+.item-component-title {
+	height: 15%;
+}
+
+.item-component-title {
+	position: relative;
+	width: 100%;
+
+	img {
+		object-fit: contain;
+		width: 100%;
+		height: auto;
+	}
+
+	div {
+		position: absolute;
+		z-index: 99;
+		background-color: rgb(78, 78, 119);
+		width: 25px;
+		height: 25px;
+		border-radius: 50%;
+		overflow: hidden;
+		text-align: center;
+		right: -7px;
+		top: -7px;
+	}
+}

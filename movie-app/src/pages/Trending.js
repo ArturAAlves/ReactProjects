@@ -1,5 +1,10 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
+import Item from "../components/Item"
+
+//Style
+import "../scss/Trending.scss"
+
 
 const Trending = () => {
     const [content, setContent] = useState([])
@@ -14,19 +19,11 @@ const Trending = () => {
 
     console.log(content)
 
-
     return (
         <div className="main-page-container">
-
             <div className="trending-content">
                 {content && content.map((item) => (
-                    <div className="content-item" key={item.id}>
-                        <img src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${item.poster_pa}`} alt={item.title} ></img>
-
-                        <p>{item.original_title}</p>
-                        <div>{item.vote_average}</div>
-                    </div>
-
+                    <Item {...item} key={item.id} />
                 ))
                 }
             </div>

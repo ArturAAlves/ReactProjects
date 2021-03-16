@@ -8,9 +8,6 @@ import WhatshotIcon from '@material-ui/icons/Whatshot';
 import { useHistory } from 'react-router-dom';
 
 
-
-
-
 const MainNav = () => {
     const [value, setValue] = React.useState(0);
     const history = useHistory();
