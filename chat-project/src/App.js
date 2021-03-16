@@ -5,16 +5,16 @@ import ChatFeed from "./components/ChatFeed"
 import LoginForm from "./components/loginForm"
 
 const App = () => {
-
+    const projectID = process.env.REACT_APP_API_KEY
     if (!localStorage.getItem("username")) {
         return <LoginForm />
     }
     return (
         <div>
             <ChatEngine
-                // privateKey="158cff28-956c-4a93-8dbb-6f271eadba31"
                 height="100vh"
-                projectID="3498eb6b-f805-4713-a030-a8dd8882ba64"
+                // projectID={process.env.REACT_APP_API_KEY}
+                projectID={projectID}
                 userName={localStorage.getItem('username')}
                 userSecret={localStorage.getItem('password')}
                 // userName="AAlves"
@@ -23,9 +23,6 @@ const App = () => {
             />
         </div>
     )
-
-
-
 }
 
 export default App
