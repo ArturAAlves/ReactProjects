@@ -3,9 +3,9 @@ import React, { useState, useEffect } from 'react'
 import Item from "../components/Item"
 import PaginationComponent from "../components/Pagination"
 import Genres from "../components/Genres"
+import useGenres from "../hooks/useGenre"
 //Style
 import "../scss/App.scss"
-
 
 const Trending = () => {
     const [page, setPage] = useState(1)
@@ -14,15 +14,19 @@ const Trending = () => {
     const [selectedGenres, setSelectedGenres] = useState([])
     const [genres, setGenres] = useState([])
     const contentType = "movie"
+    const genreList = useGenres(selectedGenres)
+
     const fetchMovies = async () => {
-        const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&page=${page}`)
+        const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreList}`)
         setContent(data.results)
         setTotalPages(data.total_pages)
-
+        console.log(data)
     }
+
     useEffect(() => {
         fetchMovies()
-    }, [page])
+    }, [page, genreList])
+
     return (
         <div className="main-page-container">
             <div className="trending-content">
@@ -33,6 +37,7 @@ const Trending = () => {
                     genres={genres}
                     setGenres={setGenres}
                     setSelectedGenres={setSelectedGenres}
+                    setPage={setPage}
                 />
 
 

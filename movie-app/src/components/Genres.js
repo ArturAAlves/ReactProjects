@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 
-const OutlinedChips = ({ type, genres, selectedGenres, setGenres, setSelectedGenres }) => {
+const OutlinedChips = ({ type, genres, setGenres, selectedGenres, setSelectedGenres, setPage }) => {
     // type = { contentType }
     // selectedGenres = { selectedGenres }
     // genres = { genres }
@@ -23,9 +23,18 @@ const OutlinedChips = ({ type, genres, selectedGenres, setGenres, setSelectedGen
         console.info('You clicked the delete icon.');
     };
 
+    const handleAdd = (genre) => {
+        setSelectedGenres([...selectedGenres, genre])
+        setGenres(genres.filter((item) => item.id !== genre.id))
+        setPage(1)
 
+    }
 
-
+    const handleRemove = (genre) => {
+        setSelectedGenres(selectedGenres.filter((item) => item.id !== genre.id))
+        setGenres([genre, ...genres])
+        setPage(1)
+    }
 
 
     useEffect(() => {
@@ -43,16 +52,31 @@ const OutlinedChips = ({ type, genres, selectedGenres, setGenres, setSelectedGen
                 display: 'flex',
                 flexWrap: "wrap",
                 justifyContent: "center",
-                marginBottom: "15px"
+                marginBottom: "15px",
+                width: "100%"
             }}>
-            {genres && genres.map((item) => (
+            {selectedGenres && selectedGenres.map((genre) => (
                 <Chip
-                    label={item.name}
-                    key={item.id}
+                    onClick={() => handleRemove(genre)}
+                    label={genre.name}
+                    key={genre.id}
                     style={{ margin: "5px" }}
-                    clickable size="small"
+                    clickable
+                    size="small"
+                    color="primary"
                 />
             ))}
+            {genres && genres.map((genre) => (
+                <Chip
+                    onClick={() => handleAdd(genre)}
+                    label={genre.name}
+                    key={genre.id}
+                    style={{ margin: "5px" }}
+                    clickable
+                    size="small"
+                />
+            ))}
+
         </div>
     );
 }
