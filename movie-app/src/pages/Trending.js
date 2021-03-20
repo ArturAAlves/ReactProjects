@@ -21,18 +21,21 @@ const Trending = () => {
 
     useEffect(() => {
         fetchTrending()
+        // eslint-disable-next-line
     }, [page])
 
 
     return (
-        <div className="main-page-container">
-            <div className="trending-content">
+        <div className="search-container">
+            <div className="search-content">
                 <h3 className="page-tittles">Trending</h3>
                 {content && content.map((item) => (
                     <Item item={item} key={item.id} />
                 ))}
-                <PaginationComponent setPage={setPage} totalPages={10} />
+                <PaginationComponent setPage={setPage} totalPages={totalPages} className="search-pagination" />
+
             </div>
+
 
         </div>
     )
