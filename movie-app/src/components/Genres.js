@@ -5,12 +5,6 @@ import axios from 'axios';
 
 
 const OutlinedChips = ({ type, genres, setGenres, selectedGenres, setSelectedGenres, setPage }) => {
-    // type = { contentType }
-    // selectedGenres = { selectedGenres }
-    // genres = { genres }
-    // setGenres = { setGenres }
-    // setSelectedGenres = { setSelectedGenres }
-
 
     const fetchGenres = async () => {
         const { data } = await axios.get(
@@ -20,14 +14,13 @@ const OutlinedChips = ({ type, genres, setGenres, selectedGenres, setSelectedGen
 
     }
     const handleDelete = () => {
-        console.info('You clicked the delete icon.');
+        return ""
     };
 
     const handleAdd = (genre) => {
         setSelectedGenres([...selectedGenres, genre])
         setGenres(genres.filter((item) => item.id !== genre.id))
         setPage(1)
-
     }
 
     const handleRemove = (genre) => {
@@ -36,12 +29,12 @@ const OutlinedChips = ({ type, genres, setGenres, selectedGenres, setSelectedGen
         setPage(1)
     }
 
-
     useEffect(() => {
         fetchGenres()
         return () => {
             setGenres([])
         }
+        // eslint-disable-next-line
     }, [])
 
 
@@ -64,6 +57,7 @@ const OutlinedChips = ({ type, genres, setGenres, selectedGenres, setSelectedGen
                     clickable
                     size="small"
                     color="primary"
+                    onDelete={handleDelete}
                 />
             ))}
             {genres && genres.map((genre) => (

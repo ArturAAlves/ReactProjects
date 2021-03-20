@@ -7,7 +7,7 @@ import useGenres from "../hooks/useGenre"
 //Style
 import "../scss/App.scss"
 
-const Trending = () => {
+const Movies = () => {
     const [page, setPage] = useState(1)
     const [content, setContent] = useState([])
     const [totalPages, setTotalPages] = useState(1)
@@ -17,14 +17,14 @@ const Trending = () => {
     const genreList = useGenres(selectedGenres)
 
     const fetchMovies = async () => {
-        const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreList}`)
+        const { data } = await axios.get(`https://api.themoviedb.org/3/discover/${contentType}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=${genreList}`)
         setContent(data.results)
         setTotalPages(data.total_pages)
-        console.log(data)
     }
 
     useEffect(() => {
         fetchMovies()
+        // eslint-disable-next-line
     }, [page, genreList])
 
     return (
@@ -40,15 +40,13 @@ const Trending = () => {
                     setPage={setPage}
                 />
 
-
                 {content && content.map((item) => (
                     <Item item={item} contentType={contentType} key={item.id} />
                 ))}
                 <PaginationComponent setPage={setPage} totalPages={totalPages} />
             </div>
-
         </div>
     )
 }
 
-export default Trending
+export default Movies
