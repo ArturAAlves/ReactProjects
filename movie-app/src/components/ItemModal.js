@@ -4,6 +4,9 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { img_500, unavailable } from "../config/Config"
+import Button from '@material-ui/core/Button';
+import TheatersIcon from '@material-ui/icons/Theaters';
+
 
 //Style
 import "../scss/Item.scss"
@@ -16,13 +19,13 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
 
     },
+
     paper: {
         backgroundColor: "#566585",
         border: 'none',
         outline: "none",
         active: "none",
         boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
     },
 }));
 
@@ -43,7 +46,8 @@ const ItemModal = ({ children, item }) => {
     const poster = item.backdrop_path
     const title = item.original_name || item.title
     const date = item.first_air_date || item.release_date
-
+    const overview = item.overview
+    console.log(item)
     return (
         <>
             <button type="button" onClick={handleOpen} className="item-component" style={{ border: "none" }}>
@@ -64,15 +68,20 @@ const ItemModal = ({ children, item }) => {
                 <Fade in={open}>
                     <div className={classes.paper}>
                         <div className="content-modal">
-                            <div className="item-img-container">
+                            <div className="mnodal-img-container">
                                 <img src={poster ? `${img_500}${poster}` : unavailable
                                 } alt={item.title} ></img>
                             </div>
-                            <div className="item-title-container">
-                                <p className="tittle">{title} ({date})</p>
-
+                            <div className="modal-text-container">
+                                <p className="modal-title">{title} ({date.substring(0, 4)})</p>
+                                <p className="modal-overview">{overview}</p>
+                                <Button
+                                    variant="contained"
+                                    className="modal-button"
+                                    startIcon={<TheatersIcon />}>
+                                    Watch the Trailer
+                                     </Button>
                             </div>
-
                         </div>
                     </div>
                 </Fade>
