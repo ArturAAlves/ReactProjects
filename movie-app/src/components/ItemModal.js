@@ -3,8 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import { img_500, unavailable } from "../config/Config"
+
 //Style
 import "../scss/Item.scss"
+import "../scss/ItemModal.scss"
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -24,6 +27,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ItemModal = ({ children, item }) => {
+
+
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
@@ -35,6 +40,9 @@ const ItemModal = ({ children, item }) => {
         setOpen(false);
     };
 
+    const poster = item.backdrop_path
+    const title = item.original_name || item.title
+    const date = item.first_air_date || item.release_date
 
     return (
         <>
@@ -55,7 +63,17 @@ const ItemModal = ({ children, item }) => {
             >
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        {children}
+                        <div className="content-modal">
+                            <div className="item-img-container">
+                                <img src={poster ? `${img_500}${poster}` : unavailable
+                                } alt={item.title} ></img>
+                            </div>
+                            <div className="item-title-container">
+                                <p className="tittle">{title} ({date})</p>
+
+                            </div>
+
+                        </div>
                     </div>
                 </Fade>
             </Modal>

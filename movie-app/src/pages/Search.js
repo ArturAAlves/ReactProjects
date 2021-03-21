@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, createMuiTheme, Tab, Tabs, TextField, ThemeProvider } from '@material-ui/core';
 import SearchIcon from "@material-ui/icons/Search"
 import Item from "../components/Item"
@@ -15,7 +15,7 @@ const Trending = () => {
     const [page, setPage] = useState(1);
     const [content, setContent] = useState("")
     const [totalPages, setTotalPages] = useState(0)
-    const mountRef = useRef(false);
+    const [loaded, setLoaded] = useState(false)
 
     const fetchSearch = async () => {
         try {
@@ -42,8 +42,8 @@ const Trending = () => {
     };
 
     useEffect(() => {
-        if (mountRef) {
-            mountRef.current = true
+        if (!loaded) {
+            setLoaded(true)
         } else {
             fetchSearch()
         }
