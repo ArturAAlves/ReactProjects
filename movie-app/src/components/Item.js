@@ -1,6 +1,6 @@
 import React from 'react'
 import ItemModal from "../components/ItemModal"
-import { img_300, img_500, unavailable } from "../config/Config"
+import { img_300, unavailable } from "../config/Config"
 
 //Style
 import "../scss/Item.scss"
@@ -12,11 +12,12 @@ const Item = ({ item, contentType }) => {
     const date = item.first_air_date || item.release_date
     const type = item.media_type ? item.media_type : contentType
     const id = item.id
-
     return (
         <ItemModal key={id} item={item}>
             <div className="item-img-container">
-                <img src={`${img_300}${poster ? poster : unavailable}`} alt={item.title} ></img>
+                <img src={poster ? `${img_300}${poster}` : unavailable
+
+                } alt={item.title} ></img>
                 <div className="score"> <p>{vote}</p> </div>
             </div>
             <div className="item-title-container">
@@ -28,5 +29,4 @@ const Item = ({ item, contentType }) => {
 
     )
 }
-
 export default Item
