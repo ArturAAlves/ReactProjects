@@ -9,11 +9,12 @@
 	}
 }
 
-.mnodal-img-container {
+.modal-img-container {
 	position: relative;
 	width: 100%;
 	text-align: center;
 	margin: auto;
+	height: 35vh;
 
 	img {
 		object-fit: cover;
@@ -23,6 +24,15 @@
 	}
 }
 
+.modal-video-container {
+	position: relative;
+	width: 95%;
+	height: 35vh;
+	margin: auto;
+	margin-top: 10px;
+	object-fit: cover;
+}
+
 .modal-text-container {
 	position: relative;
 	margin: auto;
@@ -30,6 +40,7 @@
 	text-align: center;
 	color: white;
 	margin-bottom: 30px;
+	margin-top: 15px;
 }
 
 .modal-title {

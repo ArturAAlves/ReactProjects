@@ -1,4 +1,4 @@
-import React,{ useState }  from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const ItemModal = ({ children, item }) => {
-    const [videoId, setVidoId] = useState(null)
+    const [videoId, setVidoId] = useState(0)
 
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
@@ -43,6 +43,7 @@ const ItemModal = ({ children, item }) => {
 
     const handleClose = () => {
         setOpen(false);
+        setVidoId(0)
     };
 
     const poster = item.backdrop_path
@@ -51,13 +52,16 @@ const ItemModal = ({ children, item }) => {
     const overview = item.overview
 
     const fetchYoutube = async () => {
-        try {
-            const { data } = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${title} trailler&key=${process.env.REACT_APP_Youtube_Token}&maxResults=1`)
-            console.log(data.items[0].id.videoId)
-        } catch (error) {
-            
+        if (!videoId) {
+
+            try {
+                const { data } = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${title} trailler&key=${process.env.REACT_APP_Youtube_Token}&maxResults=1`)
+                setVidoId(data.items[0].id.videoId)
+            } catch (error) {
+            }
+        } else {
+            setVidoId(0)
         }
-      
     }
 
     return (
@@ -80,24 +84,22 @@ const ItemModal = ({ children, item }) => {
                 <Fade in={open}>
                     <div className={classes.paper}>
                         <div className="content-modal">
-                            <div className="mnodal-img-container">
-                                <img src={poster ? `${ img_500 }${ poster }` : unavailable
+                            {!videoId ? <div className="modal-img-container">
+                                <img src={poster ? `${img_500}${poster}` : unavailable
                                 } alt={item.title} ></img>
+                            </div> : <div className="modal-video-container">
+                                <iframe width="100%" height="100%" src={`https://www.youtube.com/embed/${videoId}`} frameBorder="0" allow="autoplay" allowFullScreen title={item.title}></iframe>
                             </div>
-                            <div className="mnodal-video-container">
-                                <iframe width="100%" height="100%" src={`https://www.youtube.com/embed/XW2E2Fnh52w`} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen ></iframe>
-                            </div>
+                            }
                             <div className="modal-text-container">
                                 <p className="modal-title">{title} ({date.substring(0, 4)})</p>
                                 <p className="modal-overview">{overview}</p>
                                 <Button
-                                    onClick={()=>fetchYoutube()}
+                                    onClick={() => fetchYoutube()}
                                     variant="contained"
                                     className="modal-button"
                                     startIcon={<TheatersIcon />}>
                                     Watch the Trailer
-                                
-
                                      </Button>
                             </div>
                         </div>
