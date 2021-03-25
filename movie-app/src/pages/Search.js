@@ -69,10 +69,10 @@ const Trending = () => {
                         />
                         <Button variant="contained" style={{ marginLeft: 10 }} onClick={() => fetchSearch()}><SearchIcon /></Button>
                     </div>
-                    <div style={{ display: "flex", justifyContent: "center", marginTop: "15px", width: "50%", margin: "auto" }} >
+                    <div style={{ display: "flex", justifyContent: "center", marginTop: "15px", margin: "auto" }} >
                         <Tabs value={type} indicatorColor="primary" textColor="primary" onChange={handleChange}>
-                            <Tab style={{ width: "50%", minWidth: "175px" }} label="Search Movies" ></Tab>
-                            <Tab style={{ width: "50%", minWidth: "175px" }} label="Search Series" ></Tab>
+                            <Tab style={{ width: "50%", minWidth: "150px" }} label="Search Movies" ></Tab>
+                            <Tab style={{ width: "50%", minWidth: "150px" }} label="Search Series" ></Tab>
                         </Tabs>
                     </div>
                 </ThemeProvider>
