@@ -1,21 +1,18 @@
 import React from 'react'
 import { Card, CardContent, Typography, Grid } from "@material-ui/core"
 import CountUp from "react-countup"
-
-
 import styles from "./Cards.module.scss"
+import cx from "classnames"
+
 
 const Cards = ({ confirmed, deaths, lastUpdate, recovered }) => {
-    if (!confirmed || !deaths || !lastUpdate) {
+    if (!confirmed) {
         return "loading.."
     }
-
-
-    console.log(new Date(lastUpdate).toDateString())
     return (
 
-        <Grid container spacing={3} justify="center" className={styles.container} >
-            <Card className={styles.card}>
+        <Grid container justify="center" className={cx(styles.container)} >
+            <Grid item component={Card} xs={11} md={3} className={cx(styles.card, styles.infected)} >
                 <CardContent>
                     <Typography color="textSecondary" gutterBottom>
                         Infected
@@ -35,8 +32,9 @@ const Cards = ({ confirmed, deaths, lastUpdate, recovered }) => {
                         Number of active cases of COVID-19
                         </Typography>
                 </CardContent>
-            </Card>
-            <Card className={styles.card}>
+            </Grid>
+
+            <Grid item component={Card} xs={11} md={3} className={cx(styles.card, styles.recovered)}>
                 <CardContent>
                     <Typography color="textSecondary" gutterBottom>
                         Recovered
@@ -56,9 +54,9 @@ const Cards = ({ confirmed, deaths, lastUpdate, recovered }) => {
                         Number of recoveries from COVID-19
                         </Typography>
                 </CardContent>
-            </Card>
+            </Grid>
 
-            <Card className={styles.card}>
+            <Grid item component={Card} xs={11} md={3} className={cx(styles.card, styles.deaths)}>
                 <CardContent>
                     <Typography color="textSecondary" gutterBottom>
                         Deaths
@@ -78,7 +76,7 @@ const Cards = ({ confirmed, deaths, lastUpdate, recovered }) => {
                         Number of Deaths from COVID-19
                         </Typography>
                 </CardContent>
-            </Card>
+            </Grid>
         </Grid>
 
     )
