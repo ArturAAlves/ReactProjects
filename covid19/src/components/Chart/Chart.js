@@ -1,9 +1,31 @@
 import React from 'react'
+import { Line, Bar } from "react-chartjs-2"
 
-function Chart() {
+import styles from "./Chart.module.scss"
+
+
+
+
+function Chart(data) {
+
+    const lineChart = (
+        data ? <Line
+            data={
+                {
+                    labels: "",
+                    datasets: [{}, {}]
+
+
+                }
+            }
+        /> : "Loading"
+    )
+
+
     return (
         <div>
-            <h1>Chart</h1>
+            {lineChart}
+
         </div>
     )
 }
