@@ -34,12 +34,14 @@ function App() {
     return () => {
       // cleanup
     }
+
+
   }, [])
 
   return (
     <div className="App">
       <Cards {...data} />
-      <Chart {...dailyData} />
+      <Chart dailyData={dailyData.data} data={data} />
       <CountryPicker />
     </div>
   );
