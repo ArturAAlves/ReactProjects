@@ -1,11 +1,31 @@
+import { FormControl, NativeSelect } from '@material-ui/core'
 import React from 'react'
 
-function CounterPicker() {
+import styles from "./CountryPicker.module.scss"
+
+
+const CountryPicker = ({ countryData, setSelectedCountry, selectedCountry }) => {
+    // { countryData }
+    if (countryData) {
+        // console.log(setSelectedCountry)
+    }
+
+
     return (
-        <div>
-            <h1>Counter Picker</h1>
-        </div>
+        countryData ?
+            <FormControl className={styles.container} >
+                <NativeSelect onChange={(e) => setSelectedCountry(e.target.value)}>
+                    < option value="Global">Global</option>
+
+                    {countryData.map((data, i) =>
+                        < option key={i} value={data}>{data}</option>
+                    )}
+                </NativeSelect>
+            </FormControl >
+            : "Loading"
+
+
     )
 }
 
-export default CounterPicker
+export default CountryPicker
