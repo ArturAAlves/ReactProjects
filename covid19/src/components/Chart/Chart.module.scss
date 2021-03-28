@@ -1,0 +1,6 @@
+.container {
+	width: 85%;
+	@media only screen and(max-width:960px) {
+		width: 92%;
+	}
+}
