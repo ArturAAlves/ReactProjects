@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "../src/components/PokeCard/PokeCard.scss"
+    ],
+    "names": [],
+    "file": "PokeCard.css"
+}
