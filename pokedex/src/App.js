@@ -1,25 +1,30 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Pokedex from "./components/Pokedex/Pokedex"
+import PokeCard from "./components/PokeCard/PokeCard"
 function App() {
 
 
-  const [pokemon, setPokemon] = useState()
+  const [pokemonList, setPokemonList] = useState()
+  const [pokemons, setPokemons] = useState()
   const [currentPageUrl, setCurrentPageUrl] = useState("https://pokeapi.co/api/v2/pokemon")
   const [nextPageUrl, setNextPageUrl] = useState("")
   const [previoustPageUrl, setPrevioustPageUrl] = useState("")
   const [loading, setLoading] = useState(true)
   let cancel
 
-  const fetchPokemons = async (page) => {
 
+  // https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${searchLimit}
+
+  // https://pokeres.bastionbot.org/images/${id}
+
+
+  const fetchPokemonList = async (page) => {
     try {
       const pokemonReturn = await axios(page, { cancelToken: axios.CancelToken(c => cancel = c) })
-      setPokemon([pokemonReturn.data.results])
+      setPokemonList([...pokemonReturn.data.results])
       setNextPageUrl(pokemonReturn.data.next)
       setPrevioustPageUrl(pokemonReturn.data.previous)
-      console.log(pokemonReturn.data)
-      setLoading(false)
+
 
     } catch (err) {
       // Handle Error Here
@@ -29,29 +34,48 @@ function App() {
 
 
   useEffect(() => {
-    fetchPokemons(currentPageUrl)
+    fetchPokemonList(currentPageUrl)
     return () => {
       cancel()
     }
   }, [currentPageUrl])
 
 
+  //Next Page Btns
   function handleNextBtn() {
-    fetchPokemons(nextPageUrl)
+    if (nextPageUrl) {
+      fetchPokemonList(nextPageUrl)
+    }
   }
 
   function handlePreviousBtn() {
-    fetchPokemons(previoustPageUrl)
+    if (previoustPageUrl) {
+      fetchPokemonList(previoustPageUrl)
+    }
   }
 
 
+  const fetchPokemon = async (page) => {
+    try {
+      const pokemonReturn = await axios(page, { cancelToken: axios.CancelToken(c => cancel = c) })
+      return pokemonReturn.data
+    } catch (err) {
+      // Handle Error Here
+      console.error(err);
+    }
+  };
 
-  console.log(pokemon)
+
   return (
     <div className="App">
       <button type="button" onClick={handlePreviousBtn}>Previous</button>
       <button type="button" onClick={handleNextBtn}>Next</button>
-      {loading ? "loading" : "notloading"}
+      {pokemonList ?
+        pokemonList.map((poke) => (
+          <PokeCard {...poke} key={poke.name} fetchPokemon={fetchPokemon(poke.url)} />
+        ))
+        : "loading"
+      }
 
 
     </div>
