@@ -6,7 +6,7 @@ function App() {
 
   const [pokemonList, setPokemonList] = useState()
   const [pokemons, setPokemons] = useState()
-  const [currentPageUrl, setCurrentPageUrl] = useState("https://pokeapi.co/api/v2/pokemon")
+  const [currentPageUrl, setCurrentPageUrl] = useState("https://pokeapi.co/api/v2/pokemon?limit=3")
   const [nextPageUrl, setNextPageUrl] = useState("")
   const [previoustPageUrl, setPrevioustPageUrl] = useState("")
   const [loading, setLoading] = useState(true)
@@ -24,8 +24,6 @@ function App() {
       setPokemonList([...pokemonReturn.data.results])
       setNextPageUrl(pokemonReturn.data.next)
       setPrevioustPageUrl(pokemonReturn.data.previous)
-
-
     } catch (err) {
       // Handle Error Here
       console.error(err);
@@ -54,25 +52,14 @@ function App() {
     }
   }
 
-
-  const fetchPokemon = async (page) => {
-    try {
-      const pokemonReturn = await axios(page, { cancelToken: axios.CancelToken(c => cancel = c) })
-      return pokemonReturn.data
-    } catch (err) {
-      // Handle Error Here
-      console.error(err);
-    }
-  };
-
-
+  console.log(pokemonList)
   return (
     <div className="App">
       <button type="button" onClick={handlePreviousBtn}>Previous</button>
       <button type="button" onClick={handleNextBtn}>Next</button>
       {pokemonList ?
         pokemonList.map((poke) => (
-          <PokeCard {...poke} key={poke.name} fetchPokemon={fetchPokemon(poke.url)} />
+          <PokeCard poke={poke} name={poke.name} key={poke.name} url={poke.url} />
         ))
         : "loading"
       }
