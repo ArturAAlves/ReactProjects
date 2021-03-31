@@ -1,21 +1,19 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import PokeCard from "./components/PokeCard/PokeCard"
+
+import "./App.scss"
+
 function App() {
 
-
-  const [pokemonList, setPokemonList] = useState()
-  const [pokemons, setPokemons] = useState()
-  const [currentPageUrl, setCurrentPageUrl] = useState("https://pokeapi.co/api/v2/pokemon?limit=3")
-  const [nextPageUrl, setNextPageUrl] = useState("")
-  const [previoustPageUrl, setPrevioustPageUrl] = useState("")
-  const [loading, setLoading] = useState(true)
+  const mainUrl = "https://pokeapi.co/api/v2/pokemon?limit=3"
   let cancel
 
+  const [pokemonList, setPokemonList] = useState("")
+  const [nextPageUrl, setNextPageUrl] = useState("")
+  const [previoustPageUrl, setPrevioustPageUrl] = useState("")
 
-  // https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${searchLimit}
 
-  // https://pokeres.bastionbot.org/images/${id}
 
 
   const fetchPokemonList = async (page) => {
@@ -24,19 +22,24 @@ function App() {
       setPokemonList([...pokemonReturn.data.results])
       setNextPageUrl(pokemonReturn.data.next)
       setPrevioustPageUrl(pokemonReturn.data.previous)
+
+
     } catch (err) {
       // Handle Error Here
-      console.error(err);
+      console.error("err");
     }
+
   };
 
 
   useEffect(() => {
-    fetchPokemonList(currentPageUrl)
+    fetchPokemonList(mainUrl)
     return () => {
       cancel()
     }
-  }, [currentPageUrl])
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
 
   //Next Page Btns
@@ -52,19 +55,21 @@ function App() {
     }
   }
 
-  console.log(pokemonList)
+
   return (
     <div className="App">
       <button type="button" onClick={handlePreviousBtn}>Previous</button>
       <button type="button" onClick={handleNextBtn}>Next</button>
-      {pokemonList ?
-        pokemonList.map((poke) => (
-          <PokeCard poke={poke} name={poke.name} key={poke.name} url={poke.url} />
-        ))
-        : "loading"
-      }
+      <div className="pokedex">
+        {pokemonList ?
+          pokemonList.map((poke) => (
+            // <PokeCard poke={poke} pokemonName={poke.name} key={poke.name} url={poke.url} />
+            <PokeCard poke={poke} key={poke.name} url={poke.url} />
 
-
+          ))
+          : "loading"
+        }
+      </div>
     </div>
   );
 }
