@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import PokeCard from "./components/PokeCard/PokeCard"
 
+import logo from "./images/pokemonLogo.png"
 import "./App.scss"
 
 function App() {
@@ -12,8 +13,6 @@ function App() {
   const [pokemonList, setPokemonList] = useState("")
   const [nextPageUrl, setNextPageUrl] = useState("")
   const [previoustPageUrl, setPrevioustPageUrl] = useState("")
-
-
 
 
   const fetchPokemonList = async (page) => {
@@ -55,9 +54,12 @@ function App() {
     }
   }
 
-
   return (
     <div className="App">
+      <div className="logo">
+        <img src={logo} alt="logo" />
+      </div>
+
       <button type="button" onClick={handlePreviousBtn}>Previous</button>
       <button type="button" onClick={handleNextBtn}>Next</button>
       <div className="pokedex">
