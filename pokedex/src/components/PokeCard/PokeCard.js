@@ -5,11 +5,9 @@ import "./PokeCard.scss"
 import CountUp from 'react-countup';
 
 function PokeCard({ url, pokemonName }) {
-
     const [pokemon, setPokemon] = useState("")
-    const [pokemonColor, setPokemonColor] = useState()
     const [pokemonHabitat, setPokemonHabitat] = useState("")
-    const [loading, setLoading] = useState(true)
+
 
     const fetchPokemon = async () => {
         try {
@@ -73,24 +71,14 @@ function PokeCard({ url, pokemonName }) {
 
 
 
-    const getColor = (colorToFilter) => colors.map((color) => {
-        // console.log(colorToFilter)
-        return color.colorName === colorToFilter ? setPokemonColor(color.color) : ""
-    })
 
-    if (types && loading) {
-        getColor(types[0].type.name)
-        setLoading(false)
-    }
-
-    if (pokemonColor) {
-        // console.log(pokemonColor)
-    }
+    //Get colors with color info
+    const getColor = (colorToFilter) => colors.filter(color => (
+        color.colorName === colorToFilter
+    ))[0].color
 
 
-    //Grow Animation
-
-
+    // Add zeros to ID
     const resizeId = (valaasda) => {
         let res = valaasda.toString()
         while (res.length < 3) {
@@ -99,10 +87,10 @@ function PokeCard({ url, pokemonName }) {
         return res
     }
 
-    console.log(resizeId("999"))
+
 
     return (
-        <div className="pokeCard-container" style={{ backgroundColor: pokemonColor ? pokemonColor : "none" }}>
+        <div className="pokeCard-container" style={{ backgroundColor: types ? getColor(types[0].type.name) : "none" }}>
             {/* Pokemon img */}
             < div className="pokemon-img-container" >
                 < img src={pokemon ? imgUrl : loadingAni} alt={name} className="pokemon-img" />
@@ -156,7 +144,6 @@ function PokeCard({ url, pokemonName }) {
                                     separator={","}
                                 />
                                /150</span></div>
-
                             <div className="pokemon-stat-bar" style={{
                                 width: `${item.base_stat / 1.456}%`,
 
