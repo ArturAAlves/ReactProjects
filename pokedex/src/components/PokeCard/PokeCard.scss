@@ -104,15 +104,6 @@
 	margin-bottom: 5px;
 }
 
-.pokemon-stat-bar {
-	position: relative;
-	z-index: 99;
-	height: 5px;
-	border-radius: 3px;
-	background-color: rgb(251, 251, 251);
-	width: 0px;
-}
-
 .pokemon-stat-bar::after {
 	content: "";
 	position: absolute;
@@ -125,4 +116,5 @@
 
 .pokemon-stats-number {
 	float: right;
+	color: white;
 }

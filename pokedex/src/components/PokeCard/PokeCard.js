@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import loadingAni from "../PokeCard/Images/loadingAni.gif"
 import "./PokeCard.scss"
 import CountUp from 'react-countup';
+import Pokebar from "./components/Pokebar"
+
 
 function PokeCard({ url, pokemonName }) {
     const [pokemon, setPokemon] = useState("")
@@ -87,8 +89,6 @@ function PokeCard({ url, pokemonName }) {
         return res
     }
 
-
-
     return (
         <div className="pokeCard-container" style={{ backgroundColor: types ? getColor(types[0].type.name) : "none" }}>
             {/* Pokemon img */}
@@ -106,6 +106,7 @@ function PokeCard({ url, pokemonName }) {
                     )) : "loading..."
                 }
             </div >
+
             <div className="pokecard-header-container">
                 <div className="pokecard-name">{name}</div>
                 <div className="pokecard-header-left">
@@ -135,6 +136,7 @@ function PokeCard({ url, pokemonName }) {
             <div className="pokemon-stat-container">
                 {
                     pokemon ? stats.map((item, i) => (
+
                         <div className="pokemon-stats" key={i}>
                             <div className="pokemon-stats-info">{item.stat.name}<span className="pokemon-stats-number">
                                 < CountUp
@@ -144,12 +146,10 @@ function PokeCard({ url, pokemonName }) {
                                     separator={","}
                                 />
                                /150</span></div>
-                            <div className="pokemon-stat-bar" style={{
-                                width: `${item.base_stat / 1.456}%`,
 
-                            }}>
+                            <Pokebar barWidth={item.base_stat / 1.456} />
 
-                            </div>
+
                         </div>
                     )) : "loading..."
                 }
