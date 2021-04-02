@@ -9,6 +9,7 @@
 	font-size: 18px;
 	text-transform: capitalize;
 	transition: transform ease 0.5s;
+	animation: fadeIn 0.5s linear;
 }
 
 .pokeCard-container:hover {
@@ -117,4 +118,15 @@
 .pokemon-stats-number {
 	float: right;
 	color: white;
+}
+
+@keyframes fadeIn {
+	from {
+		transform: scale(0.8);
+		opacity: 0.8;
+	}
+	to {
+		transform: scale(1);
+		opacity: 1;
+	}
 }
