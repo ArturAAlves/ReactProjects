@@ -56,10 +56,10 @@ function App() {
       </div>
 
       {previoustPageUrl ?
-        <button type="button" onClick={handlePreviousBtn}>Previous</button> : null
+        <button type="button" className="big-button" onClick={handlePreviousBtn}>Previous</button> : null
       }
 
-      <button type="button" onClick={handleNextBtn}>Next</button>
+      <button type="button" className="big-button" onClick={handleNextBtn}>Next</button>
       <div className="pokedex">
         {pokemonList ?
           pokemonList.map((poke) => (
