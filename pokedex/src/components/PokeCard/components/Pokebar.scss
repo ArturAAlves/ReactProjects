@@ -1,0 +1,18 @@
+.pokemon-stat-bar {
+	position: relative;
+	z-index: 99;
+	height: 5px;
+	border-radius: 3px;
+	background-color: rgb(255, 255, 255);
+	width: 100 !important;
+}
+
+.pokemon-stat-bar::after {
+	content: "";
+	position: absolute;
+	z-index: 0;
+	width: 320px;
+	background-color: #ffffff50;
+	height: 5px;
+	border-radius: 3px;
+}

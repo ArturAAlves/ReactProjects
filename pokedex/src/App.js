@@ -22,24 +22,19 @@ function App() {
       setNextPageUrl(pokemonReturn.data.next)
       setPrevioustPageUrl(pokemonReturn.data.previous)
 
-
     } catch (err) {
       // Handle Error Here
       console.error("err");
     }
-
   };
-
 
   useEffect(() => {
     fetchPokemonList(mainUrl)
     return () => {
       cancel()
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
 
   //Next Page Btns
   function handleNextBtn() {
@@ -60,7 +55,10 @@ function App() {
         <img src={logo} alt="logo" />
       </div>
 
-      <button type="button" onClick={handlePreviousBtn}>Previous</button>
+      {previoustPageUrl ?
+        <button type="button" onClick={handlePreviousBtn}>Previous</button> : null
+      }
+
       <button type="button" onClick={handleNextBtn}>Next</button>
       <div className="pokedex">
         {pokemonList ?
