@@ -4,7 +4,7 @@
 	height: 470px;
 	border-radius: 15px;
 	margin: 10px;
-	margin-top: 75px;
+	margin-bottom: 100px;
 	color: white;
 	font-size: 18px;
 	text-transform: capitalize;
@@ -54,11 +54,12 @@
 }
 
 .pokemon-type {
-	background-color: rgba(255, 255, 255, 0.459);
+	background-color: rgba(212, 212, 212, 0.459);
 	border-radius: 15px;
 	margin-top: 5px;
 	text-align: center;
 	padding: 4px 7px;
+	font-size: 20px;
 }
 
 .pokecard-header-container {
@@ -122,11 +123,11 @@
 
 @keyframes fadeIn {
 	from {
-		transform: scale(0.8);
-		opacity: 0.8;
+		// transform: scale(0.8);
+		opacity: 0.5;
 	}
 	to {
-		transform: scale(1);
+		// transform: scale(1);
 		opacity: 1;
 	}
 }

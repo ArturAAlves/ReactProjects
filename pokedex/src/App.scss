@@ -1,7 +1,24 @@
+* {
+	scroll-behavior: smooth !important;
+}
+
+.App {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	margin: auto;
+}
+
+.logo {
+	margin: auto;
+	margin-top: 15px;
+}
+
 .pokedex {
-	margin-top: 150px;
+	margin-top: 120px;
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
 }
 
 :root {
@@ -13,7 +30,21 @@
 	--colorShadeE: rgb(205, 255, 232);
 }
 
-button {
+.main-btns-container {
+	margin: auto;
+	width: 100%;
+	height: 200px;
+	display: flex;
+	justify-content: center;
+}
+
+.btn-next,
+.btn-prev {
+	position: relative;
+	margin: 0 15px;
+}
+
+.big-button {
 	position: relative;
 	display: inline-block;
 	cursor: pointer;
@@ -31,7 +62,7 @@ button {
 	text-align: center;
 }
 
-button.big-button {
+.big-button {
 	padding: 1em 2em;
 	border: 2px solid var(--colorShadeA);
 	border-radius: 1em;
@@ -39,7 +70,7 @@ button.big-button {
 	transform-style: preserve-3d;
 	transition: all 175ms cubic-bezier(0, 0, 1, 1);
 }
-button.big-button::before {
+.big-button::before {
 	position: absolute;
 	content: "";
 	width: 100%;
@@ -55,21 +86,20 @@ button.big-button::before {
 	transition: all 175ms cubic-bezier(0, 0, 1, 1);
 }
 
-button.big-button:hover {
+.big-button:hover {
 	background: var(--colorShadeD);
 	transform: translate(0, 0.375em);
 }
 
-button.big-button:hover::before {
+.big-button:hover::before {
 	transform: translate3d(0, 0.75em, -1em);
 }
 
-button.big-button:active {
+.big-button:active {
 	transform: translate(0em, 0.75em);
 }
 
-button.big-button:active::before {
+.big-button:active::before {
 	transform: translate3d(0, 0, -1em);
-
 	box-shadow: 0 0 0 2px var(--colorShadeB), 0 0.25em 0 0 var(--colorShadeB);
 }

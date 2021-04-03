@@ -6,10 +6,8 @@ import logo from "./images/pokemonLogo.png"
 import "./App.scss"
 
 function App() {
-
-  const mainUrl = "https://pokeapi.co/api/v2/pokemon?limit=3"
-  let cancel
-
+  const mainUrl = "https://pokeapi.co/api/v2/pokemon?limit=12"
+  // let cancel
   const [pokemonList, setPokemonList] = useState("")
   const [nextPageUrl, setNextPageUrl] = useState("")
   const [previoustPageUrl, setPrevioustPageUrl] = useState("")
@@ -17,21 +15,22 @@ function App() {
 
   const fetchPokemonList = async (page) => {
     try {
-      const pokemonReturn = await axios(page, { cancelToken: axios.CancelToken(c => cancel = c) })
+      const pokemonReturn = await axios(page)
+      // const pokemonReturn = await axios(page, { cancelToken: axios.CancelToken(c => cancel = c) })
       setPokemonList([...pokemonReturn.data.results])
-      setNextPageUrl(pokemonReturn.data.next)
-      setPrevioustPageUrl(pokemonReturn.data.previous)
+      setNextPageUrl(currentUrl => currentUrl = pokemonReturn.data.next)
+      setPrevioustPageUrl(currentUrl => currentUrl = pokemonReturn.data.previous)
 
     } catch (err) {
       // Handle Error Here
-      console.error("err");
+      console.log(err)
     }
   };
 
   useEffect(() => {
     fetchPokemonList(mainUrl)
     return () => {
-      cancel()
+      // cancel()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -39,12 +38,14 @@ function App() {
   //Next Page Btns
   function handleNextBtn() {
     if (nextPageUrl) {
+      window.scrollTo(0, 0);
       fetchPokemonList(nextPageUrl)
     }
   }
 
   function handlePreviousBtn() {
     if (previoustPageUrl) {
+      window.scrollTo(0, 0);
       fetchPokemonList(previoustPageUrl)
     }
   }
@@ -55,11 +56,7 @@ function App() {
         <img src={logo} alt="logo" />
       </div>
 
-      {previoustPageUrl ?
-        <button type="button" className="big-button" onClick={handlePreviousBtn}>Previous</button> : null
-      }
 
-      <button type="button" className="big-button" onClick={handleNextBtn}>Next</button>
       <div className="pokedex">
         {pokemonList ?
           pokemonList.map((poke) => (
@@ -70,7 +67,14 @@ function App() {
           : "loading"
         }
       </div>
+      <div className="main-btns-container">
+        {previoustPageUrl ?
+          <button type="button" className="big-button btn-prev" onClick={handlePreviousBtn}>Previous</button> : null
+        }
+        {nextPageUrl ? <button type="button" className="big-button btn-next" onClick={handleNextBtn}>Next</button> : null}
+      </div>
     </div>
+
   );
 }
 export default App;
