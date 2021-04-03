@@ -10,7 +10,6 @@ function PokeCard({ url, pokemonName }) {
     const [pokemon, setPokemon] = useState("")
     const [pokemonHabitat, setPokemonHabitat] = useState("")
 
-
     const fetchPokemon = async () => {
         try {
             const pokemonRequest = await axios(url)
@@ -22,6 +21,7 @@ function PokeCard({ url, pokemonName }) {
         }
     };
 
+
     const { name, id, stats, types, height, weight, species } = pokemon
     const imgUrl = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`
 
@@ -29,6 +29,7 @@ function PokeCard({ url, pokemonName }) {
         try {
             const pokeAreaRequest = await axios(species.url)
             setPokemonHabitat(pokeAreaRequest.data.habitat.name)
+
 
         } catch (err) {
             console.error();
@@ -136,7 +137,6 @@ function PokeCard({ url, pokemonName }) {
             <div className="pokemon-stat-container">
                 {
                     pokemon ? stats.map((item, i) => (
-
                         <div className="pokemon-stats" key={i}>
                             <div className="pokemon-stats-info">{item.stat.name}<span className="pokemon-stats-number">
                                 < CountUp
@@ -145,11 +145,9 @@ function PokeCard({ url, pokemonName }) {
                                     duration={2}
                                     separator={","}
                                 />
-                               /150</span></div>
+                               /250</span></div>
 
-                            <Pokebar barWidth={item.base_stat / 1.456} />
-
-
+                            <Pokebar barWidth={item.base_stat / 2.4} />
                         </div>
                     )) : "loading..."
                 }
