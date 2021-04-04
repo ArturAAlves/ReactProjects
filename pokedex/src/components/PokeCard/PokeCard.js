@@ -1,14 +1,19 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import loadingAni from "../PokeCard/Images/loadingAni.gif"
+import loadingAni from "../PokeCard/Images/preloader.gif"
 import "./PokeCard.scss"
 import CountUp from 'react-countup';
 import Pokebar from "./components/Pokebar"
 
 
-function PokeCard({ url, pokemonName }) {
+function PokeCard({ url }) {
     const [pokemon, setPokemon] = useState("")
     const [pokemonHabitat, setPokemonHabitat] = useState("")
+    const [pokemonType, setPokemonType] = useState("")
+
+
+
+    let { name, id, stats, types, height, weight, species } = pokemon
 
     const fetchPokemon = async () => {
         try {
@@ -21,16 +26,11 @@ function PokeCard({ url, pokemonName }) {
         }
     };
 
-
-    const { name, id, stats, types, height, weight, species } = pokemon
     const imgUrl = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`
-
     const fetchHabitat = async () => {
         try {
             const pokeAreaRequest = await axios(species.url)
             setPokemonHabitat(pokeAreaRequest.data.habitat.name)
-
-
         } catch (err) {
             console.error();
         }
@@ -43,6 +43,7 @@ function PokeCard({ url, pokemonName }) {
         { colorName: "grass", color: "#79bb5b" },
         { colorName: "electric", color: "#FCB925" },
         { colorName: "water", color: "#73d0f5" },
+        { colorName: "ice", color: "#33addd" },
         { colorName: "ground", color: "#906523" },
         { colorName: "rock", color: "#8f7f67" },
         { colorName: "fairy", color: "#bfb0db" },
@@ -52,8 +53,10 @@ function PokeCard({ url, pokemonName }) {
         { colorName: "psychic", color: "#bfb0db" },
         { colorName: "flying", color: "#b6bcbe" },
         { colorName: "fighting", color: "#d4cbb9" },
-        { colorName: "normal", color: "#8f989b" },
-        { colorName: "ghost", color: "#3d3944" },
+        { colorName: "normal", color: "#c0b6a4" },
+        { colorName: "ghost", color: "#67626e52" },
+        { colorName: "dark", color: "#3d3944" },
+        { colorName: "steel", color: "#707070" },
     ];
 
     useEffect(() => {
@@ -66,6 +69,7 @@ function PokeCard({ url, pokemonName }) {
 
     useEffect(() => {
         fetchHabitat()
+        setPokemonType(types)
         return () => {
             // cleanup
         }
@@ -76,9 +80,21 @@ function PokeCard({ url, pokemonName }) {
 
 
     //Get colors with color info
-    const getColor = (colorToFilter) => colors.filter(color => (
-        color.colorName === colorToFilter
-    ))[0].color
+    const getColor = () => colors.filter(color => {
+        let val = []
+
+        if (pokemonType[0].type.name !== undefined) {
+            val = color.colorName === pokemonType[0].type.name
+        }
+
+        if (pokemonType[0].type.name === undefined) {
+            val = [{ colorName: "ghost", color: "#3d3944" }]
+        }
+
+
+        return val
+
+    })
 
 
     // Add zeros to ID
@@ -90,11 +106,13 @@ function PokeCard({ url, pokemonName }) {
         return res
     }
 
+    // getColor()[0].color
+
     return (
-        <div className="pokeCard-container" style={{ backgroundColor: types ? getColor(types[0].type.name) : "none" }}>
+        <div className="pokeCard-container" style={{ backgroundColor: pokemonType ? getColor().length !== 0 ? getColor()[0].color : "red" : "" }}>
             {/* Pokemon img */}
             < div className="pokemon-img-container" >
-                < img src={pokemon ? imgUrl : loadingAni} alt={name} className="pokemon-img" />
+                < img src={pokemon ? imgUrl : loadingAni} alt={name} className={pokemon ? "pokemon-img" : "pokemon-loading"} />
             </div >
             {/* top left */}
             < div className="pokemon-id" >#{id ? resizeId(id) : "Loading..."} </div >

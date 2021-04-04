@@ -5,8 +5,10 @@ import PokeCard from "./components/PokeCard/PokeCard"
 import logo from "./images/pokemonLogo.png"
 import "./App.scss"
 
+
+
 function App() {
-  const mainUrl = "https://pokeapi.co/api/v2/pokemon?limit=12"
+  const mainUrl = "https://pokeapi.co/api/v2/pokemon?limit=10"
   // let cancel
   const [pokemonList, setPokemonList] = useState("")
   const [nextPageUrl, setNextPageUrl] = useState("")
@@ -16,8 +18,7 @@ function App() {
   const fetchPokemonList = async (page) => {
     try {
       const pokemonReturn = await axios(page)
-      // const pokemonReturn = await axios(page, { cancelToken: axios.CancelToken(c => cancel = c) })
-      setPokemonList([...pokemonReturn.data.results])
+      setPokemonList(currVal => currVal = [...pokemonReturn.data.results])
       setNextPageUrl(currentUrl => currentUrl = pokemonReturn.data.next)
       setPrevioustPageUrl(currentUrl => currentUrl = pokemonReturn.data.previous)
 
@@ -50,27 +51,34 @@ function App() {
     }
   }
 
+  const pokedex = () => (
+    < div className="pokedex" >
+      { pokemonList.map((poke) =>
+      (<PokeCard
+        url={poke.url}
+        key={poke.name}
+      // name={poke.name}
+      // id={poke.id}
+      // stats={poke.stats}
+      // types={poke.types}
+      // height={poke.height}
+      // weight={poke.weight}
+      // species={poke.species}
+
+      />))
+      }
+    </div >)
+
   return (
     <div className="App">
       <div className="logo">
         <img src={logo} alt="logo" />
       </div>
-
-
       <div className="pokedex">
-        {pokemonList ?
-          pokemonList.map((poke) => (
-            // <PokeCard poke={poke} pokemonName={poke.name} key={poke.name} url={poke.url} />
-            <PokeCard poke={poke} key={poke.name} url={poke.url} />
-
-          ))
-          : "loading"
-        }
+        {pokemonList ? pokedex() : "loading"}
       </div>
       <div className="main-btns-container">
-        {previoustPageUrl ?
-          <button type="button" className="big-button btn-prev" onClick={handlePreviousBtn}>Previous</button> : null
-        }
+        {previoustPageUrl ? <button type="button" className="big-button btn-prev" onClick={handlePreviousBtn}>Previous</button> : null}
         {nextPageUrl ? <button type="button" className="big-button btn-next" onClick={handleNextBtn}>Next</button> : null}
       </div>
     </div>
