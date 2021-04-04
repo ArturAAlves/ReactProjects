@@ -1,6 +1,6 @@
 .pokeCard-container {
 	position: relative;
-	width: 350px;
+	width: 300px !important;
 	height: 470px;
 	border-radius: 15px;
 	margin: 10px;
@@ -8,8 +8,8 @@
 	color: white;
 	font-size: 18px;
 	text-transform: capitalize;
-	transition: transform ease 0.5s;
-	animation: fadeIn 0.5s linear;
+	animation: fadeIn 1s linear;
+	transition: transform ease 0.2s;
 }
 
 .pokeCard-container:hover {
@@ -21,18 +21,22 @@
 	position: absolute;
 	z-index: 999;
 	top: -90px;
-	width: 180px;
+	width: 150px;
 	left: 50%;
 	transform: translate(-50%);
 	transition: width ease 0.5s;
 	img {
-		transition: opacity ease 1s;
+		transition: opacity ease 5s;
 		width: inherit;
 	}
 }
 
+.pokemon-loading {
+	animation: spin 2s infinite;
+}
+
 .pokemon-img-container:hover {
-	width: 250px;
+	width: 200px;
 	transition: width ease 1s;
 }
 
@@ -51,14 +55,15 @@
 	right: 10px;
 	display: flex;
 	flex-direction: column;
+	font-weight: 500;
 }
 
 .pokemon-type {
-	background-color: rgba(212, 212, 212, 0.459);
+	background-color: rgba(255, 255, 255, 0.418);
 	border-radius: 15px;
 	margin-top: 5px;
 	text-align: center;
-	padding: 4px 7px;
+	padding: 4px 8px;
 	font-size: 20px;
 }
 
@@ -123,11 +128,20 @@
 
 @keyframes fadeIn {
 	from {
-		// transform: scale(0.8);
-		opacity: 0.5;
+		transform: scale(0.1);
+		opacity: 0.3;
 	}
 	to {
-		// transform: scale(1);
+		transform: scale(1);
 		opacity: 1;
+	}
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
 	}
 }
