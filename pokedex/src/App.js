@@ -8,13 +8,11 @@ import "./App.scss"
 
 
 function App() {
-  const mainUrl = "https://pokeapi.co/api/v2/pokemon?limit=10"
+  const mainUrl = "https://pokeapi.co/api/v2/pokemon?limit=15"
   // let cancel
   const [pokemonList, setPokemonList] = useState("")
   const [nextPageUrl, setNextPageUrl] = useState("")
   const [previoustPageUrl, setPrevioustPageUrl] = useState("")
-
-
   const fetchPokemonList = async (page) => {
     try {
       const pokemonReturn = await axios(page)
