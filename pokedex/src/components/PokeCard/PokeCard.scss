@@ -4,7 +4,7 @@
 	height: 470px;
 	border-radius: 15px;
 	margin: 10px;
-	margin-bottom: 100px;
+	margin-bottom: 120px;
 	color: white;
 	font-size: 18px;
 	text-transform: capitalize;
@@ -20,8 +20,8 @@
 .pokemon-img-container {
 	position: absolute;
 	z-index: 999;
-	top: -90px;
-	width: 150px;
+	top: -60px;
+	width: 140px;
 	left: 50%;
 	transform: translate(-50%);
 	transition: width ease 0.5s;
@@ -137,11 +137,11 @@
 	}
 }
 
-@keyframes spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
-}
+// @keyframes spin {
+// 	from {
+// 		transform: rotate(0deg);
+// 	}
+// 	to {
+// 		transform: rotate(360deg);
+// 	}
+// }
