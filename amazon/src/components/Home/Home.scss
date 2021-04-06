@@ -1,0 +1,30 @@
+.home {
+	display: flex;
+	margin: auto;
+	flex-direction: column;
+	background-color: #eaeded;
+	max-width: 1500px;
+	height: 2000px;
+}
+
+.home-carousel {
+	width: 100%;
+	z-index: 1;
+	margin-bottom: -150px;
+	mask-image: linear-gradient(to top, transparent 0%, black 60%);
+}
+
+.home-items-container {
+	margin: 0 10px;
+}
+
+.home-carousel-img {
+	width: 100%;
+	object-fit: contain;
+}
+
+.home-items-row {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
