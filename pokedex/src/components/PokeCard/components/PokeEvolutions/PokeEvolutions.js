@@ -1,7 +1,6 @@
 import React from 'react'
 import "./PokeEvolutions.scss"
 import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
-import ReactTooltip from 'react-tooltip';
 
 const PokeEvolutions = ({ evolution }) => {
     // console.log(evolution)
