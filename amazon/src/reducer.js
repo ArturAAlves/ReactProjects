@@ -2,6 +2,13 @@ export const initialState = {
     basket: []
 }
 
+//Slector
+export const getBasketTotal = (basket) => {
+    console.log(basket.price)
+    basket.reduce((acc, item) => acc += item.price, 0)
+}
+
+
 const reducer = (state, action) => {
 
     switch (action.type) {

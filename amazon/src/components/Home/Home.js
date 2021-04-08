@@ -31,21 +31,21 @@ function Home() {
                     <Product
                         id={3}
                         title="Oral-B Pro-Expert Protección Profesional Pasta de Dientes, Pack de 12, Limpieza Bucal Completa "
-                        price="27,17"
+                        price="27.17"
                         image="https://m.media-amazon.com/images/I/51MSqR96+XL._AC_SR400,600_.jpg"
                         rating={4}
                     />
                     <Product
                         id={4}
                         title="Kit de Blanqueamiento Dental-GLAMADOR Blanqueador Dental Profesional, Blanqueamiento de Dientes-12 * Gel Blanqueamiento,3 * Gel Calmante-Cuidado Dental Eficaz,Sin Dolor,Cuidado Dental Casero Perfecto"
-                        price="21,98"
+                        price="21.98"
                         image=" https://m.media-amazon.com/images/I/6192aQ9HliL._AC_UL320_.jpg"
                         rating={4}
                     />
                     <Product
                         id={5}
                         title="Cabeçotes de substituição de tamanho de caixa postal Oral-B CrossAction, pacote de 8 recargas genuínas com tecnologia CleanMaximiser para escovas de dentes elétricas"
-                        price="21,99"
+                        price="21.99"
                         image="https://m.media-amazon.com/images/I/41NIr6XbIDL._AC_SR400,600_.jpg"
                         rating={4}
                     />
@@ -56,21 +56,21 @@ function Home() {
                     <Product
                         id={6}
                         title="Kenwood Prospero + KHC29.H0WH - Processador de alimentos multifuncional, tigela de 4,3L, misture, agite e amasse, liquidificador de vidro de 1,5 l, processador de alimentos de 1,4 l com três discos e espremedor, branco"
-                        price="199,00"
+                        price="199.00"
                         image="https://m.media-amazon.com/images/I/51wDY7iJMNL._AC_UL320_.jpg"
                         rating={4}
                     />
                     <Product
                         id={7}
                         title="Kenwood KCook Multi CCL401WH - Processador de alimentos multifuncional de 1500 W, até 180ºC, tigela de 4,5 L, 6 programas predefinidos, acessórios incluídos, classe A, cinza / branco [classe de eficiência energética A]"
-                        price="465,00"
+                        price="465.00"
                         image=" https://m.media-amazon.com/images/I/61fgq2+27vL._AC_UL320_.jpg"
                         rating={4}
                     />
                     <Product
                         id={8}
                         title="Kenwood Persona TTM610 - Torradeira com abertura longa para 2 torradas ou grande, estante confortável, vários programas, 1080 W, prata"
-                        price="111,27"
+                        price="111.27"
                         image="https://m.media-amazon.com/images/I/51sL7lYBDbL._AC_UL320_.jpg"
                         rating={4}
                     />
