@@ -10,7 +10,7 @@ import { useStateValue } from '../../StateProvider';
 const Product = ({ id, title, image, price, rating }) => {
     const [basket, dispatch] = useStateValue()
 
-    console.log(basket.basket)
+
     function getRating() {
         return [...Array((parseInt(rating)))].map((item, i) => (
             <StarIcon key={i} />
