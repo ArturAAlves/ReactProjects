@@ -2,10 +2,11 @@ import React from 'react'
 import "./Checkout.scss"
 import SubTotal from "../SubTotal/SubTotal"
 import { useStateValue } from '../../StateProvider'
-import ShoppingCartItem from '../ShoppingCartItem/ShoppingCartItem'
+import CheckoutItem from '../CheckoutItem/CheckoutItem'
+import { getBasketTotal } from '../../reducer'
+import CurrencyFormat from 'react-currency-format'
 
 const Checkout = () => {
-
     const [{ basket }, dispatch] = useStateValue()
 
     return (
@@ -25,22 +26,38 @@ const Checkout = () => {
                     </div>
                 </div>
 
-                <div className="shoppingCart">
+                <div className="CheckoutCart">
                     <h2>Shopping Cart</h2>
                     {/* <p>Slect all the Items</p> */}
-                    <div className="shoppingCart-line">
+                    <div className="CheckoutCart-line">
                         <span>Price</span>
                     </div>
-                    <div className="shoppingCart-items">
+                    <div className="CheckoutCart-items">
                         {basket && basket.map((item) => {
-
-                            return <ShoppingCartItem {...item} key={item.id} />
+                            return <CheckoutItem {...item} key={item.id} />
                         })
-
                         }
-
                     </div>
 
+                    {basket.length !== 0 ?
+                        <div className="checkout-value">
+                            <p>Subtotal ({basket.length} Item):
+                            <CurrencyFormat
+                                    fixedDecimalScale={true}
+                                    value={getBasketTotal(basket)}
+                                    decimalScale={2}
+                                    displayType={"text"}
+                                    thousandSeparator={true}
+                                    prefix={"€"}
+                                    renderText={(value) => (
+                                        <span className="subtotal-value">
+                                            {value}
+                                        </span>
+                                    )}
+                                />
+                            </p>
+                        </div> : ""
+                    }
                 </div>
                 {/* 
                 <div className="shoppingCart-empty">
