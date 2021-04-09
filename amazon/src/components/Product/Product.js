@@ -44,7 +44,7 @@ const Product = ({ id, title, image, price, rating }) => {
 
                 {price
                     ? <div className="product-price">
-                        <small>$</small><p>{price}</p>
+                        <small>€</small><p>{price}</p>
                     </div>
                     : "Loading.."
                 }

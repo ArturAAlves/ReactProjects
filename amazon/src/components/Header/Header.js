@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./Header.scss"
 import AmazonLogo from "./img/amazon-logo.png"
 import SearchIcon from '@material-ui/icons/Search';
@@ -9,22 +9,29 @@ import { useStateValue } from '../../StateProvider';
 function Header() {
     const [{ basket }, dispatch] = useStateValue()
 
+
+    function scrollTop() {
+        window.scrollTo(0, 0)
+    }
+
     return (
-        <div className="header">
+        <div className="header" onClick={() => scrollTop()}>
             <Link to="./">
                 <img alt="amazon-logo" className="header-logo" src={AmazonLogo} />
             </Link>
 
-            <div className="header-search">
+            <div className="header-search" >
                 <input className="header-search-input" type="text">
                 </input>
                 <SearchIcon className="header-search-icon" />
             </div>
             <div className="header-nav">
-                <div className="header-nav-option">
-                    <span className="header-option-topLine">Hello</span>
-                    <span className="header-option-botLine">Sign in</span>
-                </div>
+                <Link to="./login">
+                    <div className="header-nav-option">
+                        <span className="header-option-topLine">Hello</span>
+                        <span className="header-option-botLine">Sign in</span>
+                    </div>
+                </Link>
                 <div className="header-nav-option">
                     <span className="header-option-topLine">Returns</span>
                     <span className="header-option-botLine">& Orders</span>
@@ -34,7 +41,7 @@ function Header() {
                     <span className="header-option-botLine">Prime</span>
                 </div>
 
-                <Link to="./checkout">
+                <Link to="./checkout" onClick={() => scrollTop()}>
                     <div className="header-nav-cart" >
                         <ShoppingBasketIcon className="nav-cart-icon" />
                         <span className="nav-cart">{basket && basket.length}</span>
