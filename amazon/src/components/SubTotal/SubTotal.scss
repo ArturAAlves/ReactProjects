@@ -35,15 +35,19 @@
 
 .subtotal-checkout-btn {
 	margin-bottom: 10px;
-	button {
-		background-color: #fbd720;
-		border: 1px solid rgba(85, 85, 85, 0.287);
-		padding: 8px 0px;
-		width: 200px;
-		border-radius: 4px;
-	}
+}
+.checkout-btn {
+	padding: 7px 10px !important;
 
-	button:hover {
-		background-color: #ffd103;
-	}
+	white-space: nowrap;
+	padding: 5px;
+	margin-top: 15px;
+	border: 1px solid;
+	border-color: #a88734 #9c7e31 #846a29;
+	border-radius: 4px;
+	background-color: #f2cc6b;
+	background: linear-gradient(to bottom, #f7dfa5, #f0c14b);
+}
+.checkout-btn:hover {
+	background: linear-gradient(to bottom, #fadc95, #f0b829);
 }
