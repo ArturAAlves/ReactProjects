@@ -5,9 +5,10 @@ import { useStateValue } from '../../StateProvider'
 import CheckoutItem from '../CheckoutItem/CheckoutItem'
 import { getBasketTotal } from '../../reducer'
 import CurrencyFormat from 'react-currency-format'
+import { Link } from 'react-router-dom'
 
 const Checkout = () => {
-    const [{ basket }, dispatch] = useStateValue()
+    const [{ basket, user }, dispatch] = useStateValue()
 
     return (
         <div className="checkout">
@@ -26,47 +27,68 @@ const Checkout = () => {
                     </div>
                 </div>
 
-                <div className="CheckoutCart">
-                    <h2>Shopping Cart</h2>
-                    {/* <p>Slect all the Items</p> */}
-                    <div className="CheckoutCart-line">
-                        <span>Price</span>
-                    </div>
-                    <div className="CheckoutCart-items">
-                        {basket && basket.map((item) => {
-                            return <CheckoutItem {...item} key={item.id} />
-                        })
+
+                {basket.length !== 0 ?
+                    <div className="CheckoutCart">
+                        {user ?
+                            <h3>Hello <span>{user.email}</span></h3> : ""
+                        }
+
+                        <h2>Shopping Cart</h2>
+                        {/* <p>Slect all the Items</p> */}
+                        <div className="CheckoutCart-line">
+                            <span>Price</span>
+                        </div>
+                        <div className="CheckoutCart-items">
+                            {basket && basket.map((item) => {
+                                return <CheckoutItem {...item} key={item.id} />
+                            })
+                            }
+                        </div>
+                        {basket.length !== 0 ?
+                            <div className="checkout-value">
+                                <p>Subtotal ({basket.length} Item):
+                            <CurrencyFormat
+                                        fixedDecimalScale={true}
+                                        value={getBasketTotal(basket)}
+                                        decimalScale={2}
+                                        displayType={"text"}
+                                        thousandSeparator={true}
+                                        prefix={"€"}
+                                        renderText={(value) => (
+                                            <span className="subtotal-value">
+                                                {value}
+                                            </span>
+                                        )}
+                                    />
+                                </p>
+                            </div> : ""
                         }
                     </div>
+                    :
+                    <div className="shoppingCart-empty">
+                        <img src="https://m.media-amazon.com/images/G/01/cart/empty/kettle-desaturated._CB445243794_.svg" alt="empty shopping cart" />
 
-                    {basket.length !== 0 ?
-                        <div className="checkout-value">
-                            <p>Subtotal ({basket.length} Item):
-                            <CurrencyFormat
-                                    fixedDecimalScale={true}
-                                    value={getBasketTotal(basket)}
-                                    decimalScale={2}
-                                    displayType={"text"}
-                                    thousandSeparator={true}
-                                    prefix={"€"}
-                                    renderText={(value) => (
-                                        <span className="subtotal-value">
-                                            {value}
-                                        </span>
-                                    )}
-                                />
-                            </p>
-                        </div> : ""
-                    }
-                </div>
-                {/* 
-                <div className="shoppingCart-empty">
-                    <img src="https://m.media-amazon.com/images/G/01/cart/empty/kettle-desaturated._CB445243794_.svg" className />
-                </div> */}
+                        <div className="shoppingCart-hero">
+                            <h3>Your Amazon Cart is empty</h3>
+                            <p>Shop today's deals</p>
+                            <div className="shoppingCart-hero-btns">
+                                <Link to="./login">
+                                    <button className="shoppingCart-btn-signIn" type="button">Sign in to your account</button>
+                                </Link>
+                                <Link to="./login">
+                                    <button className="shoppingCart-btn-signUp" type="button">Sign up now</button>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
-            <div className="checkout-right">
-                <SubTotal />
-            </div >
+            {basket.length !== 0 ?
+                <div className="checkout-right">
+                    <SubTotal />
+                </div >
+                : ""}
         </div>
     )
 }

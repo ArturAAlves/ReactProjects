@@ -6,11 +6,11 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Login from './components/Login/Login'
 import { auth } from "./firebase"
 import { useStateValue } from './StateProvider'
+import Footer from './components/footer/footer'
 
 const App = () => {
 
   const [{ user }, disapatch] = useStateValue()
-
   useEffect(() => {
     auth.onAuthStateChanged(authUser => {
       console.log(authUser)
@@ -58,7 +58,7 @@ const App = () => {
             <Home />
           </Route>
         </Switch>
-
+        <Footer />
         {/* Fix Header component Duplication */}
       </div>
     </Router>

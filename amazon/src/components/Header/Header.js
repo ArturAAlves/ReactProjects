@@ -35,7 +35,7 @@ function Header() {
             <div className="header-nav">
                 <Link to={user ? "" : "./login"} >
                     <div className="header-nav-option" onClick={handleAuthentication}>
-                        <span className="header-option-topLine">Hello</span>
+                        <span className="header-option-topLine">hello {user ? user.email.split("@")[0] : ""}     </span>
                         <span className="header-option-botLine">
                             {user ? " Sign Out" : "Sign in"}
                         </span>
