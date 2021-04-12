@@ -69,6 +69,13 @@
 	width: 100%;
 	display: flex;
 	background-color: white;
+	h3 {
+		margin-bottom: 10px;
+
+		span {
+			text-decoration: underline;
+		}
+	}
 	h2 {
 		font-size: 29px;
 		font-weight: 500;

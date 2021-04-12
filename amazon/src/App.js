@@ -10,7 +10,6 @@ import { useStateValue } from './StateProvider'
 const App = () => {
 
   const [{ user }, disapatch] = useStateValue()
-
   useEffect(() => {
     auth.onAuthStateChanged(authUser => {
       console.log(authUser)

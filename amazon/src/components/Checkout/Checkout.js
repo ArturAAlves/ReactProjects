@@ -7,7 +7,7 @@ import { getBasketTotal } from '../../reducer'
 import CurrencyFormat from 'react-currency-format'
 
 const Checkout = () => {
-    const [{ basket }, dispatch] = useStateValue()
+    const [{ basket, user }, dispatch] = useStateValue()
 
     return (
         <div className="checkout">
@@ -27,6 +27,10 @@ const Checkout = () => {
                 </div>
 
                 <div className="CheckoutCart">
+                    {user ?
+                        <h3>Hello <span>{user.email}</span></h3> : ""
+                    }
+
                     <h2>Shopping Cart</h2>
                     {/* <p>Slect all the Items</p> */}
                     <div className="CheckoutCart-line">
