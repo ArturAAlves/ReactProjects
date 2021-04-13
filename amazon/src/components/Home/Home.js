@@ -1,14 +1,43 @@
 import React from 'react'
 import "./Home.scss"
-import image1 from "./img/carousel/img1.jpg"
 import Product from "../Product/Product"
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+
+
+// carousell img
+//https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Hero/Fuji_TallHero_Toys_en_US_1x._CB431858161_.jpg
+//https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Hero/Fuji_TallHero_Home_v2_en_US_1x._CB429090084_.jpg
+//https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Hero/Fuji_TallHero_Computers_1x._CB432469755_.jpg
+//https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Hero/Fuji_TallHero_45M_v2_1x._CB432458380_.jpg
 
 function Home() {
     return (
         <div className="home">
             <div className="home-carousel">
-                <img className="home-carousel-img" src={image1} alt="" />
+                <Carousel autoPlay={true} infiniteLoop={true} interval={4000} showStatus={false} showThumbs={false} swipeable={true}>
+                    <div>
+                        <img className="home-carousel-img" src="https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Hero/Fuji_TallHero_45M_v2_1x._CB432458380_.jpg" alt="" />
+                    </div>
+                    <div>
+                        <img className="home-carousel-img" src="https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Hero/Fuji_TallHero_Home_v2_en_US_1x._CB429090084_.jpg" alt="" />
+
+                    </div>
+                    <div>
+                        <img className="home-carousel-img" src="https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Hero/Fuji_TallHero_Computers_1x._CB432469755_.jpg" alt="" />
+                    </div>
+                    <div>
+                        <img className="home-carousel-img" src="https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Hero/Fuji_TallHero_Toys_en_US_1x._CB431858161_.jpg
+" alt="" />
+                    </div>
+
+                </Carousel>
             </div>
+
+
+
+
+
             <div className="home-items-container">
                 <div className="home-items-row">
                     <Product

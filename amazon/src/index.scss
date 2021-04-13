@@ -17,4 +17,10 @@
 	button:hover {
 		cursor: pointer;
 	}
+
+	ul,
+	li {
+		list-style: none;
+		padding: 0;
+	}
 }

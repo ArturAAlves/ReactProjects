@@ -9,8 +9,6 @@ import { auth } from "../../firebase"
 
 function Header() {
     const [{ basket, user }, dispatch] = useStateValue()
-
-
     function scrollTop() {
         window.scrollTo(0, 0)
     }
