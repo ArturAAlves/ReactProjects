@@ -68,18 +68,21 @@ const Checkout = () => {
                     :
                     <div className="shoppingCart-empty">
                         <img src="https://m.media-amazon.com/images/G/01/cart/empty/kettle-desaturated._CB445243794_.svg" alt="empty shopping cart" />
-
                         <div className="shoppingCart-hero">
                             <h3>Your Amazon Cart is empty</h3>
                             <p>Shop today's deals</p>
-                            <div className="shoppingCart-hero-btns">
-                                <Link to="./login">
-                                    <button className="shoppingCart-btn-signIn" type="button">Sign in to your account</button>
-                                </Link>
-                                <Link to="./login">
-                                    <button className="shoppingCart-btn-signUp" type="button">Sign up now</button>
-                                </Link>
-                            </div>
+                            {!user ?
+                                <div className="shoppingCart-hero-btns">
+                                    <Link to="./login">
+                                        <button className="shoppingCart-btn-signIn" type="button">Sign in to your account</button>
+                                    </Link>
+                                    <Link to="./login">
+                                        <button className="shoppingCart-btn-signUp" type="button">Sign up now</button>
+                                    </Link>
+                                </div>
+                                : ""
+                            }
+
                         </div>
                     </div>
                 }
