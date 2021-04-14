@@ -1,13 +1,19 @@
 .header {
 	display: flex;
 	align-items: center;
-	height: 60px;
+	height: auto;
 	width: 100%;
+	padding: 5px 0;
 	background-color: #131921;
 	position: sticky;
 	top: 0;
 	z-index: 100;
 	color: white;
+	flex-wrap: wrap;
+
+	@media only screen and(max-width:800px) {
+		padding-bottom: 10px;
+	}
 }
 
 .header-logo {
@@ -26,6 +32,12 @@
 	border-radius: 3px;
 	// background-color: #cd9042;
 	padding: 3px;
+	min-width: 200px;
+	@media only screen and (max-width: 800px) {
+		max-width: 90%;
+		margin: auto;
+		order: 1;
+	}
 }
 
 .header-search-input {
@@ -53,7 +65,12 @@
 //Left nav Piece
 .header-nav {
 	display: flex;
-	justify-content: space-evenly;
+
+	@media only screen and (max-width: 800px) {
+		max-width: 90%;
+		margin: auto;
+		justify-content: space-evenly;
+	}
 }
 
 .header-nav-option {
@@ -78,6 +95,10 @@
 	display: flex;
 	align-items: center;
 	margin: 0 10px;
+	span {
+		text-align: center;
+		width: 15px;
+	}
 }
 
 .nav-cart-icon {

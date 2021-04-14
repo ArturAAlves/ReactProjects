@@ -1,20 +1,92 @@
-import React from 'react'
 import "./AddedToCart.scss"
+import { useStateValue } from '../../StateProvider'
+import CurrencyFormat from 'react-currency-format'
+import { getBasketTotal } from '../../reducer'
+import { useEffect, useState } from "react"
+import CheckIcon from '@material-ui/icons/Check';
+import { Link } from "react-router-dom"
 
-const AddedToCart = () => {
+let initial;
+
+
+const AddedToCart = ({ id, title, image, rating, price }) => {
+    const [{ basket, user }, dispatch] = useStateValue()
+    const [itemDisplay, setItemDisplay] = useState("")
+    const [loaded, setLoaded] = useState(false)
+    function removeItemDisplay() {
+        setLoaded(true)
+        initial = window.setTimeout(
+            function () {
+                setItemDisplay("")
+            }, 55555555);
+    }
+
+    useEffect(() => {
+        clearTimeout(initial)
+        removeItemDisplay()
+
+        if (loaded) {
+            setItemDisplay(basket)
+        }
+
+        return () => {
+        }
+    }, [basket])
+
     return (
-        <div className="addedToCart">
-            <div className="addedToCart-img">
-                <img />
-            </div>
-            <div className="addedToCart-info">
-                <div className="addedToCart-info-discription"></div>
-                <div className="addedToCart-info-buttons">
-                    <button>Cart</button>
-                    <button>Proceed to Chechout(X items)</button>
+        itemDisplay.length > 0 ?
+            < div className="addedToCart" >
+                <div className="addedToCart-img-container">
+                    <div className="addedToCart-check">
+                        <span> <CheckIcon /></span>
+                    </div><Link to="./checkout">
+                        <div className="addedToCart-img">
+                            <img alt={title} src={itemDisplay.length > 0 ? itemDisplay[itemDisplay.length - 1].image : ""} />
+                        </div>
+                    </Link>
+                    <div className="addedToCart-success">
+                        <p>Added to Cart</p>
+                    </div>
                 </div>
-            </div>
-        </div>
+                <div className="addedToCart-description-container">
+                    <div className="addedToCart-description">
+                        <div className="addedToCart-description-top">
+                            {basket.length > 0 ?
+                                <div className="addedToCart-description-value">
+                                    <p> Cart subtotal ({basket.length} Item):
+                            <CurrencyFormat
+                                            fixedDecimalScale={true}
+                                            value={getBasketTotal(basket)}
+                                            decimalScale={2}
+                                            displayType={"text"}
+                                            thousandSeparator={true}
+                                            prefix={"€"}
+                                            renderText={(value) => (
+                                                <span className="addedToCart-description-subtotal-value">
+                                                    {value}
+                                                </span>
+                                            )}
+                                        />
+                                    </p>
+                                </div> : ""
+                            }
+                        </div>
+                        <div className="addedToCart-description-bottom">
+                            <input type="checkbox" name="" id="" />
+
+                            <p> This order contains a gift</p>
+                        </div>
+                    </div>
+                    <div className="addedToCart-description-buttons">
+                        <button type="button" className="addedToCart-cart">Cart</button>
+                        <button type="button" className="addedToCart-cart">Proceed to checkout (5 items)</button>
+                    </div>
+                </div>
+                <div className="addedToCart-close">
+                    <button type="button">X</button>
+                </div>
+            </div >
+            : ""
     )
 }
 

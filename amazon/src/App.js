@@ -7,14 +7,14 @@ import Login from './components/Login/Login'
 import { auth } from "./firebase"
 import { useStateValue } from './StateProvider'
 import Footer from './components/footer/footer'
+import AddedToCart from "./components/AddedToCart/AddedToCart"
+import "./index.scss"
+
 
 const App = () => {
-
   const [{ user }, disapatch] = useStateValue()
   useEffect(() => {
     auth.onAuthStateChanged(authUser => {
-      console.log(authUser)
-
       if (authUser) {
         disapatch({
           type: "SET_USER",
@@ -29,22 +29,13 @@ const App = () => {
         })
       }
     })
-
-
     return () => {
     }
   }, [])
 
-
-  if (user) {
-    console.log("user", user.email)
-
-  }
-
   return (
     <Router>
       <div className="app">
-
         <Switch>
           <Route path="/login">
             <Login />
@@ -54,6 +45,7 @@ const App = () => {
             <Checkout />
           </Route>
           <Route path="/">
+            <AddedToCart />
             <Header />
             <Home />
           </Route>

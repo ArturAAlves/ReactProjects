@@ -8,7 +8,6 @@ export const getBasketTotal = (basket) => (
     basket.reduce((acc, item) => acc + parseFloat(item.price), 0)
 )
 
-
 const reducer = (state, action) => {
     switch (action.type) {
         case 'ADD_TO_BASKET':
@@ -31,6 +30,10 @@ const reducer = (state, action) => {
             return {
                 ...state, user: action.user
             }
+        // case 'ADDED_ITEM':
+        //     return {
+        //         ...state, basket: [...state.basket, action.item]
+        //     }
 
 
         // return {

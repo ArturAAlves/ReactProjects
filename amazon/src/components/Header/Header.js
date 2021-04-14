@@ -30,6 +30,8 @@ function Header() {
                 </input>
                 <SearchIcon className="header-search-icon" />
             </div>
+
+
             <div className="header-nav">
                 <Link to={user ? "" : "./login"} >
                     <div className="header-nav-option" onClick={handleAuthentication}>

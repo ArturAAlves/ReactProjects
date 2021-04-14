@@ -35,9 +35,6 @@ function Home() {
             </div>
 
 
-
-
-
             <div className="home-items-container">
                 <div className="home-items-row">
                     <Product
