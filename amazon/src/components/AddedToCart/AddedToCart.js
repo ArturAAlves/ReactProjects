@@ -4,6 +4,7 @@ import CurrencyFormat from 'react-currency-format'
 import { getBasketTotal } from '../../reducer'
 import { useEffect, useState } from "react"
 import CheckIcon from '@material-ui/icons/Check';
+import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
 import { Link } from "react-router-dom"
 
 let initial;
@@ -53,7 +54,7 @@ const AddedToCart = ({ id, title, image, rating, price }) => {
                         <div className="addedToCart-description-top">
                             {basket.length > 0 ?
                                 <div className="addedToCart-description-value">
-                                    <p> Cart subtotal ({basket.length} Item):
+                                    <p><span>Cart subtotal</span>  ({basket.length} Item):
                             <CurrencyFormat
                                             fixedDecimalScale={true}
                                             value={getBasketTotal(basket)}
@@ -74,12 +75,12 @@ const AddedToCart = ({ id, title, image, rating, price }) => {
                         <div className="addedToCart-description-bottom">
                             <input type="checkbox" name="" id="" />
 
-                            <p> This order contains a gift</p>
+                            <p><span><CardGiftcardIcon /></span>   This is a gift</p>
                         </div>
                     </div>
                     <div className="addedToCart-description-buttons">
                         <button type="button" className="addedToCart-cart">Cart</button>
-                        <button type="button" className="addedToCart-cart">Proceed to checkout (5 items)</button>
+                        <button type="button" className="addedToCart-checkout">Proceed to checkout (5 items)</button>
                     </div>
                 </div>
                 <div className="addedToCart-close">
