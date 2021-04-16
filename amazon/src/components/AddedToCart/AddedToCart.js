@@ -83,9 +83,9 @@ const AddedToCart = ({ id, title, image, rating, price }) => {
                         <button type="button" className="addedToCart-checkout">Proceed to checkout (5 items)</button>
                     </div>
                 </div>
-                <div className="addedToCart-close">
+                {/* <div className="addedToCart-close">
                     <button type="button">X</button>
-                </div>
+                </div> */}
             </div >
             : ""
     )
