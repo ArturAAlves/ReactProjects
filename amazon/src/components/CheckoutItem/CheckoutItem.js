@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./CheckoutItem.scss"
 import { useStateValue } from '../../StateProvider'
 
 
 const ShoppingCartItems = ({ id, title, image, rating, price }) => {
     const [{ basket }, dispatch] = useStateValue()
+
+    function scrollTop() {
+        window.scrollTo(0, 0)
+    }
 
 
     const removeFromBasket = () => {
@@ -13,6 +17,13 @@ const ShoppingCartItems = ({ id, title, image, rating, price }) => {
             id: id
         })
     }
+
+    useEffect(() => {
+        scrollTop()
+        return () => {
+
+        }
+    }, [])
 
     return (
         <div className="CheckoutItem">

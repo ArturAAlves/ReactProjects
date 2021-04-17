@@ -113,7 +113,7 @@ const footer = () => {
             <div className="footer-line" />
             <div className="footer-bottom">
                 <div className="footer-bottom-logo">
-                    <img alt="amazon" src={amazonLogo} />
+                    <img alt="amazon" src={amazonLogo} onClick={scrollTop} />
                 </div>
             </div>
         </div>

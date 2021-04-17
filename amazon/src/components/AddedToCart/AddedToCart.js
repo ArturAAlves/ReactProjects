@@ -19,7 +19,7 @@ const AddedToCart = ({ id, title, image, rating, price }) => {
         initial = window.setTimeout(
             function () {
                 setItemDisplay("")
-            }, 55555555);
+            }, 5000);
     }
 
     useEffect(() => {
@@ -29,7 +29,6 @@ const AddedToCart = ({ id, title, image, rating, price }) => {
         if (loaded) {
             setItemDisplay(basket)
         }
-
         return () => {
         }
     }, [basket])
@@ -79,8 +78,13 @@ const AddedToCart = ({ id, title, image, rating, price }) => {
                         </div>
                     </div>
                     <div className="addedToCart-description-buttons">
-                        <button type="button" className="addedToCart-cart">Cart</button>
-                        <button type="button" className="addedToCart-checkout">Proceed to checkout (5 items)</button>
+                        <Link to="./checkout">
+                            <button type="button" className="addedToCart-cart">Cart</button>
+                        </Link>
+
+                        <Link to="./checkout">
+                            <button type="button" className="addedToCart-checkout">Proceed to checkout ({basket.length})</button>
+                        </Link>
                     </div>
                 </div>
                 {/* <div className="addedToCart-close">
