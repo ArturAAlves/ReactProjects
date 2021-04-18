@@ -43,7 +43,7 @@ function Home() {
                         price="159.00"
                         image="https://m.media-amazon.com/images/I/91OIsbTx3RL._AC_UL320_.jpg"
                         rating={3}
-                        quantity={1}
+                        qty={1}
                     />
 
                     <Product
@@ -52,7 +52,7 @@ function Home() {
                         price="395.00"
                         image="https://m.media-amazon.com/images/I/81f4qtOtzcL._AC_UL320_.jpg"
                         rating={3}
-                        quantity={1}
+                        qty={1}
                     />
                 </div>
                 <div className="home-items-row">
@@ -62,7 +62,7 @@ function Home() {
                         price="27.17"
                         image="https://m.media-amazon.com/images/I/51MSqR96+XL._AC_SR400,600_.jpg"
                         rating={4}
-                        quantity={1}
+                        qty={1}
                     />
                     <Product
                         id={4}
@@ -70,7 +70,7 @@ function Home() {
                         price="21.98"
                         image=" https://m.media-amazon.com/images/I/6192aQ9HliL._AC_UL320_.jpg"
                         rating={4}
-                        quantity={1}
+                        qty={1}
                     />
                     <Product
                         id={5}
@@ -78,7 +78,7 @@ function Home() {
                         price="21.99"
                         image="https://m.media-amazon.com/images/I/41NIr6XbIDL._AC_SR400,600_.jpg"
                         rating={4}
-                        quantity={1}
+                        qty={1}
                     />
                 </div>
 
@@ -90,7 +90,7 @@ function Home() {
                         price="199.00"
                         image="https://m.media-amazon.com/images/I/51wDY7iJMNL._AC_UL320_.jpg"
                         rating={4}
-                        quantity={1}
+                        qty={1}
                     />
                     <Product
                         id={7}
@@ -98,7 +98,7 @@ function Home() {
                         price="465.00"
                         image=" https://m.media-amazon.com/images/I/61fgq2+27vL._AC_UL320_.jpg"
                         rating={4}
-                        quantity={1}
+                        qty={1}
                     />
                     <Product
                         id={8}
@@ -106,7 +106,7 @@ function Home() {
                         price="111.27"
                         image="https://m.media-amazon.com/images/I/51sL7lYBDbL._AC_UL320_.jpg"
                         rating={4}
-                        quantity={1}
+                        qty={1}
                     />
                 </div>
             </div>

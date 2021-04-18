@@ -3,7 +3,7 @@ import "./CheckoutItem.scss"
 import { useStateValue } from '../../StateProvider'
 
 
-const ShoppingCartItems = ({ id, title, image, rating, price }) => {
+const ShoppingCartItems = ({ id, title, image, rating, price, qty }) => {
     const [{ basket }, dispatch] = useStateValue()
 
     function scrollTop() {
@@ -34,7 +34,7 @@ const ShoppingCartItems = ({ id, title, image, rating, price }) => {
                 <div className="CheckoutItem-description">
                     <div className="checkoutItem-title"><p>{title}</p></div>
                     <div className="checkoutItem-remove"><button type="button" onClick={removeFromBasket}>Remove Item</button></div>
-
+                    <div>{qty} </div>
                 </div>
                 <div className="CheckoutItem-price">
                     <span>€{price}</span>

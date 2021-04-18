@@ -7,7 +7,7 @@ import { useStateValue } from '../../StateProvider';
 
 
 
-const Product = ({ id, title, image, price, rating }) => {
+const Product = ({ id, title, image, price, rating, qty }) => {
     const [basket, dispatch] = useStateValue()
 
 
@@ -17,12 +17,15 @@ const Product = ({ id, title, image, price, rating }) => {
         ));
     }
 
-    // if (rating) {
-    //     console.log(parseFloat(rating))
-    // }
 
 
     const addToBasket = () => {
+        // basket.basket.map((items) => {
+        //     while (items.id !== id) {
+        //         return console.log(items)
+        //     }
+        // })
+
         dispatch({
             type: 'ADD_TO_BASKET',
             item: {
@@ -30,9 +33,13 @@ const Product = ({ id, title, image, price, rating }) => {
                 title: title,
                 image: image,
                 price: price,
-                rating: rating
+                rating: rating,
+                qty: qty
             }
         })
+
+
+
     }
 
     return (
