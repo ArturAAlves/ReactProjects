@@ -37,7 +37,9 @@ const ShoppingCartItems = ({ id, title, image, rating, price, qty }) => {
                     <div>{qty} </div>
                 </div>
                 <div className="CheckoutItem-price">
-                    <span>€{price}</span>
+                    <span>€{price} X {qty}</span>
+                    <br />
+                    <span>€{price * qty}</span>
                 </div>
             </div>
 
