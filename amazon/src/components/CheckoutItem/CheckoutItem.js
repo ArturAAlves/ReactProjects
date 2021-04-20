@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import "./CheckoutItem.scss"
 import { useStateValue } from '../../StateProvider'
-
+import { getTotalProducs } from '../../reducer'
 
 const ShoppingCartItems = ({ id, title, image, rating, price, qty }) => {
     const [{ basket }, dispatch] = useStateValue()
@@ -37,9 +37,8 @@ const ShoppingCartItems = ({ id, title, image, rating, price, qty }) => {
                     <div>{qty} </div>
                 </div>
                 <div className="CheckoutItem-price">
-                    <span>€{price} X {qty}</span>
-                    <br />
-                    <span>€{price * qty}</span>
+                    <span>€{price}</span>
+
                 </div>
             </div>
 

@@ -14,6 +14,7 @@ const AddedToCart = ({ id, title, image, rating, price }) => {
     const [{ basket, user }, dispatch] = useStateValue()
     const [itemDisplay, setItemDisplay] = useState("")
     const [loaded, setLoaded] = useState(false)
+
     function removeItemDisplay() {
         setLoaded(true)
         initial = window.setTimeout(
