@@ -3,15 +3,15 @@ import "./SubTotal.scss"
 import CurrencyFormat from "react-currency-format"
 import { useStateValue } from '../../StateProvider'
 import { getBasketTotal } from '../../reducer'
+import { getTotalProducs } from '../../reducer'
 
 const Subtotal = () => {
     const [{ basket }, dispatch] = useStateValue()
-
-
+    
     return (
         <div className="subtotal">
             <div className="subtotal-text">
-                <p>Subtotal<span> ({basket.length} items) : </span>
+                <p>Subtotal<span> ({basket.length !== 0 ? getTotalProducs(basket) : 0} items) : </span>
                     <CurrencyFormat
                         fixedDecimalScale={true}
                         value={basket.length !== 0 ? getBasketTotal(basket) : 0}
