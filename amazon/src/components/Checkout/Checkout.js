@@ -6,6 +6,7 @@ import CheckoutItem from '../CheckoutItem/CheckoutItem'
 import { getBasketTotal } from '../../reducer'
 import CurrencyFormat from 'react-currency-format'
 import { Link } from 'react-router-dom'
+import { getTotalProducs } from '../../reducer';
 
 const Checkout = () => {
     const [{ basket, user }, dispatch] = useStateValue()
@@ -47,7 +48,7 @@ const Checkout = () => {
                         </div>
                         {basket.length !== 0 ?
                             <div className="checkout-value">
-                                <p>Subtotal ({basket.length} Item):
+                                <p>Subtotal ({getTotalProducs(basket)} Item):
                             <CurrencyFormat
                                         fixedDecimalScale={true}
                                         value={getBasketTotal(basket)}

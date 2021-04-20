@@ -6,6 +6,7 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { Link } from 'react-router-dom';
 import { useStateValue } from '../../StateProvider';
 import { auth } from "../../firebase"
+import { getTotalProducs } from '../../reducer';
 
 function Header() {
     const [{ basket, user }, dispatch] = useStateValue()
@@ -53,7 +54,7 @@ function Header() {
                 <Link to="./checkout" onClick={() => scrollTop()}>
                     <div className="header-nav-cart" >
                         <ShoppingBasketIcon className="nav-cart-icon" />
-                        <span className="nav-cart">{basket && basket.length}</span>
+                        <span className="nav-cart">{basket ? getTotalProducs(basket) : ""}</span>
 
                     </div>
                 </Link>
