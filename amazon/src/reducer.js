@@ -68,7 +68,7 @@ export const getBasketTotal = (basket) => (
     basket.reduce((acc, item) => acc + parseFloat(item.price * item.qty), 0)
 )
 
- 
+
 export const getTotalProducs = (basket) => {
     let val = 0
     basket.forEach(element => {

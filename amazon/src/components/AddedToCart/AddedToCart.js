@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import CheckIcon from '@material-ui/icons/Check';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
 import { Link } from "react-router-dom"
+import { getTotalProducs } from '../../reducer'
 
 let initial;
 
@@ -54,7 +55,7 @@ const AddedToCart = ({ id, title, image, rating, price }) => {
                         <div className="addedToCart-description-top">
                             {basket.length > 0 ?
                                 <div className="addedToCart-description-value">
-                                    <p><span>Cart subtotal</span>  ({basket.length} Item):
+                                    <p><span>Cart subtotal</span>  ({getTotalProducs(basket)} Item):
                             <CurrencyFormat
                                             fixedDecimalScale={true}
                                             value={getBasketTotal(basket)}
@@ -84,7 +85,7 @@ const AddedToCart = ({ id, title, image, rating, price }) => {
                         </Link>
 
                         <Link to="./checkout">
-                            <button type="button" className="addedToCart-checkout">Proceed to checkout ({basket.length})</button>
+                            <button type="button" className="addedToCart-checkout">Proceed to checkout ({getTotalProducs(basket)})</button>
                         </Link>
                     </div>
                 </div>
