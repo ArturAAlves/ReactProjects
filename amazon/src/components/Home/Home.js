@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Home.scss"
 import Product from "../Product/Product"
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { useStateValue } from '../../StateProvider';
 
 
 // carousell img
@@ -12,6 +13,29 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 //https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Hero/Fuji_TallHero_45M_v2_1x._CB432458380_.jpg
 
 function Home() {
+
+    const [{ basket, user }, dispatch] = useStateValue()
+    const [localStorageItems, setLocalStorageItems] = useState(JSON.parse(localStorage.getItem("basket")))
+    // useEffect(() => {
+    //     // setLocalStorage(JSON.parse(localStorage.getItem("basket") || "[]"))
+
+
+
+    //     // localStorage.setItem("basket", JSON.stringify(basket));
+    //     // console.log(JSON.parse(localStorage.getItem("basket") || "[]"))
+    // }, [localStorageItems])
+
+
+    const storagea = () => {
+        dispatch({
+            type: "UPDATE_FROM_BASKET",
+            storage: localStorageItems.basket
+        })
+    }
+    if (localStorageItems) {
+        storagea()
+    }
+
     return (
         <div className="home">
             <div className="home-carousel">
@@ -42,7 +66,7 @@ function Home() {
                         title="Samsung Galaxy A12 | Ram 4G para smartphone grátis e capacidade interna expansível de 64 GB | Câmera principal 48MP | Bateria de 5.000 mAh e carga rápida | Cor Azul "
                         price="159.00"
                         image="https://m.media-amazon.com/images/I/91OIsbTx3RL._AC_UL320_.jpg"
-                        rating={3}
+                        rating={3.5}
                         qty={1}
                     />
 
@@ -61,7 +85,7 @@ function Home() {
                         title="Oral-B Pro-Expert Protección Profesional Pasta de Dientes, Pack de 12, Limpieza Bucal Completa "
                         price="27.17"
                         image="https://m.media-amazon.com/images/I/51MSqR96+XL._AC_SR400,600_.jpg"
-                        rating={4}
+                        rating={4.6}
                         qty={1}
                     />
                     <Product
@@ -89,7 +113,7 @@ function Home() {
                         title="Kenwood Prospero + KHC29.H0WH - Processador de alimentos multifuncional, tigela de 4,3L, misture, agite e amasse, liquidificador de vidro de 1,5 l, processador de alimentos de 1,4 l com três discos e espremedor, branco"
                         price="199.00"
                         image="https://m.media-amazon.com/images/I/51wDY7iJMNL._AC_UL320_.jpg"
-                        rating={4}
+                        rating={5}
                         qty={1}
                     />
                     <Product
@@ -105,7 +129,7 @@ function Home() {
                         title="Kenwood Persona TTM610 - Torradeira com abertura longa para 2 torradas ou grande, estante confortável, vários programas, 1080 W, prata"
                         price="111.27"
                         image="https://m.media-amazon.com/images/I/51sL7lYBDbL._AC_UL320_.jpg"
-                        rating={4}
+                        rating={1.6}
                         qty={1}
                     />
                 </div>

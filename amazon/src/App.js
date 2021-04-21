@@ -1,29 +1,34 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from "./components/Header/Header"
 import Home from "./components/Home/Home"
 import Checkout from './components/Checkout/Checkout'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Login from './components/Login/Login'
 import { auth } from "./firebase"
-import { useStateValue } from './StateProvider'
+import { useStateValue } from "./StateProvider"
 import Footer from './components/footer/footer'
 import AddedToCart from "./components/AddedToCart/AddedToCart"
 import "./index.scss"
 
 
+
+
 const App = () => {
-  const [{ user }, disapatch] = useStateValue()
+  const [{ basket, user }, dispatch] = useStateValue()
+
+
   useEffect(() => {
+
     auth.onAuthStateChanged(authUser => {
       if (authUser) {
-        disapatch({
+        dispatch({
           type: "SET_USER",
           user: authUser
         })
         console.log("loggedIn")
       } else {
         console.log("loggedOut")
-        disapatch({
+        dispatch({
           type: "SET_USER",
           user: null
         })

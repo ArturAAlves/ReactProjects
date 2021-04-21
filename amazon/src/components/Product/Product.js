@@ -1,31 +1,13 @@
 import React from 'react'
 import "./Product .scss"
-import StarIcon from '@material-ui/icons/Star';
-import StarHalfIcon from '@material-ui/icons/StarHalf';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
 import { useStateValue } from '../../StateProvider';
-
+import Rating from '@material-ui/lab/Rating';
 
 
 const Product = ({ id, title, image, price, rating, qty }) => {
     const [basket, dispatch] = useStateValue()
 
-
-    function getRating() {
-        return [...Array((parseInt(rating)))].map((item, i) => (
-            <StarIcon key={i} />
-        ));
-    }
-
-
-
     const addToBasket = () => {
-        // basket.basket.map((items) => {
-        //     while (items.id !== id) {
-        //         return console.log(items)
-        //     }
-        // })
-
         dispatch({
             type: 'ADD_TO_BASKET',
             item: {
@@ -37,10 +19,8 @@ const Product = ({ id, title, image, price, rating, qty }) => {
                 qty: qty
             }
         })
-
-
-
     }
+
 
     return (
         <div className="product">
@@ -64,7 +44,7 @@ const Product = ({ id, title, image, price, rating, qty }) => {
             </div>
             {rating
                 ? <div className="product-rating">
-                    {getRating()}
+                    <Rating name="half-rating-read" defaultValue={rating} precision={0.5} readOnly />
                 </div>
                 : "Loading.."
             }
