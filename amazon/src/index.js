@@ -6,6 +6,7 @@ import { StateProvider } from './StateProvider';
 import reducer, { initialState } from "./reducer.js"
 
 
+
 ReactDOM.render(
   <React.StrictMode>
     <StateProvider initialState={initialState} reducer={reducer}>

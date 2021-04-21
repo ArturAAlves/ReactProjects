@@ -1,4 +1,4 @@
-import { AccordionDetails } from "@material-ui/core";
+
 
 export const initialState = {
     basket: [],
@@ -6,9 +6,15 @@ export const initialState = {
     user: null
 }
 
-
 const reducer = (state, action) => {
     switch (action.type) {
+        case 'UPDATE_TO_BASKET':
+            console.log(state)
+            console.log(action.storage)
+            return {
+                ...state, basket: action
+            }
+
         case 'ADD_TO_BASKET':
             let countBasket = [...state.basket];
             const countPlus = state.basket.find(basketItem => {
@@ -57,12 +63,27 @@ const reducer = (state, action) => {
                 ...state, user: action.user
             }
 
+        case 'QTY_FROM_BASKET':
+            // console.log(action)
+            let qtyBasket = [...state.basket];
+            const x = state.basket.findIndex(
+                basketItem => basketItem.id === action.id
+            )
+            if (x >= 0) {
+                qtyBasket[x].qty = parseInt(action.qty)
+            }
+
+
+            return {
+                ...state, basket: qtyBasket
+            }
+
         default:
             return state;
     }
 }
 export default reducer
-//Slector
+
 
 export const getBasketTotal = (basket) => (
     basket.reduce((acc, item) => acc + parseFloat(item.price * item.qty), 0)
@@ -74,6 +95,6 @@ export const getTotalProducs = (basket) => {
     basket.forEach(element => {
         val = val + element.qty
     });
-    console.log(val)
+
     return val
 }
