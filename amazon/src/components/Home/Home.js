@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react'
 import "./Home.scss"
 import Product from "../Product/Product"
 import { Carousel } from 'react-responsive-carousel';
@@ -13,28 +12,7 @@ import { useStateValue } from '../../StateProvider';
 //https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Hero/Fuji_TallHero_45M_v2_1x._CB432458380_.jpg
 
 function Home() {
-
     const [{ basket, user }, dispatch] = useStateValue()
-    const [localStorageItems, setLocalStorageItems] = useState(JSON.parse(localStorage.getItem("basket")))
-    // useEffect(() => {
-    //     // setLocalStorage(JSON.parse(localStorage.getItem("basket") || "[]"))
-
-
-
-    //     // localStorage.setItem("basket", JSON.stringify(basket));
-    //     // console.log(JSON.parse(localStorage.getItem("basket") || "[]"))
-    // }, [localStorageItems])
-
-
-    const storagea = () => {
-        dispatch({
-            type: "UPDATE_FROM_BASKET",
-            storage: localStorageItems.basket
-        })
-    }
-    if (localStorageItems) {
-        storagea()
-    }
 
     return (
         <div className="home">
@@ -69,7 +47,6 @@ function Home() {
                         rating={3.5}
                         qty={1}
                     />
-
                     <Product
                         id={2}
                         title="Smartphone Samsung Galaxy A52 5G com tela Infinity-O FHD + de 6,5 polegadas, 6 GB de RAM e 128 GB de memória interna expansível, bateria de 4500 mAh e preto super rápido de carregamento"

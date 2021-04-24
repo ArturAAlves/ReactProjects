@@ -9,10 +9,9 @@ export const initialState = {
 const reducer = (state, action) => {
     switch (action.type) {
         case 'UPDATE_TO_BASKET':
-            console.log(state)
             console.log(action.storage)
             return {
-                ...state, basket: action
+                ...state, basket: action.storage
             }
 
         case 'ADD_TO_BASKET':

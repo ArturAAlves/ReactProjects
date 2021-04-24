@@ -15,10 +15,26 @@ import "./index.scss"
 
 const App = () => {
   const [{ basket, user }, dispatch] = useStateValue()
+  const [loaded, setLoaded] = useState(true)
 
 
   useEffect(() => {
+    const localData = localStorage.getItem("basket")
+    if (localData && loaded) {
+      dispatch({
+        type: "UPDATE_TO_BASKET",
+        storage: JSON.parse(localStorage.getItem("basket"))
+      })
+      setLoaded(false)
+    }
+    localStorage.setItem("basket", JSON.stringify(basket));
+    // console.log(JSON.parse(localStorage.getItem("basket") || "[]"))
 
+  }, [basket])
+
+
+
+  useEffect(() => {
     auth.onAuthStateChanged(authUser => {
       if (authUser) {
         dispatch({
