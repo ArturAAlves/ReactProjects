@@ -1,99 +1,93 @@
-
-
 export const initialState = {
-    basket: [],
-    total: 0,
-    user: null
-}
+	basket: [],
+	total: 0,
+	user: null,
+};
 
 const reducer = (state, action) => {
-    switch (action.type) {
-        case 'UPDATE_TO_BASKET':
-            console.log(action.storage)
-            return {
-                ...state, basket: action.storage
-            }
+	switch (action.type) {
+		case "UPDATE_TO_BASKET":
+			return {
+				...state,
+				basket: action.storage,
+			};
 
-        case 'ADD_TO_BASKET':
-            let countBasket = [...state.basket];
-            const countPlus = state.basket.find(basketItem => {
-                return basketItem.id === action.item.id
+		case "ADD_TO_BASKET":
+			let countBasket = [...state.basket];
+			const countPlus = state.basket.find((basketItem) => {
+				return basketItem.id === action.item.id;
+			});
 
-            })
+			const u = state.basket.findIndex(
+				(basketItem) => basketItem.id === action.item.id
+			);
 
-            const u = state.basket.findIndex(
-                basketItem => basketItem.id === action.item.id
-            )
+			if (u >= 0) {
+				countBasket.splice(u, 1);
+				countPlus.qty += 1;
+				countBasket.push(countPlus);
+			} else if (u < 0) {
+				countBasket.push(action.item);
+			}
 
-            if (u >= 0) {
-                countBasket.splice(u, 1)
-                countPlus.qty += 1
-                countBasket.push(countPlus)
-            }
+			return {
+				...state,
+				basket: countBasket,
+			};
 
-            else if (u < 0) {
-                countBasket.push(action.item)
-            }
+		case "REMOVE_FROM_BASKET":
+			// const index = state.basket.findIndex(
+			//     basketItem => basketItem.id === action.id
+			// )
+			// let newBasket = [...state.basket];
 
-            return {
-                ...state, basket: countBasket
-            }
+			// if (index >= 0) {
+			//     newBasket.splice(index, 1)
+			// }
+			const index = state.basket.filter(
+				(basketItem) => basketItem.id !== action.id
+			);
 
+			return {
+				...state,
+				basket: index,
+			};
 
-        case 'REMOVE_FROM_BASKET':
-            // const index = state.basket.findIndex(
-            //     basketItem => basketItem.id === action.id
-            // )
-            // let newBasket = [...state.basket];
+		case "SET_USER":
+			return {
+				...state,
+				user: action.user,
+			};
 
-            // if (index >= 0) {
-            //     newBasket.splice(index, 1)
-            // }
-            const index = state.basket.filter(
-                basketItem => basketItem.id !== action.id
-            )
+		case "QTY_FROM_BASKET":
+			// console.log(action)
+			let qtyBasket = [...state.basket];
+			const x = state.basket.findIndex(
+				(basketItem) => basketItem.id === action.id
+			);
+			if (x >= 0) {
+				qtyBasket[x].qty = parseInt(action.qty);
+			}
 
-            return {
-                ...state, basket: index
-            }
+			return {
+				...state,
+				basket: qtyBasket,
+			};
 
-        case 'SET_USER':
-            return {
-                ...state, user: action.user
-            }
+		default:
+			return state;
+	}
+};
+export default reducer;
 
-        case 'QTY_FROM_BASKET':
-            // console.log(action)
-            let qtyBasket = [...state.basket];
-            const x = state.basket.findIndex(
-                basketItem => basketItem.id === action.id
-            )
-            if (x >= 0) {
-                qtyBasket[x].qty = parseInt(action.qty)
-            }
-
-
-            return {
-                ...state, basket: qtyBasket
-            }
-
-        default:
-            return state;
-    }
-}
-export default reducer
-
-
-export const getBasketTotal = (basket) => (
-    basket.reduce((acc, item) => acc + parseFloat(item.price * item.qty), 0)
-)
-
+export const getBasketTotal = (basket) =>
+	basket.reduce((acc, item) => acc + parseFloat(item.price * item.qty), 0);
 
 export const getTotalProducs = (basket) => {
-    let val = 0
-    basket.forEach(element => {
-        val = val + element.qty
-    });
+	let val = 0;
+	basket.forEach((element) => {
+		val = val + element.qty;
+	});
 
-    return val
-}
+	return val;
+};

@@ -73,13 +73,17 @@ const AddedToCart = ({ id, title, image, rating, price }) => {
                                 </div> : ""
                             }
                         </div>
+
+
                         <div className="addedToCart-description-bottom">
-                            <input type="checkbox" name="" id="" />
+                            <input type="checkbox" name="" id="" disabled />
 
                             <p><span><CardGiftcardIcon /></span>   This is a gift</p>
                         </div>
                     </div>
-                    <div className="addedToCart-description-buttons">
+                    <div className="addedToCart-description-buttons"
+
+                    >
                         <Link to="./checkout">
                             <button type="button" className="addedToCart-cart">Cart</button>
                         </Link>
