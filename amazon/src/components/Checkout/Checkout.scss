@@ -78,9 +78,9 @@
 	background-color: white;
 	h3 {
 		margin-bottom: 10px;
-
 		span {
-			text-decoration: underline;
+			color: #007185;
+			text-decoration: none !important;
 		}
 	}
 	h2 {
@@ -202,4 +202,11 @@
 }
 .shoppingCart-btn-signUp:hover {
 	background-color: rgb(245, 245, 245);
+}
+
+.CheckoutCart-clearCart {
+	margin-top: 10px;
+	margin-left: 3px;
+	color: #007185;
+	cursor: pointer;
 }

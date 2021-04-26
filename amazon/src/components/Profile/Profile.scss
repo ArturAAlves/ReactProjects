@@ -206,12 +206,19 @@
 
 .personal-info {
 	margin-top: 50px;
-	width: 300px;
-	height: 100px;
+	width: calc(98% - 5px);
+	height: auto;
 	background-color: #131921;
 	display: flex;
-	align-items: center;
+
 	justify-content: center;
 	padding-left: 10px;
 	color: white;
+	flex-direction: column;
+	margin: 30px 0;
+	padding: 15px;
+	padding-left: 10px;
+	div a {
+		color: #ffbe29;
+	}
 }

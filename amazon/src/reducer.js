@@ -2,6 +2,7 @@ export const initialState = {
 	basket: [],
 	total: 0,
 	user: null,
+	contacts: null,
 };
 
 const reducer = (state, action) => {
@@ -33,6 +34,21 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				basket: countBasket,
+			};
+
+		case "CLEAR_BASKET":
+			// const index = state.basket.findIndex(
+			//     basketItem => basketItem.id === action.id
+			// )
+			// let newBasket = [...state.basket];
+
+			// if (index >= 0) {
+			//     newBasket.splice(index, 1)
+			// }
+
+			return {
+				...state,
+				basket: [],
 			};
 
 		case "REMOVE_FROM_BASKET":
