@@ -29,7 +29,24 @@ const Profile = () => {
 					</div>
 				</div>
 				<div className="personal-info">
-					<div>Your UserName: {user ? user.email : ""} </div>
+					<div>
+						Your UserName:{" "}
+						<span style={{ textDecoration: "underline" }}>
+							{" "}
+							{user ? user.email : ""}{" "}
+						</span>{" "}
+					</div>
+					<br />
+					<div>
+						<p>
+							The information is limited since the registration is processed
+							through
+							<a href="https://firebase.google.com/" alt="firebase">
+								{" "}
+								Firebase
+							</a>
+						</p>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -61,18 +61,21 @@ function Header() {
 						)}
 					</span>
 				</div>
-				{user ? (
+				<Link to={!user ? "./login" : "./returns&orders"}>
 					<div className="header-nav-option text-disabled">
 						<span className="header-option-topLine">Returns</span>
 						<span className="header-option-botLine">& Orders</span>
 					</div>
+				</Link>
+
+				{/* {user ? (
+					<div className="header-nav-option text-disabled">
+						<span className="header-option-topLine">Your</span>
+						<span className="header-option-botLine">Prime</span>
+					</div>
 				) : (
 					""
-				)}
-				<div className="header-nav-option text-disabled">
-					<span className="header-option-topLine">Your</span>
-					<span className="header-option-botLine">Prime</span>
-				</div>
+				)} */}
 
 				<Link to="./checkout" onClick={() => scrollTop()}>
 					<div className="header-nav-cart">

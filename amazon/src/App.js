@@ -10,6 +10,7 @@ import { useStateValue } from "./StateProvider";
 import Footer from "./components/footer/footer";
 import AddedToCart from "./components/AddedToCart/AddedToCart";
 import "./index.scss";
+import Order from "./components/Order/Order";
 
 const App = () => {
 	const [{ basket, user }, dispatch] = useStateValue();
@@ -52,9 +53,13 @@ const App = () => {
 					<Route path="/login">
 						<Login />
 					</Route>
+					<Route path="/order">
+						<Header />
+						<Order />
+					</Route>
 					<Route path="/checkout">
 						<Header />
-						<Checkout style />
+						<Checkout />
 					</Route>
 					<Route path="/profile">
 						<Header />
