@@ -14,7 +14,7 @@ function Home() {
 	const [{ basket, user }, dispatch] = useStateValue();
 
 	return (
-		<div>
+		<div className="home">
 			<div className="home-carousel">
 				<Carousel
 					autoPlay={true}
