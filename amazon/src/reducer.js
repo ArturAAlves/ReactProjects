@@ -90,6 +90,12 @@ const reducer = (state, action) => {
 				basket: qtyBasket,
 			};
 
+		case "SET_CONTACTS":
+			return {
+				...state,
+				contacts: action.contacts,
+			};
+
 		default:
 			return state;
 	}
