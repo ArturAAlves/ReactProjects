@@ -13,7 +13,7 @@ import "./index.scss";
 import Order from "./components/Order/Order";
 
 const App = () => {
-	const [{ basket, user }, dispatch] = useStateValue();
+	const [{ basket, user, contacts }, dispatch] = useStateValue();
 	const [loaded, setLoaded] = useState(true);
 
 	useEffect(() => {
@@ -26,8 +26,19 @@ const App = () => {
 			setLoaded(false);
 		}
 		localStorage.setItem("basket", JSON.stringify(basket));
-		// console.log(JSON.parse(localStorage.getItem("basket") || "[]"))
 	}, [basket]);
+
+	useEffect(() => {
+		const localContactsData = localStorage.getItem("contacts");
+		if (localContactsData && loaded) {
+			dispatch({
+				type: "SET_CONTACTS",
+				contacts: JSON.parse(localStorage.getItem("contacts")),
+			});
+			setLoaded(false);
+		}
+		localStorage.setItem("contacts", JSON.stringify(contacts));
+	}, [contacts]);
 
 	useEffect(() => {
 		auth.onAuthStateChanged((authUser) => {
