@@ -13,8 +13,20 @@ import "./index.scss";
 import Order from "./components/Order/Order";
 
 const App = () => {
-	const [{ basket, user, contacts }, dispatch] = useStateValue();
+	const [{ basket, user, contacts, purchase }, dispatch] = useStateValue();
 	const [loaded, setLoaded] = useState(true);
+	useEffect(() => {
+		const localContactsData = localStorage.getItem("contacts");
+		if (localContactsData && loaded) {
+			console.log("loaded");
+			dispatch({
+				type: "SET_CONTACTS",
+				contacts: JSON.parse(localStorage.getItem("contacts")),
+			});
+			setLoaded(false);
+		}
+		localStorage.setItem("contacts", JSON.stringify(contacts));
+	}, [contacts]);
 
 	useEffect(() => {
 		const localData = localStorage.getItem("basket");
@@ -29,16 +41,16 @@ const App = () => {
 	}, [basket]);
 
 	useEffect(() => {
-		const localContactsData = localStorage.getItem("contacts");
-		if (localContactsData && loaded) {
+		const localpurchaseData = localStorage.getItem("purchase");
+		if (localpurchaseData && loaded) {
 			dispatch({
-				type: "SET_CONTACTS",
-				contacts: JSON.parse(localStorage.getItem("contacts")),
+				type: "SET_PURCHASE",
+				contacts: JSON.parse(localStorage.getItem("purchase")),
 			});
 			setLoaded(false);
 		}
-		localStorage.setItem("contacts", JSON.stringify(contacts));
-	}, [contacts]);
+		localStorage.setItem("purchase", JSON.stringify(purchase));
+	}, [purchase]);
 
 	useEffect(() => {
 		auth.onAuthStateChanged((authUser) => {

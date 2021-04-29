@@ -2,7 +2,8 @@ export const initialState = {
 	basket: [],
 	total: 0,
 	user: null,
-	contacts: null,
+	contacts: [],
+	purchase: [],
 };
 
 const reducer = (state, action) => {
@@ -37,29 +38,12 @@ const reducer = (state, action) => {
 			};
 
 		case "CLEAR_BASKET":
-			// const index = state.basket.findIndex(
-			//     basketItem => basketItem.id === action.id
-			// )
-			// let newBasket = [...state.basket];
-
-			// if (index >= 0) {
-			//     newBasket.splice(index, 1)
-			// }
-
 			return {
 				...state,
 				basket: [],
 			};
 
 		case "REMOVE_FROM_BASKET":
-			// const index = state.basket.findIndex(
-			//     basketItem => basketItem.id === action.id
-			// )
-			// let newBasket = [...state.basket];
-
-			// if (index >= 0) {
-			//     newBasket.splice(index, 1)
-			// }
 			const index = state.basket.filter(
 				(basketItem) => basketItem.id !== action.id
 			);
@@ -91,9 +75,20 @@ const reducer = (state, action) => {
 			};
 
 		case "SET_CONTACTS":
+			console.log("hello");
+			let tempContacts = [...state.contacts];
+			tempContacts.push(action.contacts);
 			return {
 				...state,
-				contacts: action.contacts,
+				contacts: tempContacts,
+			};
+
+		case "SET_PURCHASE":
+			let tempPurchase = [...state.purchase];
+			tempPurchase.push(action);
+			return {
+				...state,
+				purchase: tempPurchase,
 			};
 
 		default:
