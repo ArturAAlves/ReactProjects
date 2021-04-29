@@ -5,9 +5,10 @@ import CurrencyFormat from "react-currency-format";
 import { getBasketTotal } from "../../reducer";
 import { getTotalProducs } from "../../reducer";
 import { Radio, TextField } from "@material-ui/core";
-import paypal from "./img/paypal.png";
-import mastercard from "./img/mastercard.png";
-import visa from "./img/visa.png";
+import Paypal from "./img/paypal.png";
+import MasterCard from "./img/mastercard.png";
+import Visa from "./img/visa.png";
+import uuid from "react-uuid";
 
 const Order = () => {
 	const orderInfoTemp = [
@@ -25,9 +26,11 @@ const Order = () => {
 	];
 
 	const [loaded, setLoaded] = useState(false);
-	const [{ user, basket, contacts }, dispatch] = useStateValue();
-	const [selectedValue, setSelectedValue] = useState("MasterCard");
+	const [{ user, basket, contacts, purchase }, dispatch] = useStateValue();
+	const [selectedValue, setSelectedValue] = useState();
 	const [orderInfo, setOrderInfo] = useState();
+	const [present, setPresent] = useState(false);
+	const [presentNote, setPresentNote] = useState();
 
 	const handleChange = (event) => {
 		let value = event.target.value;
@@ -91,19 +94,46 @@ const Order = () => {
 	// 	let mobile = phone.value.length < 9 ? "" : "Please enter 10 numbers";
 	// }
 
-	const addToContacts = () => {
+	//Submit Contacts
+	function handleSubmit(e) {
+		console.log("hello");
+		e.preventDefault();
 		dispatch({
 			type: "SET_CONTACTS",
 			contacts: orderInfo,
 		});
-	};
-
-	function handleSubmit(e) {
-		e.preventDefault();
-		addToContacts();
 	}
 
-	console.log("order", contacts);
+	//Purchase
+	function handlePurchase(e) {
+		e.preventDefault();
+		console.log("hello");
+		dispatch({
+			type: "SET_PURCHASE",
+			purchase: uuid(),
+			contacts,
+			basket,
+			presentNote,
+		});
+	}
+
+	function imgSelector(img) {
+		switch (img) {
+			case "Paypal":
+				return Paypal;
+
+			case "MasterCard":
+				return MasterCard;
+
+			case "VISA":
+				return Visa;
+
+			default:
+				break;
+		}
+	}
+
+	// console.log("hello", purchase);
 	return (
 		<div className="order">
 			<div className="checkout-Order">
@@ -135,31 +165,85 @@ const Order = () => {
 					</div>
 				</div>
 			</div>
-			{/* name: "", adress: "", city: "", postal: "", phone: "", method: "", cardN:
-			"", year: "", code: "", */}
+
 			<div className="order-contact-form">
 				<h2>Delivery Information</h2>
-				{contacts ? (
+				{contacts === "null" ? (
 					<div className="contact-info">
-						<div className="adress">
-							<h3>Adress Information</h3>
-							<p>Full name: {contacts.name}</p>
-							<p>Adress: {contacts.adress}</p>
-							<p>City: {contacts.city}</p>
-							<p>Postal Code: {contacts.postal}</p>
-							<p>Phone Number: {contacts.phone}</p>
-						</div>
-
-						<div className="payment">
-							<h3>Payment Information</h3>
-							<div className="payment-type">
-								<img src="" alt="" />
+						<form onSubmit={handlePurchase}>
+							<div className="adress">
+								<h3>Adress:</h3>
+								<p>Full name: {contacts.name}</p>
+								<p>Adress: {contacts.adress}</p>
+								<p>City: {contacts.city}</p>
+								<p>Postal Code: {contacts.postal}</p>
+								<p>Phone Number: {contacts.phone}</p>
 							</div>
-							<p>
-								Card Number :{contacts.cardN} / year :{contacts.year} / year :
-								{contacts.code}
-							</p>
-						</div>
+							<div className="payment">
+								<h3>Payment Info</h3>
+								<div className="payment-type">
+									<img
+										src={imgSelector(contacts.method)}
+										alt={contacts.method}
+									/>
+								</div>
+								<p>
+									Card Number :{contacts.cardN} / year :{contacts.year} / Code :
+									{contacts.code}
+								</p>
+							</div>
+							<div className="contact-info-line"></div>
+							<div className="subtotal-Order">
+								<div className="subtotal-text" style={{ marginTop: "15px" }}>
+									<p>
+										Total
+										<span>
+											{" "}
+											({basket.length !== 0 ? getTotalProducs(basket) : 0}{" "}
+											items) :{" "}
+										</span>
+										<CurrencyFormat
+											fixedDecimalScale={true}
+											value={basket.length !== 0 ? getBasketTotal(basket) : 0}
+											decimalScale={2}
+											displayType={"text"}
+											thousandSeparator={true}
+											prefix={"€"}
+											renderText={(value) => (
+												<span className="subtotal-value">{value}</span>
+											)}
+										/>
+									</p>
+									<div className="subtotal-checkout-offer">
+										<input
+											type="checkbox"
+											onChange={() => setPresent(!present)}
+										/>
+										<p>This order contains a Gift</p>
+										{present ? (
+											<div>
+												<textarea
+													name=""
+													id=""
+													cols="30"
+													rows="10"
+													onChange={(e) => setPresentNote(e.target.value)}
+												/>
+											</div>
+										) : (
+											""
+										)}
+									</div>
+								</div>
+								<div
+									className="subtotal-checkout-btn-order"
+									style={{ marginTop: "15px" }}>
+									<button className="checkout-btn" type="submit" value="Submit">
+										Complete Purchase
+									</button>
+								</div>
+							</div>
+						</form>
 					</div>
 				) : (
 					<form onSubmit={handleSubmit}>
@@ -170,10 +254,8 @@ const Order = () => {
 							label="Full Name"
 							placeholder="Full Name"
 							variant="outlined"
-
 							// helperText="Please Enter Your name"
 						/>
-
 						<TextField
 							required
 							onChange={handleChange}
@@ -182,7 +264,6 @@ const Order = () => {
 							placeholder="Adress"
 							variant="outlined"
 						/>
-
 						<div className="order-contact-form-sub">
 							<TextField
 								required
@@ -201,7 +282,6 @@ const Order = () => {
 								variant="outlined"
 							/>
 						</div>
-
 						<TextField
 							required
 							onChange={handleChange}
@@ -225,7 +305,7 @@ const Order = () => {
 									inputProps={{ "aria-label": "MasterCard" }}
 									size="small"
 								/>
-								<img src={mastercard} alt="mastercard" />
+								<img src={MasterCard} alt="mastercard" />
 							</div>
 							<div className="payment-method">
 								<Radio
@@ -239,7 +319,7 @@ const Order = () => {
 									inputProps={{ "aria-label": "VISA" }}
 									size="small"
 								/>
-								<img src={visa} alt="visa" />
+								<img src={Visa} alt="visa" />
 							</div>
 							<div className="payment-method">
 								<Radio
@@ -253,7 +333,7 @@ const Order = () => {
 									inputProps={{ "aria-label": "Paypal" }}
 									size="small"
 								/>
-								<img src={paypal} alt="paypal" />
+								<img src={Paypal} alt="paypal" />
 							</div>
 						</div>
 						<div className="order-contact-form-payment">
@@ -284,36 +364,32 @@ const Order = () => {
 							/>
 						</div>
 						<div className="subtotal-Order">
-							<div className="subtotal-text">
-								<p>
-									Total
-									<span>
-										{" "}
-										({basket.length !== 0 ? getTotalProducs(basket) : 0} items)
-										:{" "}
-									</span>
-									<CurrencyFormat
-										fixedDecimalScale={true}
-										value={basket.length !== 0 ? getBasketTotal(basket) : 0}
-										decimalScale={2}
-										displayType={"text"}
-										thousandSeparator={true}
-										prefix={"€"}
-										renderText={(value) => (
-											<span className="subtotal-value">{value}</span>
-										)}
-									/>
-								</p>
-								<div className="subtotal-checkout-offer">
-									<input type="checkbox" />
-									<p>This order contains a Gift</p>
-								</div>
-							</div>
 							<div className="subtotal-checkout-btn-order">
 								<button className="checkout-btn" type="submit" value="Submit">
-									Comple Purchase
+									Submit
 								</button>
 							</div>
+						</div>
+
+						<div className="subtotal-text" style={{ marginTop: "30px" }}>
+							<p>
+								Total
+								<span>
+									{" "}
+									({basket.length !== 0 ? getTotalProducs(basket) : 0} items) :{" "}
+								</span>
+								<CurrencyFormat
+									fixedDecimalScale={true}
+									value={basket.length !== 0 ? getBasketTotal(basket) : 0}
+									decimalScale={2}
+									displayType={"text"}
+									thousandSeparator={true}
+									prefix={"€"}
+									renderText={(value) => (
+										<span className="subtotal-value">{value}</span>
+									)}
+								/>
+							</p>
 						</div>
 					</form>
 				)}
