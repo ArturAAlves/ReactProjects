@@ -15,20 +15,9 @@ import Order from "./components/Order/Order";
 const App = () => {
 	const [{ basket, user, contacts, purchase }, dispatch] = useStateValue();
 	const [loaded, setLoaded] = useState(true);
-	useEffect(() => {
-		const localContactsData = localStorage.getItem("contacts");
-		if (localContactsData && loaded) {
-			console.log("loaded");
-			dispatch({
-				type: "SET_CONTACTS",
-				contacts: JSON.parse(localStorage.getItem("contacts")),
-			});
-			setLoaded(false);
-		}
-		localStorage.setItem("contacts", JSON.stringify(contacts));
-	}, [contacts]);
 
 	useEffect(() => {
+		//Basket
 		const localData = localStorage.getItem("basket");
 		if (localData && loaded) {
 			dispatch({
@@ -38,9 +27,20 @@ const App = () => {
 			setLoaded(false);
 		}
 		localStorage.setItem("basket", JSON.stringify(basket));
-	}, [basket]);
 
-	useEffect(() => {
+		//Contacts
+		const localContactsData = localStorage.getItem("contacts");
+		console.log("app", localContactsData);
+		if (localContactsData && loaded) {
+			dispatch({
+				type: "SET_CONTACTS",
+				contacts: JSON.parse(localStorage.getItem("contacts")),
+			});
+			setLoaded(false);
+		}
+		localStorage.setItem("contacts", JSON.stringify(contacts));
+
+		//Purchase
 		const localpurchaseData = localStorage.getItem("purchase");
 		if (localpurchaseData && loaded) {
 			dispatch({
@@ -50,7 +50,47 @@ const App = () => {
 			setLoaded(false);
 		}
 		localStorage.setItem("purchase", JSON.stringify(purchase));
-	}, [purchase]);
+	}, [basket, contacts, purchase]);
+
+	// useEffect(() => {
+	// 	const localContactsData = localStorage.getItem("contacts");
+	// 	// console.log(localContactsData[0].name);
+
+	// 	console.log(localContactsData);
+	// 	if (localContactsData && loaded) {
+	// 		console.log("localContactsData");
+	// 		dispatch({
+	// 			type: "SET_CONTACTS",
+	// 			contacts: JSON.parse(localStorage.getItem("contacts")),
+	// 		});
+	// 		setLoaded(false);
+	// 	}
+	// 	localStorage.setItem("contacts", JSON.stringify(contacts));
+	// }, [contacts]); // eslint-disable-line
+
+	// useEffect(() => {
+	// 	const localData = localStorage.getItem("basket");
+	// 	if (localData && loaded) {
+	// 		dispatch({
+	// 			type: "UPDATE_TO_BASKET",
+	// 			storage: JSON.parse(localStorage.getItem("basket")),
+	// 		});
+	// 		setLoaded(false);
+	// 	}
+	// 	localStorage.setItem("basket", JSON.stringify(basket));
+	// }, [basket]);
+
+	// useEffect(() => {
+	// 	const localpurchaseData = localStorage.getItem("purchase");
+	// 	if (localpurchaseData && loaded) {
+	// 		dispatch({
+	// 			type: "SET_PURCHASE",
+	// 			contacts: JSON.parse(localStorage.getItem("purchase")),
+	// 		});
+	// 		setLoaded(false);
+	// 	}
+	// 	localStorage.setItem("purchase", JSON.stringify(purchase));
+	// }, [purchase]);
 
 	useEffect(() => {
 		auth.onAuthStateChanged((authUser) => {

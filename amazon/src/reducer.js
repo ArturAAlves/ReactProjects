@@ -75,9 +75,15 @@ const reducer = (state, action) => {
 			};
 
 		case "SET_CONTACTS":
-			console.log("hello");
 			let tempContacts = [...state.contacts];
-			tempContacts.push(action.contacts);
+			let data = action.contacts;
+			console.log("refreshData", data);
+			console.log("refreshState", tempContacts);
+			if (data.name) {
+				console.log(true);
+				tempContacts.push(data);
+			}
+			console.log("reducer", tempContacts);
 			return {
 				...state,
 				contacts: tempContacts,

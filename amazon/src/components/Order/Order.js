@@ -26,11 +26,12 @@ const Order = () => {
 	];
 
 	const [loaded, setLoaded] = useState(false);
-	const [{ user, basket, contacts, purchase }, dispatch] = useStateValue();
+	const [{ user, basket, contacts }, dispatch] = useStateValue();
 	const [selectedValue, setSelectedValue] = useState();
 	const [orderInfo, setOrderInfo] = useState();
 	const [present, setPresent] = useState(false);
 	const [presentNote, setPresentNote] = useState();
+	const [submit, setSubmited] = useState(false);
 
 	const handleChange = (event) => {
 		let value = event.target.value;
@@ -74,40 +75,22 @@ const Order = () => {
 		}
 		if (field === "typeC" || field === "typeB" || field === "typeA") {
 			setSelectedValue(value);
-			console.log("hello");
 		}
 	};
 
-	useEffect(() => {
-		setLoaded(true);
-		if (!loaded) {
-			setOrderInfo(...orderInfoTemp);
-		}
-
-		return () => {};
-	}, [loaded]);
-
-	// function validation() {
-	// 	let email = /\S+@\S+\.\S+/.test(email.value)
-	// 		? ""
-	// 		: "Please Enter an Email Email";
-	// 	let mobile = phone.value.length < 9 ? "" : "Please enter 10 numbers";
-	// }
-
 	//Submit Contacts
-	function handleSubmit(e) {
-		console.log("hello");
+	const handleSubmit = (e) => {
+		console.log(submit);
 		e.preventDefault();
 		dispatch({
 			type: "SET_CONTACTS",
 			contacts: orderInfo,
 		});
-	}
+	};
 
 	//Purchase
-	function handlePurchase(e) {
+	const handlePurchase = (e) => {
 		e.preventDefault();
-		console.log("hello");
 		dispatch({
 			type: "SET_PURCHASE",
 			purchase: uuid(),
@@ -115,7 +98,7 @@ const Order = () => {
 			basket,
 			presentNote,
 		});
-	}
+	};
 
 	function imgSelector(img) {
 		switch (img) {
@@ -133,7 +116,22 @@ const Order = () => {
 		}
 	}
 
+	useEffect(() => {
+		setLoaded(true);
+		if (!loaded) {
+			setOrderInfo(...orderInfoTemp);
+		}
+
+		return () => {};
+	}, [loaded]); // eslint-disable-line
+
 	// console.log("hello", purchase);
+	// function validation() {
+	// 	let email = /\S+@\S+\.\S+/.test(email.value)
+	// 		? ""
+	// 		: "Please Enter an Email Email";
+	// 	let mobile = phone.value.length < 9 ? "" : "Please enter 10 numbers";
+	// }
 	return (
 		<div className="order">
 			<div className="checkout-Order">
@@ -365,7 +363,11 @@ const Order = () => {
 						</div>
 						<div className="subtotal-Order">
 							<div className="subtotal-checkout-btn-order">
-								<button className="checkout-btn" type="submit" value="Submit">
+								<button
+									className="checkout-btn"
+									type="submit"
+									value="Submit"
+									onClick={() => setSubmited(true)}>
 									Submit
 								</button>
 							</div>
