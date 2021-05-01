@@ -80,7 +80,6 @@ const Order = () => {
 
 	//Submit Contacts
 	const handleSubmit = (e) => {
-		console.log(submit);
 		e.preventDefault();
 		dispatch({
 			type: "SET_CONTACTS",
@@ -93,10 +92,12 @@ const Order = () => {
 		e.preventDefault();
 		dispatch({
 			type: "SET_PURCHASE",
-			purchase: uuid(),
-			contacts,
-			basket,
-			presentNote,
+			data: {
+				purchaseID: uuid(),
+				contacts,
+				basket,
+				presentNote,
+			},
 		});
 	};
 
@@ -132,6 +133,7 @@ const Order = () => {
 	// 		: "Please Enter an Email Email";
 	// 	let mobile = phone.value.length < 9 ? "" : "Please enter 10 numbers";
 	// }
+
 	return (
 		<div className="order">
 			<div className="checkout-Order">
@@ -166,30 +168,34 @@ const Order = () => {
 
 			<div className="order-contact-form">
 				<h2>Delivery Information</h2>
-				{contacts === "null" ? (
+				{contacts.length > 0 ? (
 					<div className="contact-info">
-						<form onSubmit={handlePurchase}>
-							<div className="adress">
-								<h3>Adress:</h3>
-								<p>Full name: {contacts.name}</p>
-								<p>Adress: {contacts.adress}</p>
-								<p>City: {contacts.city}</p>
-								<p>Postal Code: {contacts.postal}</p>
-								<p>Phone Number: {contacts.phone}</p>
-							</div>
-							<div className="payment">
-								<h3>Payment Info</h3>
-								<div className="payment-type">
-									<img
-										src={imgSelector(contacts.method)}
-										alt={contacts.method}
-									/>
+						{contacts.map((contact) => (
+							<div>
+								<div className="adress">
+									<h3>Adress:</h3>
+									<p>Full name: {contact.name}</p>
+									<p>Adress: {contact.adress}</p>
+									<p>City: {contact.city}</p>
+									<p>Postal Code: {contact.postal}</p>
+									<p>Phone Number: {contact.phone}</p>
 								</div>
-								<p>
-									Card Number :{contacts.cardN} / year :{contacts.year} / Code :
-									{contacts.code}
-								</p>
+								<div className="payment">
+									<h3>Payment Info</h3>
+									<div className="payment-type">
+										<img
+											src={imgSelector(contact.method)}
+											alt={contact.method}
+										/>
+									</div>
+									<p>
+										Card Number :{contact.cardN} / year :{contact.year} / Code :
+										{contact.code}
+									</p>
+								</div>
 							</div>
+						))}
+						<form onSubmit={handlePurchase}>
 							<div className="contact-info-line"></div>
 							<div className="subtotal-Order">
 								<div className="subtotal-text" style={{ marginTop: "15px" }}>

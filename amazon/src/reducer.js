@@ -77,13 +77,13 @@ const reducer = (state, action) => {
 		case "SET_CONTACTS":
 			let tempContacts = [...state.contacts];
 			let data = action.contacts;
-			console.log("refreshData", data);
-			console.log("refreshState", tempContacts);
+
 			if (data.name) {
-				console.log(true);
 				tempContacts.push(data);
+			} else if (tempContacts) {
+				tempContacts = data;
 			}
-			console.log("reducer", tempContacts);
+
 			return {
 				...state,
 				contacts: tempContacts,
@@ -91,7 +91,17 @@ const reducer = (state, action) => {
 
 		case "SET_PURCHASE":
 			let tempPurchase = [...state.purchase];
-			tempPurchase.push(action);
+			let purchaseData = action;
+
+			console.log("copy", tempPurchase);
+			console.log("action", purchaseData);
+
+			if (purchaseData.data) {
+				tempPurchase.push(purchaseData.data);
+			} else if (purchaseData.purchase) {
+				tempPurchase = purchaseData.purchase;
+			}
+
 			return {
 				...state,
 				purchase: tempPurchase,
