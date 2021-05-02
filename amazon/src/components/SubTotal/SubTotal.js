@@ -29,10 +29,6 @@ const Subtotal = () => {
 						)}
 					/>
 				</p>
-				<div className="subtotal-checkout-offer">
-					<input type="checkbox" />
-					<p>This order contains a Gift</p>
-				</div>
 			</div>
 
 			<div className="subtotal-checkout-btn">
