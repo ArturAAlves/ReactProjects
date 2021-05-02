@@ -9,12 +9,16 @@ import Paypal from "./img/paypal.png";
 import MasterCard from "./img/mastercard.png";
 import Visa from "./img/visa.png";
 import uuid from "react-uuid";
+import { Link } from "react-router-dom";
+import AddIcon from "@material-ui/icons/Add";
+
+//line 355
 
 const Order = () => {
 	const orderInfoTemp = [
 		{
 			name: "",
-			adress: "",
+			address: "",
 			city: "",
 			postal: "",
 			phone: "",
@@ -32,6 +36,7 @@ const Order = () => {
 	const [present, setPresent] = useState(false);
 	const [presentNote, setPresentNote] = useState();
 	const [submit, setSubmited] = useState(false);
+	const [addContact, setAddContact] = useState(false);
 
 	const handleChange = (event) => {
 		let value = event.target.value;
@@ -40,8 +45,8 @@ const Order = () => {
 			case "name":
 				setOrderInfo({ ...orderInfo, name: value });
 				break;
-			case "adress":
-				setOrderInfo({ ...orderInfo, adress: value });
+			case "address":
+				setOrderInfo({ ...orderInfo, address: value });
 				break;
 			case "city":
 				setOrderInfo({ ...orderInfo, city: value });
@@ -168,88 +173,54 @@ const Order = () => {
 
 			<div className="order-contact-form">
 				<h2>Delivery Information</h2>
-				{contacts.length > 0 ? (
-					<div className="contact-info">
+
+				<div className="contact-info">
+					<div className="address-container">
+						<div
+							className="address-box-add"
+							onClick={(e) => setAddContact(!addContact)}>
+							<AddIcon className="add-icon" />
+							<p>Add Address</p>
+						</div>
 						{contacts.map((contact) => (
-							<div>
-								<div className="adress">
-									<h3>Adress:</h3>
-									<p>Full name: {contact.name}</p>
-									<p>Adress: {contact.adress}</p>
-									<p>City: {contact.city}</p>
-									<p>Postal Code: {contact.postal}</p>
-									<p>Phone Number: {contact.phone}</p>
+							<div className="address-box">
+								<div className="address">
+									<p className="bold">{contact.name}</p>
+									<p>{contact.address}</p>
+									<p>{contact.city}</p>
+									<p>{contact.postal}</p>
+									<p>{contact.phone}</p>
 								</div>
 								<div className="payment">
-									<h3>Payment Info</h3>
-									<div className="payment-type">
-										<img
-											src={imgSelector(contact.method)}
-											alt={contact.method}
-										/>
+									<p>Payment Info</p>
+									<div className="payment-type-container">
+										<div className="payment-type">
+											<img
+												src={imgSelector(contact.method)}
+												alt={contact.method}
+											/>
+										</div>
+										<div>
+											<ul>
+												<li>
+													<span>Card:</span> {contact.cardN}
+												</li>
+												<li>
+													<span>Year:</span> {contact.year}
+												</li>
+												<li>
+													<span>Code:</span> {contact.code}
+												</li>
+											</ul>
+										</div>
 									</div>
-									<p>
-										Card Number :{contact.cardN} / year :{contact.year} / Code :
-										{contact.code}
-									</p>
 								</div>
 							</div>
 						))}
-						<form onSubmit={handlePurchase}>
-							<div className="contact-info-line"></div>
-							<div className="subtotal-Order">
-								<div className="subtotal-text" style={{ marginTop: "15px" }}>
-									<p>
-										Total
-										<span>
-											{" "}
-											({basket.length !== 0 ? getTotalProducs(basket) : 0}{" "}
-											items) :{" "}
-										</span>
-										<CurrencyFormat
-											fixedDecimalScale={true}
-											value={basket.length !== 0 ? getBasketTotal(basket) : 0}
-											decimalScale={2}
-											displayType={"text"}
-											thousandSeparator={true}
-											prefix={"€"}
-											renderText={(value) => (
-												<span className="subtotal-value">{value}</span>
-											)}
-										/>
-									</p>
-									<div className="subtotal-checkout-offer">
-										<input
-											type="checkbox"
-											onChange={() => setPresent(!present)}
-										/>
-										<p>This order contains a Gift</p>
-										{present ? (
-											<div>
-												<textarea
-													name=""
-													id=""
-													cols="30"
-													rows="10"
-													onChange={(e) => setPresentNote(e.target.value)}
-												/>
-											</div>
-										) : (
-											""
-										)}
-									</div>
-								</div>
-								<div
-									className="subtotal-checkout-btn-order"
-									style={{ marginTop: "15px" }}>
-									<button className="checkout-btn" type="submit" value="Submit">
-										Complete Purchase
-									</button>
-								</div>
-							</div>
-						</form>
 					</div>
-				) : (
+				</div>
+
+				{addContact ? (
 					<form onSubmit={handleSubmit}>
 						<TextField
 							required
@@ -263,9 +234,9 @@ const Order = () => {
 						<TextField
 							required
 							onChange={handleChange}
-							id="adress"
-							label="Adress"
-							placeholder="Adress"
+							id="address"
+							label="address"
+							placeholder="address"
 							variant="outlined"
 						/>
 						<div className="order-contact-form-sub">
@@ -378,28 +349,67 @@ const Order = () => {
 								</button>
 							</div>
 						</div>
+					</form>
+				) : (
+					""
+				)}
 
-						<div className="subtotal-text" style={{ marginTop: "30px" }}>
-							<p>
-								Total
-								<span>
-									{" "}
-									({basket.length !== 0 ? getTotalProducs(basket) : 0} items) :{" "}
-								</span>
-								<CurrencyFormat
-									fixedDecimalScale={true}
-									value={basket.length !== 0 ? getBasketTotal(basket) : 0}
-									decimalScale={2}
-									displayType={"text"}
-									thousandSeparator={true}
-									prefix={"€"}
-									renderText={(value) => (
-										<span className="subtotal-value">{value}</span>
+				{!addContact && contacts.length > 0 ? (
+					<form onSubmit={handlePurchase}>
+						<div className="subtotal-Order">
+							<div className="subtotal-text" style={{ marginTop: "50px" }}>
+								<p>
+									Total
+									<span>
+										{" "}
+										({basket.length !== 0 ? getTotalProducs(basket) : 0} items)
+										:{" "}
+									</span>
+									<CurrencyFormat
+										fixedDecimalScale={true}
+										value={basket.length !== 0 ? getBasketTotal(basket) : 0}
+										decimalScale={2}
+										displayType={"text"}
+										thousandSeparator={true}
+										prefix={"€"}
+										renderText={(value) => (
+											<span className="subtotal-value">{value}</span>
+										)}
+									/>
+								</p>
+								<div className="subtotal-checkout-offer">
+									<div className="checkbox-container">
+										<input
+											type="checkbox"
+											onChange={() => setPresent(!present)}
+										/>
+										<p>This order contains a Gift</p>
+									</div>
+									{present ? (
+										<div className="gift-details">
+											<textarea
+												name=""
+												id=""
+												rows="4"
+												onChange={(e) => setPresentNote(e.target.value)}
+											/>
+										</div>
+									) : (
+										""
 									)}
-								/>
-							</p>
+								</div>
+							</div>
+						</div>
+						<div
+							className="subtotal-checkout-btn-order"
+							style={{ marginTop: "100px" }}>
+							<button className="checkout-btn" type="submit" value="Submit">
+								Complete Purchase
+							</button>
 						</div>
 					</form>
+				) : (
+					"Please Add a Adress"
 				)}
 			</div>
 		</div>

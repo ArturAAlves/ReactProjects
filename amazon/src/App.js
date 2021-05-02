@@ -11,6 +11,7 @@ import Footer from "./components/footer/footer";
 import AddedToCart from "./components/AddedToCart/AddedToCart";
 import "./index.scss";
 import Order from "./components/Order/Order";
+import ReturnsAndOrders from "./components/ReturnsAndOrders/ReturnsAndOrders";
 
 const App = () => {
 	const [{ basket, user, contacts, purchase }, dispatch] = useStateValue();
@@ -90,6 +91,10 @@ const App = () => {
 					<Route path="/profile">
 						<Header />
 						<Profile />
+					</Route>
+					<Route path="/returns&orders">
+						<Header />
+						<ReturnsAndOrders />
 					</Route>
 					<Route path="/">
 						<AddedToCart />
