@@ -92,10 +92,6 @@ const reducer = (state, action) => {
 		case "SET_PURCHASE":
 			let tempPurchase = [...state.purchase];
 			let purchaseData = action;
-
-			console.log("copy", tempPurchase);
-			console.log("action", purchaseData);
-
 			if (purchaseData.data) {
 				tempPurchase.push(purchaseData.data);
 			} else if (purchaseData.purchase) {

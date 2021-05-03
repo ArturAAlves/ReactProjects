@@ -14,7 +14,7 @@ import Order from "./components/Order/Order";
 import ReturnsAndOrders from "./components/ReturnsAndOrders/ReturnsAndOrders";
 
 const App = () => {
-	const [{ basket, user, contacts, purchase }, dispatch] = useStateValue();
+	const [{ basket, contacts, purchase }, dispatch] = useStateValue();
 	const [loaded, setLoaded] = useState(true);
 
 	useEffect(() => {
@@ -28,7 +28,7 @@ const App = () => {
 			setLoaded(false);
 		}
 		localStorage.setItem("purchase", JSON.stringify(purchase));
-	}, [purchase]);
+	}, [purchase]); // eslint-disable-line
 
 	useEffect(() => {
 		//Basket
@@ -41,7 +41,7 @@ const App = () => {
 			setLoaded(false);
 		}
 		localStorage.setItem("basket", JSON.stringify(basket));
-	}, [basket]);
+	}, [basket]); // eslint-disable-line
 
 	useEffect(() => {
 		//Contacts
@@ -54,7 +54,7 @@ const App = () => {
 			setLoaded(false);
 		}
 		localStorage.setItem("contacts", JSON.stringify(contacts));
-	}, [contacts]);
+	}, [contacts]); // eslint-disable-line
 
 	useEffect(() => {
 		auth.onAuthStateChanged((authUser) => {
@@ -71,7 +71,7 @@ const App = () => {
 			}
 		});
 		return () => {};
-	}, []);
+	}, []); // eslint-disable-line
 
 	return (
 		<Router>
@@ -80,10 +80,12 @@ const App = () => {
 					<Route path="/login">
 						<Login />
 					</Route>
+
 					<Route path="/order">
 						<Header />
 						<Order />
 					</Route>
+
 					<Route path="/checkout">
 						<Header />
 						<Checkout />

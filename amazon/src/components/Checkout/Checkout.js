@@ -40,7 +40,6 @@ const Checkout = () => {
 						/>
 					</div>
 				</div>
-
 				{basket.length !== 0 ? (
 					<div className="CheckoutCart">
 						{user ? (
@@ -69,7 +68,6 @@ const Checkout = () => {
 									return <CheckoutItem {...item} key={item.id} />;
 								})}
 						</div>
-
 						{basket.length !== 0 ? (
 							<div className="checkout-value">
 								<p>
@@ -120,7 +118,6 @@ const Checkout = () => {
 					</div>
 				)}
 			</div>
-
 			{basket.length !== 0 ? (
 				<div className="checkout-right">
 					<SubTotal />

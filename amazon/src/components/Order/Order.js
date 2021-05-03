@@ -9,8 +9,8 @@ import Paypal from "./img/paypal.png";
 import MasterCard from "./img/mastercard.png";
 import Visa from "./img/visa.png";
 import uuid from "react-uuid";
-import { Link } from "react-router-dom";
 import AddIcon from "@material-ui/icons/Add";
+import AddressItem from "./../AddressItem/AdressItem";
 
 //line 355
 
@@ -28,15 +28,16 @@ const Order = () => {
 			code: "",
 		},
 	];
-
 	const [loaded, setLoaded] = useState(false);
-	const [{ user, basket, contacts }, dispatch] = useStateValue();
+	const [{ user, basket, contacts, purchase }, dispatch] = useStateValue();
 	const [selectedValue, setSelectedValue] = useState();
 	const [orderInfo, setOrderInfo] = useState();
 	const [present, setPresent] = useState(false);
 	const [presentNote, setPresentNote] = useState();
-	const [submit, setSubmited] = useState(false);
+	const [submited, setSubmited] = useState(false);
 	const [addContact, setAddContact] = useState(false);
+	const [errorMessage, setErrorMessage] = useState("");
+	const [selectedAdress, setSelectedAdress] = useState(0);
 
 	const handleChange = (event) => {
 		let value = event.target.value;
@@ -84,8 +85,10 @@ const Order = () => {
 	};
 
 	//Submit Contacts
-	const handleSubmit = (e) => {
+	const handleSubmitAddress = (e) => {
 		e.preventDefault();
+		setAddContact(!addContact);
+		window.scrollTo(0, 0);
 		dispatch({
 			type: "SET_CONTACTS",
 			contacts: orderInfo,
@@ -95,32 +98,36 @@ const Order = () => {
 	//Purchase
 	const handlePurchase = (e) => {
 		e.preventDefault();
-		dispatch({
-			type: "SET_PURCHASE",
-			data: {
-				purchaseID: uuid(),
-				contacts,
-				basket,
-				presentNote,
-			},
-		});
-	};
+		let address = contacts[selectedAdress];
 
-	function imgSelector(img) {
-		switch (img) {
-			case "Paypal":
-				return Paypal;
+		if (basket.length > 0 && contacts.length > 0) {
+			setSubmited(true);
+			window.scrollTo(0, 0);
+			setErrorMessage("");
 
-			case "MasterCard":
-				return MasterCard;
+			dispatch({
+				type: "SET_PURCHASE",
+				data: {
+					purchaseID: uuid(),
+					address,
+					basket,
+					presentNote,
+				},
+			});
 
-			case "VISA":
-				return Visa;
+			dispatch({
+				type: "CLEAR_BASKET",
+			});
 
-			default:
-				break;
+			setTimeout(function () {
+				window.open("/");
+			}, 2500);
+
+			// browserHistory.push("/");
+		} else if (basket.length <= 0) {
+			setErrorMessage("Please Add Items to the Shopping Cart");
 		}
-	}
+	};
 
 	useEffect(() => {
 		setLoaded(true);
@@ -138,6 +145,11 @@ const Order = () => {
 	// 		: "Please Enter an Email Email";
 	// 	let mobile = phone.value.length < 9 ? "" : "Please enter 10 numbers";
 	// }
+
+	const hangleSelectedAddress = (e) => {
+		setSelectedAdress(e);
+		// console.log("order,console", e);
+	};
 
 	return (
 		<div className="order">
@@ -170,248 +182,238 @@ const Order = () => {
 					</div>
 				</div>
 			</div>
+			{!submited ? (
+				<div className="order-contact-form">
+					<h2>Delivery Information</h2>
 
-			<div className="order-contact-form">
-				<h2>Delivery Information</h2>
-
-				<div className="contact-info">
-					<div className="address-container">
-						<div
-							className="address-box-add"
-							onClick={(e) => setAddContact(!addContact)}>
-							<AddIcon className="add-icon" />
-							<p>Add Address</p>
+					<div className="contact-info">
+						<div className="address-container">
+							<div
+								className="address-box-add"
+								onClick={(e) => setAddContact(!addContact)}>
+								<AddIcon className="add-icon" />
+								<p>Add Address</p>
+							</div>
+							{contacts.map((contact, i) => (
+								<AddressItem
+									contantIfo={contact}
+									id={i}
+									key={i}
+									select={hangleSelectedAddress}
+									active={selectedAdress}
+								/>
+							))}
 						</div>
-						{contacts.map((contact) => (
-							<div className="address-box">
-								<div className="address">
-									<p className="bold">{contact.name}</p>
-									<p>{contact.address}</p>
-									<p>{contact.city}</p>
-									<p>{contact.postal}</p>
-									<p>{contact.phone}</p>
+					</div>
+
+					{addContact ? (
+						<form onSubmit={handleSubmitAddress}>
+							<TextField
+								required
+								onChange={handleChange}
+								id="name"
+								label="Full Name"
+								placeholder="Full Name"
+								variant="outlined"
+								// helperText="Please Enter Your name"
+							/>
+							<TextField
+								required
+								onChange={handleChange}
+								id="address"
+								label="address"
+								placeholder="address"
+								variant="outlined"
+							/>
+							<div className="order-contact-form-sub">
+								<TextField
+									required
+									onChange={handleChange}
+									id="city"
+									label="City"
+									placeholder="City"
+									variant="outlined"
+								/>
+								<TextField
+									required
+									onChange={handleChange}
+									id="postal"
+									label="Postal Code"
+									placeholder="Postal Code"
+									variant="outlined"
+								/>
+							</div>
+							<TextField
+								required
+								onChange={handleChange}
+								style={{ width: "225px" }}
+								id="phoneNumber"
+								label="Phone number"
+								placeholder="Phone number"
+								variant="outlined"
+							/>
+							<h3 style={{ marginTop: "15px" }}>Payment Method</h3>
+							<div className="order-contact-form-payment-method">
+								<div className="payment-method">
+									<Radio
+										required
+										id="typeA"
+										onChange={handleChange}
+										checked={selectedValue === "MasterCard"}
+										value="MasterCard"
+										color="default"
+										name="radio-button-demo"
+										inputProps={{ "aria-label": "MasterCard" }}
+										size="small"
+									/>
+									<img src={MasterCard} alt="mastercard" />
 								</div>
-								<div className="payment">
-									<p>Payment Info</p>
-									<div className="payment-type-container">
-										<div className="payment-type">
-											<img
-												src={imgSelector(contact.method)}
-												alt={contact.method}
+								<div className="payment-method">
+									<Radio
+										required
+										id="typeB"
+										onChange={handleChange}
+										checked={selectedValue === "VISA"}
+										value="VISA"
+										color="default"
+										name="radio-button-demo"
+										inputProps={{ "aria-label": "VISA" }}
+										size="small"
+									/>
+									<img src={Visa} alt="visa" />
+								</div>
+								<div className="payment-method">
+									<Radio
+										required
+										id="typeC"
+										checked={selectedValue === "Paypal"}
+										onChange={handleChange}
+										value="Paypal"
+										color="default"
+										name="radio-button-demo"
+										inputProps={{ "aria-label": "Paypal" }}
+										size="small"
+									/>
+									<img src={Paypal} alt="paypal" />
+								</div>
+							</div>
+							<div className="order-contact-form-payment">
+								<TextField
+									required
+									id="cardNumber"
+									onChange={handleChange}
+									label="Card Number"
+									placeholder="Card Number"
+									variant="outlined"
+								/>
+
+								<TextField
+									required
+									id="year"
+									onChange={handleChange}
+									label="Year"
+									placeholder="Year"
+									variant="outlined"
+								/>
+								<TextField
+									required
+									onChange={handleChange}
+									id="securityCode"
+									label="Code"
+									placeholder="Code"
+									variant="outlined"
+								/>
+							</div>
+							<div className="subtotal-Order">
+								<div className="subtotal-checkout-btn-order">
+									<button className="checkout-btn" type="submit" value="Submit">
+										Submit
+									</button>
+								</div>
+							</div>
+						</form>
+					) : (
+						""
+					)}
+
+					{!addContact && contacts.length > 0 ? (
+						<form onSubmit={handlePurchase}>
+							<div className="subtotal-Order">
+								<div className="subtotal-text" style={{ marginTop: "50px" }}>
+									<p>
+										Total
+										<span>
+											{" "}
+											({basket.length !== 0 ? getTotalProducs(basket) : 0}{" "}
+											items) :{" "}
+										</span>
+										<CurrencyFormat
+											fixedDecimalScale={true}
+											value={basket.length !== 0 ? getBasketTotal(basket) : 0}
+											decimalScale={2}
+											displayType={"text"}
+											thousandSeparator={true}
+											prefix={"€"}
+											renderText={(value) => (
+												<span className="subtotal-value">{value}</span>
+											)}
+										/>
+									</p>
+									<div className="subtotal-checkout-offer">
+										<div className="checkbox-container">
+											<input
+												type="checkbox"
+												onChange={() => setPresent(!present)}
 											/>
+											<p>This order contains a Gift</p>
 										</div>
-										<div>
-											<ul>
-												<li>
-													<span>Card:</span> {contact.cardN}
-												</li>
-												<li>
-													<span>Year:</span> {contact.year}
-												</li>
-												<li>
-													<span>Code:</span> {contact.code}
-												</li>
-											</ul>
-										</div>
+										{present ? (
+											<div className="gift-details">
+												<textarea
+													name=""
+													id=""
+													rows="4"
+													onChange={(e) => setPresentNote(e.target.value)}
+												/>
+											</div>
+										) : (
+											""
+										)}
 									</div>
 								</div>
 							</div>
-						))}
-					</div>
-				</div>
 
-				{addContact ? (
-					<form onSubmit={handleSubmit}>
-						<TextField
-							required
-							onChange={handleChange}
-							id="name"
-							label="Full Name"
-							placeholder="Full Name"
-							variant="outlined"
-							// helperText="Please Enter Your name"
-						/>
-						<TextField
-							required
-							onChange={handleChange}
-							id="address"
-							label="address"
-							placeholder="address"
-							variant="outlined"
-						/>
-						<div className="order-contact-form-sub">
-							<TextField
-								required
-								onChange={handleChange}
-								id="city"
-								label="City"
-								placeholder="City"
-								variant="outlined"
-							/>
-							<TextField
-								required
-								onChange={handleChange}
-								id="postal"
-								label="Postal Code"
-								placeholder="Postal Code"
-								variant="outlined"
-							/>
-						</div>
-						<TextField
-							required
-							onChange={handleChange}
-							style={{ width: "225px" }}
-							id="phoneNumber"
-							label="Phone number"
-							placeholder="Phone number"
-							variant="outlined"
-						/>
-						<h3 style={{ marginTop: "15px" }}>Payment Method</h3>
-						<div className="order-contact-form-payment-method">
-							<div className="payment-method">
-								<Radio
-									required
-									id="typeA"
-									onChange={handleChange}
-									checked={selectedValue === "MasterCard"}
-									value="MasterCard"
-									color="default"
-									name="radio-button-demo"
-									inputProps={{ "aria-label": "MasterCard" }}
-									size="small"
-								/>
-								<img src={MasterCard} alt="mastercard" />
-							</div>
-							<div className="payment-method">
-								<Radio
-									required
-									id="typeB"
-									onChange={handleChange}
-									checked={selectedValue === "VISA"}
-									value="VISA"
-									color="default"
-									name="radio-button-demo"
-									inputProps={{ "aria-label": "VISA" }}
-									size="small"
-								/>
-								<img src={Visa} alt="visa" />
-							</div>
-							<div className="payment-method">
-								<Radio
-									required
-									id="typeC"
-									checked={selectedValue === "Paypal"}
-									onChange={handleChange}
-									value="Paypal"
-									color="default"
-									name="radio-button-demo"
-									inputProps={{ "aria-label": "Paypal" }}
-									size="small"
-								/>
-								<img src={Paypal} alt="paypal" />
-							</div>
-						</div>
-						<div className="order-contact-form-payment">
-							<TextField
-								required
-								id="cardNumber"
-								onChange={handleChange}
-								label="Card Number"
-								placeholder="Card Number"
-								variant="outlined"
-							/>
-
-							<TextField
-								required
-								id="year"
-								onChange={handleChange}
-								label="Year"
-								placeholder="Year"
-								variant="outlined"
-							/>
-							<TextField
-								required
-								onChange={handleChange}
-								id="securityCode"
-								label="Code"
-								placeholder="Code"
-								variant="outlined"
-							/>
-						</div>
-						<div className="subtotal-Order">
-							<div className="subtotal-checkout-btn-order">
-								<button
-									className="checkout-btn"
-									type="submit"
-									value="Submit"
-									onClick={() => setSubmited(true)}>
-									Submit
+							<div
+								className="subtotal-checkout-btn-order"
+								style={{ marginTop: "100px" }}>
+								<button className="checkout-btn" type="submit" value="Submit">
+									Complete Purchase
 								</button>
 							</div>
+							<div>{errorMessage}</div>
+						</form>
+					) : (
+						""
+					)}
+					{contacts.length <= 0 ? (
+						<div className="no-adress">
+							<p>Delivery Information is missing, please enter an Address</p>
 						</div>
-					</form>
-				) : (
-					""
-				)}
-
-				{!addContact && contacts.length > 0 ? (
-					<form onSubmit={handlePurchase}>
-						<div className="subtotal-Order">
-							<div className="subtotal-text" style={{ marginTop: "50px" }}>
-								<p>
-									Total
-									<span>
-										{" "}
-										({basket.length !== 0 ? getTotalProducs(basket) : 0} items)
-										:{" "}
-									</span>
-									<CurrencyFormat
-										fixedDecimalScale={true}
-										value={basket.length !== 0 ? getBasketTotal(basket) : 0}
-										decimalScale={2}
-										displayType={"text"}
-										thousandSeparator={true}
-										prefix={"€"}
-										renderText={(value) => (
-											<span className="subtotal-value">{value}</span>
-										)}
-									/>
-								</p>
-								<div className="subtotal-checkout-offer">
-									<div className="checkbox-container">
-										<input
-											type="checkbox"
-											onChange={() => setPresent(!present)}
-										/>
-										<p>This order contains a Gift</p>
-									</div>
-									{present ? (
-										<div className="gift-details">
-											<textarea
-												name=""
-												id=""
-												rows="4"
-												onChange={(e) => setPresentNote(e.target.value)}
-											/>
-										</div>
-									) : (
-										""
-									)}
-								</div>
-							</div>
-						</div>
-						<div
-							className="subtotal-checkout-btn-order"
-							style={{ marginTop: "100px" }}>
-							<button className="checkout-btn" type="submit" value="Submit">
-								Complete Purchase
-							</button>
-						</div>
-					</form>
-				) : (
-					"Please Add a Adress"
-				)}
-			</div>
+					) : (
+						""
+					)}
+				</div>
+			) : purchase[purchase.length - 1] ? (
+				<div className="form-submited">
+					<p>
+						Your order with ID:
+						<span> {purchase[purchase.length - 1].purchaseID} </span>, was
+						placed. Please visit Returns & Orders for more details.
+					</p>
+				</div>
+			) : (
+				"..."
+			)}
 		</div>
 	);
 };
