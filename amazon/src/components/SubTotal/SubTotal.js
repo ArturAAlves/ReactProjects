@@ -7,7 +7,7 @@ import { getTotalProducs } from "../../reducer";
 import { Link } from "react-router-dom";
 
 const Subtotal = () => {
-	const [{ basket }, dispatch] = useStateValue();
+	const [{ basket, user }, dispatch] = useStateValue();
 	return (
 		<div className="subtotal">
 			<div className="subtotal-text">
@@ -32,7 +32,7 @@ const Subtotal = () => {
 			</div>
 
 			<div className="subtotal-checkout-btn">
-				<Link to="./order">
+				<Link to={user ? "./order" : "./login"}>
 					<button className="checkout-btn" type="button">
 						Proceed to Checkout
 					</button>

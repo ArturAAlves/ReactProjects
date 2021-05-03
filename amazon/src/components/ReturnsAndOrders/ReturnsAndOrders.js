@@ -1,23 +1,11 @@
-import React, { useEffect, useState } from "react";
 import "./ReturnsAndOrders";
 import { useStateValue } from "../../StateProvider";
-import CurrencyFormat from "react-currency-format";
-import { getBasketTotal } from "../../reducer";
-import { getTotalProducs } from "../../reducer";
-import { Radio, TextField } from "@material-ui/core";
 import Paypal from "./img/paypal.png";
 import MasterCard from "./img/mastercard.png";
 import Visa from "./img/visa.png";
-import uuid from "react-uuid";
 
 const ReturnsAndOrders = () => {
-	const [loaded, setLoaded] = useState(false);
-	const [{ user, basket, contacts }, dispatch] = useStateValue();
-	const [selectedValue, setSelectedValue] = useState();
-	const [orderInfo, setOrderInfo] = useState();
-	const [present, setPresent] = useState(false);
-	const [presentNote, setPresentNote] = useState();
-	const [submit, setSubmited] = useState(false);
+	const [{ purchase, contats }, dispatch] = useStateValue(); // eslint-disable-line
 
 	function imgSelector(img) {
 		switch (img) {
@@ -34,10 +22,14 @@ const ReturnsAndOrders = () => {
 				break;
 		}
 	}
+	if (purchase[0]) {
+		let { basket, purchaseID, address, presentNote } = purchase[0];
+		console.log(basket, purchaseID, address, presentNote);
+	}
 
 	return (
 		<div className="order">
-			<div className="checkout-Order">
+			{/* <div className="checkout-Order">
 				<div className="checkout-banner">
 					<div className="checkout-banner-img">
 						<img
@@ -65,11 +57,10 @@ const ReturnsAndOrders = () => {
 						</span>{" "}
 					</div>
 				</div>
-			</div>
+			</div> */}
 
 			<div className="order-contact-form">
-				<h2>Delivery Information</h2>
-				<div className="contact-info">
+				{/* <div className="contact-info">
 					{contacts.map((contact) => (
 						<div>
 							<div className="adress">
@@ -92,55 +83,7 @@ const ReturnsAndOrders = () => {
 							</div>
 						</div>
 					))}
-
-					<div className="contact-info-line"></div>
-					<div className="subtotal-Order">
-						<div className="subtotal-text" style={{ marginTop: "15px" }}>
-							<p>
-								Total
-								<span>
-									{" "}
-									({basket.length !== 0 ? getTotalProducs(basket) : 0} items) :{" "}
-								</span>
-								<CurrencyFormat
-									fixedDecimalScale={true}
-									value={basket.length !== 0 ? getBasketTotal(basket) : 0}
-									decimalScale={2}
-									displayType={"text"}
-									thousandSeparator={true}
-									prefix={"€"}
-									renderText={(value) => (
-										<span className="subtotal-value">{value}</span>
-									)}
-								/>
-							</p>
-							<div className="subtotal-checkout-offer">
-								<input type="checkbox" onChange={() => setPresent(!present)} />
-								<p>This order contains a Gift</p>
-								{present ? (
-									<div>
-										<textarea
-											name=""
-											id=""
-											cols="30"
-											rows="10"
-											onChange={(e) => setPresentNote(e.target.value)}
-										/>
-									</div>
-								) : (
-									""
-								)}
-							</div>
-						</div>
-						<div
-							className="subtotal-checkout-btn-order"
-							style={{ marginTop: "15px" }}>
-							<button className="checkout-btn" type="submit" value="Submit">
-								Complete Purchase
-							</button>
-						</div>
-					</div>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

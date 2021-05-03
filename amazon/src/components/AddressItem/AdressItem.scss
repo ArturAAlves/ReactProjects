@@ -111,32 +111,15 @@
 	height: 200px;
 	margin-right: 15px;
 	cursor: pointer;
-
 	p {
 		color: #565959;
 		font-size: 25px;
 		font-weight: 700;
-		transition: color 1s;
 	}
 }
-
 .add-icon {
 	color: rgb(211, 211, 211);
 	font-size: 50px !important;
-	transition: color 1s;
-}
-.address-box-add:hover {
-	border: 1px dashed rrgb(93, 93, 93);
-	p {
-		color: #c3c3c3;
-		transition: color 1s;
-	}
-
-	.add-icon {
-		color: rgb(128, 128, 128);
-		font-size: 50px !important;
-		transition: color 1s;
-	}
 }
 
 .address {
@@ -201,10 +184,4 @@
 
 .no-adress {
 	margin-top: 20px;
-}
-
-.form-submited {
-	span {
-		font-weight: 600;
-	}
 }
