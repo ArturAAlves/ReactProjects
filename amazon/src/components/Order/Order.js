@@ -99,6 +99,7 @@ const Order = () => {
 	const handlePurchase = (e) => {
 		e.preventDefault();
 		let address = contacts[selectedAdress];
+		let date = new Date();
 
 		if (basket.length > 0 && contacts.length > 0) {
 			setSubmited(true);
@@ -112,6 +113,7 @@ const Order = () => {
 					address,
 					basket,
 					presentNote,
+					date,
 				},
 			});
 

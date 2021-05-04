@@ -36,8 +36,10 @@ const AddressItem = ({ contantIfo, id, select, active }) => {
 			<div className="address">
 				<p className="bold">{contantIfo.name}</p>
 				<p>{contantIfo.address}</p>
-				<p>{contantIfo.city}</p>
-				<p>{contantIfo.postal}</p>
+				<p>
+					{contantIfo.city}, {contantIfo.postal}
+				</p>
+
 				<p>{contantIfo.phone}</p>
 			</div>
 			<div className="payment">
