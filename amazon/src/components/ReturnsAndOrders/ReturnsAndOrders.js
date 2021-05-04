@@ -38,7 +38,7 @@ const ReturnsAndOrders = () => {
 		);
 		var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
 		var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
-		console.log(timeleft);
+		// console.log(timeleft);
 	};
 
 	return (
@@ -99,7 +99,7 @@ const ReturnsAndOrders = () => {
 
 						<div className="order-product-info">
 							<div className="order-item-list">
-								{order.basket.map((item, i) => (
+								{order.basket.map((item, i, itemArray) => (
 									<div className="order-item" key={i}>
 										<div className="order-item-info-container">
 											<div className="order-item-img">
@@ -107,11 +107,17 @@ const ReturnsAndOrders = () => {
 											</div>
 											<div className="order-item-info">
 												<p className="order-item-info-tittle">{item.title}</p>
-												<p>Price: {item.price}</p>
-												<p>Qty: {item.qty}</p>
+												<div style={{ marginTop: "5px" }}>
+													<p>Price: {item.price}</p>
+													<p>Qty: {item.qty}</p>
+												</div>
 											</div>
 										</div>
-										<div className="order-item-division"></div>
+										{itemArray.length === i + 1 ? (
+											""
+										) : (
+											<div className="order-item-division"></div>
+										)}
 									</div>
 								))}
 							</div>
