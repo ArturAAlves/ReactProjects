@@ -89,6 +89,17 @@ const reducer = (state, action) => {
 				contacts: tempContacts,
 			};
 
+		case "REMOVE_CONTACT":
+			console.log(action.contactID);
+			const contactsIndex = state.contacts.filter(
+				(contact) => contact.id !== action.contactID
+			);
+
+			return {
+				...state,
+				contacts: contactsIndex,
+			};
+
 		case "SET_PURCHASE":
 			let tempPurchase = [...state.purchase];
 			let purchaseData = action;

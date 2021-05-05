@@ -11,12 +11,14 @@ import Visa from "./img/visa.png";
 import uuid from "react-uuid";
 import AddIcon from "@material-ui/icons/Add";
 import AddressItem from "./../AddressItem/AdressItem";
+import GetDate from "./../GetDate/GetDate";
 
 //line 355
 
 const Order = () => {
 	const orderInfoTemp = [
 		{
+			id: "",
 			name: "",
 			address: "",
 			city: "",
@@ -29,7 +31,10 @@ const Order = () => {
 		},
 	];
 	const [loaded, setLoaded] = useState(false);
-	const [{ user, basket, contacts, purchase }, dispatch] = useStateValue();
+	const [
+		{ user, basket, contacts, purchase, total },
+		dispatch,
+	] = useStateValue();
 	const [selectedValue, setSelectedValue] = useState();
 	const [orderInfo, setOrderInfo] = useState();
 	const [present, setPresent] = useState(false);
@@ -42,6 +47,7 @@ const Order = () => {
 	const handleChange = (event) => {
 		let value = event.target.value;
 		let field = event.target.id;
+
 		switch (field) {
 			case "name":
 				setOrderInfo({ ...orderInfo, name: value });
@@ -86,9 +92,13 @@ const Order = () => {
 
 	//Submit Contacts
 	const handleSubmitAddress = (e) => {
+		setOrderInfo({ ...orderInfo, id: uuid() });
 		e.preventDefault();
 		setAddContact(!addContact);
 		window.scrollTo(0, 0);
+		// let randomId = uuid();
+		console.log(orderInfo);
+
 		dispatch({
 			type: "SET_CONTACTS",
 			contacts: orderInfo,
@@ -99,13 +109,12 @@ const Order = () => {
 	const handlePurchase = (e) => {
 		e.preventDefault();
 		let address = contacts[selectedAdress];
-		let date = new Date();
-
+		let date = GetDate();
 		if (basket.length > 0 && contacts.length > 0) {
 			setSubmited(true);
 			window.scrollTo(0, 0);
 			setErrorMessage("");
-
+			console.log(date);
 			dispatch({
 				type: "SET_PURCHASE",
 				data: {
@@ -122,7 +131,7 @@ const Order = () => {
 			});
 
 			setTimeout(function () {
-				window.open("/");
+				window.open("/", "_self");
 			}, 2500);
 
 			// browserHistory.push("/");
@@ -153,6 +162,9 @@ const Order = () => {
 		// console.log("order,console", e);
 	};
 
+	if (total) {
+		console.log(total);
+	}
 	return (
 		<div className="order">
 			<div className="checkout-Order">
@@ -199,7 +211,7 @@ const Order = () => {
 							{contacts.map((contact, i) => (
 								<AddressItem
 									contantIfo={contact}
-									id={i}
+									id={contact.id}
 									key={i}
 									select={hangleSelectedAddress}
 									active={selectedAdress}
