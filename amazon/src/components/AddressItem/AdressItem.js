@@ -3,8 +3,11 @@ import "./AdressItem.scss";
 import Paypal from "./img/paypal.png";
 import MasterCard from "./img/mastercard.png";
 import Visa from "./img/visa.png";
+import { useStateValue } from "../../StateProvider";
 
 const AddressItem = ({ contantIfo, id, select, active }) => {
+	const [{ contacts }, dispatch] = useStateValue();
+
 	function imgSelector(img) {
 		switch (img) {
 			case "Paypal":
@@ -21,11 +24,21 @@ const AddressItem = ({ contantIfo, id, select, active }) => {
 		}
 	}
 
+	const handleRemove = (e) => {
+		console.log(id);
+
+		dispatch({
+			type: "REMOVE_CONTACT",
+			contactID: id,
+		});
+	};
+
 	const handleBoxSelection = (e) => {
 		e.stopPropagation();
 		select(parseInt(e.currentTarget.id));
 	};
 
+	console.log();
 	return (
 		<div
 			id={id}
@@ -62,6 +75,9 @@ const AddressItem = ({ contantIfo, id, select, active }) => {
 						</ul>
 					</div>
 				</div>
+			</div>
+			<div className="remove" onClick={handleRemove}>
+				<p>Remove</p>
 			</div>
 		</div>
 	);
