@@ -44,9 +44,23 @@ const Order = () => {
 	const [errorMessage, setErrorMessage] = useState("");
 	const [selectedAdress, setSelectedAdress] = useState(0);
 
+	const formValidation = (value, field) => {
+		let returnInfo;
+		if (field === "securityCode") {
+			if (Number.isInteger(value)) {
+				returnInfo = value;
+			} else {
+				returnInfo = "Not a Number";
+			}
+			return returnInfo;
+		}
+	};
+
 	const handleChange = (event) => {
-		let value = event.target.value;
+		let value = formValidation(event.target.value, event.target.id);
 		let field = event.target.id;
+		if (value === event.target.value) {
+		}
 
 		switch (field) {
 			case "name":
@@ -357,7 +371,6 @@ const Order = () => {
 									<p>
 										Total
 										<span>
-											{" "}
 											({basket.length !== 0 ? getTotalProducs(basket) : 0}{" "}
 											items) :{" "}
 										</span>
