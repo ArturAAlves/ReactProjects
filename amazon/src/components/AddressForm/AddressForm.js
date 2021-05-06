@@ -10,11 +10,10 @@ import "./AddressForm.scss";
 const AdressForm = (active) => {
 	const [loaded, setLoaded] = useState(false);
 
-	const [selectedValue, setSelectedValue] = useState();
+	const [selectedValue, setSelectedValue] = useState("MasterCard");
 	const [orderInfo, setOrderInfo] = useState();
 	const [addContact, setAddContact] = useState(false);
 	const [{ contacts }, dispatch] = useStateValue(); // eslint-disable-line
-	const [name, setName] = useState("");
 
 	const orderInfoTemp = [
 		{
@@ -26,8 +25,8 @@ const AdressForm = (active) => {
 			phone: "",
 			method: "",
 			cardN: "",
-			year: "",
-			code: "",
+			expiration: "",
+			CVC: "",
 		},
 	];
 
@@ -62,9 +61,26 @@ const AdressForm = (active) => {
 				setOrderInfo({ ...orderInfo, city: value });
 				break;
 			case "postal":
+				if (!value.match(/^[0-9.,]+$/)) {
+					event.target.setCustomValidity(`Insert numbers only`);
+				} else {
+					event.target.setCustomValidity(``);
+				}
+				let str = value;
+				let parts = str.match(/.{1,4}/g);
+				value = parts.join("-"); //returns 123-456-789
 				setOrderInfo({ ...orderInfo, postal: value });
 				break;
 			case "phoneNumber":
+				if (!value.match(/^[0-9.,]+$/)) {
+					event.target.setCustomValidity(`Insert numbers only`);
+				}
+				if (value.length !== 9) {
+					console.log(value.length);
+					event.target.setCustomValidity(`your contact should have 9 digits`);
+				} else {
+					event.target.setCustomValidity(``);
+				}
 				setOrderInfo({ ...orderInfo, phone: value });
 				break;
 			case "typeA":
@@ -77,13 +93,31 @@ const AdressForm = (active) => {
 				setOrderInfo({ ...orderInfo, method: value });
 				break;
 			case "cardNumber":
+				if (!value.match(/^[0-9.,]+$/)) {
+					event.target.setCustomValidity(`Insert numbers only`);
+				}
+				if (value.length < 13 || value.length > 19) {
+					console.log(value.length);
+					event.target.setCustomValidity(`incorrect Information`);
+				} else {
+					event.target.setCustomValidity(``);
+				}
 				setOrderInfo({ ...orderInfo, cardN: value });
 				break;
-			case "year":
-				setOrderInfo({ ...orderInfo, year: value });
+			case "expiration":
+				setOrderInfo({ ...orderInfo, expiration: value });
 				break;
-			case "securityCode":
-				setOrderInfo({ ...orderInfo, code: value });
+			case "CVC":
+				if (!value.match(/^[0-9.,]+$/)) {
+					event.target.setCustomValidity(`Insert numbers only`);
+				}
+				if (value.length !== 3) {
+					console.log(value.length);
+					event.target.setCustomValidity(`incorrect Information`);
+				} else {
+					event.target.setCustomValidity(``);
+				}
+				setOrderInfo({ ...orderInfo, CVC: value });
 				break;
 			default:
 				break;
@@ -218,22 +252,23 @@ const AdressForm = (active) => {
 						label="Card Number"
 						placeholder="Card Number"
 						variant="outlined"
+						maxlength="10"
+					/>
+					<TextField
+						required
+						id="expiration"
+						onChange={handleChange}
+						label="MM/YY"
+						placeholder="Expiration"
+						variant="outlined"
 					/>
 
 					<TextField
 						required
-						id="year"
 						onChange={handleChange}
-						label="Year"
-						placeholder="Year"
-						variant="outlined"
-					/>
-					<TextField
-						required
-						onChange={handleChange}
-						id="securityCode"
-						label="Code"
-						placeholder="Code"
+						id="CVC"
+						label="CVC"
+						placeholder="CVC"
 						variant="outlined"
 					/>
 				</div>

@@ -31,6 +31,7 @@ const Order = () => {
 
 		let address = contacts.filter((contact) => contact.id === selectedAdress);
 
+		console.log("address", address);
 		let date = GetDate();
 		if (basket.length > 0 && contacts.length > 0) {
 			setSubmited(true);
@@ -67,12 +68,15 @@ const Order = () => {
 	};
 
 	useEffect(() => {
+		if (!user) {
+			window.open("/", "_self");
+		}
+	}, []); // eslint-disable-line
+
+	useEffect(() => {
 		if (addContactActive) {
 			setAddContactActive(!addContactActive);
 		}
-	}, [contacts]); // eslint-disable-line
-
-	useEffect(() => {
 		let contactsLength = contacts.length - 1;
 		if (contacts.length >= 1) {
 			setSelectedAdress(contacts[contactsLength].id);
