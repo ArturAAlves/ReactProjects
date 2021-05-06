@@ -90,7 +90,6 @@ const reducer = (state, action) => {
 			};
 
 		case "REMOVE_CONTACT":
-			console.log(action.contactID);
 			const contactsIndex = state.contacts.filter(
 				(contact) => contact.id !== action.contactID
 			);

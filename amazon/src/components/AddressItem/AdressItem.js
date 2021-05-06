@@ -23,7 +23,6 @@ const AddressItem = ({ contantIfo, id, select, active }) => {
 				break;
 		}
 	}
-
 	const handleRemove = (e) => {
 		console.log(id);
 
@@ -32,13 +31,11 @@ const AddressItem = ({ contantIfo, id, select, active }) => {
 			contactID: id,
 		});
 	};
-
 	const handleBoxSelection = (e) => {
 		e.stopPropagation();
-		select(parseInt(e.currentTarget.id));
+		select(e.currentTarget.id);
 	};
 
-	console.log();
 	return (
 		<div
 			id={id}
