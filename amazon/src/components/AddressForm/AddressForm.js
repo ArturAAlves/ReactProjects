@@ -6,6 +6,7 @@ import Paypal from "./img/paypal.png";
 import MasterCard from "./img/mastercard.png";
 import Visa from "./img/visa.png";
 import "./AddressForm.scss";
+import InputMask from "react-input-mask";
 
 const AdressForm = (active) => {
 	const [loaded, setLoaded] = useState(false);
@@ -14,6 +15,7 @@ const AdressForm = (active) => {
 	const [orderInfo, setOrderInfo] = useState();
 	const [addContact, setAddContact] = useState(false);
 	const [{ contacts }, dispatch] = useStateValue(); // eslint-disable-line
+	const [cvc, setCvc] = useState();
 
 	const orderInfoTemp = [
 		{
@@ -58,11 +60,20 @@ const AdressForm = (active) => {
 				setOrderInfo({ ...orderInfo, address: value });
 				break;
 			case "city":
+				if (value.match(/\d+/g)) {
+					event.target.setCustomValidity(` ${val} can only include letters`);
+				} else if (value.length <= 0) {
+					event.target.setCustomValidity(`This field cannot be empty`);
+				} else {
+					event.target.setCustomValidity(``);
+				}
 				setOrderInfo({ ...orderInfo, city: value });
 				break;
 			case "postal":
-				if (!value.match(/^[0-9.,]+$/)) {
+				if (value.match(/^[0-9.,]+$/)) {
 					event.target.setCustomValidity(`Insert numbers only`);
+				} else if (value.length < 4) {
+					event.target.setCustomValidity(`This field cannot be empty`);
 				} else {
 					event.target.setCustomValidity(``);
 				}
@@ -72,12 +83,10 @@ const AdressForm = (active) => {
 				setOrderInfo({ ...orderInfo, postal: value });
 				break;
 			case "phoneNumber":
-				if (!value.match(/^[0-9.,]+$/)) {
-					event.target.setCustomValidity(`Insert numbers only`);
-				}
-				if (value.length !== 9) {
-					console.log(value.length);
-					event.target.setCustomValidity(`your contact should have 9 digits`);
+				if (value.length !== 16) {
+					event.target.setCustomValidity(
+						`your phone number should have 9 digits`
+					);
 				} else {
 					event.target.setCustomValidity(``);
 				}
@@ -93,24 +102,29 @@ const AdressForm = (active) => {
 				setOrderInfo({ ...orderInfo, method: value });
 				break;
 			case "cardNumber":
-				if (!value.match(/^[0-9.,]+$/)) {
-					event.target.setCustomValidity(`Insert numbers only`);
-				}
+				console.log(value.length);
 				if (value.length < 13 || value.length > 19) {
 					console.log(value.length);
 					event.target.setCustomValidity(`incorrect Information`);
 				} else {
 					event.target.setCustomValidity(``);
 				}
+
 				setOrderInfo({ ...orderInfo, cardN: value });
 				break;
 			case "expiration":
+				// if (!value.match(/^[0-9.,]+$/)) {
+				// 	event.target.setCustomValidity(`Insert numbers only`);
+				// } else
+				// if (value.length !== 4) {
+				// 	console.log(value.length);
+				// 	event.target.setCustomValidity(`incorrect Information`);
+				// } else {
+				// 	event.target.setCustomValidity(``);
+				// }
 				setOrderInfo({ ...orderInfo, expiration: value });
 				break;
 			case "CVC":
-				if (!value.match(/^[0-9.,]+$/)) {
-					event.target.setCustomValidity(`Insert numbers only`);
-				}
 				if (value.length !== 3) {
 					console.log(value.length);
 					event.target.setCustomValidity(`incorrect Information`);
@@ -181,24 +195,42 @@ const AdressForm = (active) => {
 						placeholder="City"
 						variant="outlined"
 					/>
-					<TextField
-						required
-						onChange={handleChange}
-						id="postal"
-						label="Postal Code"
-						placeholder="Postal Code"
-						variant="outlined"
-					/>
+
+					<InputMask
+						mask="9999-999"
+						disabled={false}
+						maskChar=""
+						onChange={handleChange}>
+						{() => (
+							<TextField
+								required
+								onChange={handleChange}
+								id="postal"
+								label="Postal Code"
+								placeholder="Postal Code"
+								variant="outlined"
+							/>
+						)}
+					</InputMask>
 				</div>
-				<TextField
-					required
-					onChange={handleChange}
-					style={{ width: "225px" }}
-					id="phoneNumber"
-					label="Phone number"
-					placeholder="Phone number"
-					variant="outlined"
-				/>
+
+				<InputMask
+					mask="+351 999 999 999"
+					disabled={false}
+					maskChar=" "
+					onChange={handleChange}>
+					{() => (
+						<TextField
+							required
+							onChange={handleChange}
+							style={{ width: "225px" }}
+							id="phoneNumber"
+							label="Phone number"
+							placeholder="Phone number"
+							variant="outlined"
+						/>
+					)}
+				</InputMask>
 				<h3 style={{ marginTop: "15px" }}>Payment Method</h3>
 				<div className="order-contact-form-payment-method">
 					<div className="payment-method">
@@ -245,32 +277,53 @@ const AdressForm = (active) => {
 					</div>
 				</div>
 				<div className="order-contact-form-payment">
-					<TextField
-						required
-						id="cardNumber"
-						onChange={handleChange}
-						label="Card Number"
-						placeholder="Card Number"
-						variant="outlined"
-						maxlength="10"
-					/>
-					<TextField
-						required
-						id="expiration"
-						onChange={handleChange}
-						label="MM/YY"
-						placeholder="Expiration"
-						variant="outlined"
-					/>
+					<InputMask
+						mask="999 999 999 999"
+						disabled={false}
+						maskChar=" "
+						onChange={handleChange}>
+						{() => (
+							<TextField
+								required
+								id="cardNumber"
+								label="Card Number"
+								placeholder="Card Number"
+								variant="outlined"
+							/>
+						)}
+					</InputMask>
+					<InputMask
+						mask="99/99"
+						disabled={false}
+						maskChar=" "
+						onChange={handleChange}>
+						{() => (
+							<TextField
+								required
+								id="expiration"
+								onChange={handleChange}
+								label="MM/YY"
+								placeholder="Expiration Date"
+								variant="outlined"
+							/>
+						)}
+					</InputMask>
 
-					<TextField
-						required
-						onChange={handleChange}
-						id="CVC"
-						label="CVC"
-						placeholder="CVC"
-						variant="outlined"
-					/>
+					<InputMask
+						mask="999"
+						disabled={false}
+						maskChar=" "
+						onChange={handleChange}>
+						{() => (
+							<TextField
+								required
+								id="CVC"
+								label="CVC"
+								placeholder="CVC"
+								variant="outlined"
+							/>
+						)}
+					</InputMask>
 				</div>
 				<div className="subtotal-Order">
 					<div className="subtotal-checkout-btn-order">
