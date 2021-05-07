@@ -24,8 +24,6 @@ const AddressItem = ({ contantIfo, id, select, active }) => {
 		}
 	}
 	const handleRemove = (e) => {
-		console.log(id);
-
 		dispatch({
 			type: "REMOVE_CONTACT",
 			contactID: id,

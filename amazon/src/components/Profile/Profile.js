@@ -22,9 +22,14 @@ const Profile = () => {
 	};
 
 	useEffect(() => {
-		if (!user) {
-			window.open("/", "_self");
-		}
+		setTimeout(() => {
+			if (!user) {
+				// window.open(
+				// 	"https://www.arturalves.com/projects/amazonclone/",
+				// 	"_self"
+				// );
+			}
+		}, 1000);
 	}, []); // eslint-disable-line
 
 	useEffect(() => {

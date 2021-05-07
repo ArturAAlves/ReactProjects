@@ -15,7 +15,6 @@ const AdressForm = (active) => {
 	const [orderInfo, setOrderInfo] = useState();
 	const [addContact, setAddContact] = useState(false);
 	const [{ contacts }, dispatch] = useStateValue(); // eslint-disable-line
-	const [cvc, setCvc] = useState();
 
 	const orderInfoTemp = [
 		{
@@ -25,7 +24,7 @@ const AdressForm = (active) => {
 			city: "",
 			postal: "",
 			phone: "",
-			method: "",
+			method: "MasterCard",
 			cardN: "",
 			expiration: "",
 			CVC: "",
@@ -36,7 +35,6 @@ const AdressForm = (active) => {
 		// let value = formValidation(event.target.value, event.target.id);
 		let field = event.target.id;
 		let value = event.target.value;
-		console.log(event.target.id);
 
 		switch (field) {
 			case "name":
@@ -102,9 +100,9 @@ const AdressForm = (active) => {
 				setOrderInfo({ ...orderInfo, method: value });
 				break;
 			case "cardNumber":
-				console.log(value.length);
-				if (value.length < 13 || value.length > 19) {
-					console.log(value.length);
+				if (value.replace(/ /g, "").length === 0) {
+					event.target.setCustomValidity(`Cannot be empty`);
+				} else if (value.replace(/ /g, "").length < 12) {
 					event.target.setCustomValidity(`incorrect Information`);
 				} else {
 					event.target.setCustomValidity(``);
@@ -113,6 +111,14 @@ const AdressForm = (active) => {
 				setOrderInfo({ ...orderInfo, cardN: value });
 				break;
 			case "expiration":
+				console.log(value.replace(/ /g, ""));
+				if (value.replace(/ /g, "").length === 1) {
+					event.target.setCustomValidity(`Cannot be empty`);
+				} else if (value.replace(/ /g, "").length !== 5) {
+					event.target.setCustomValidity(`incorrect Information`);
+				} else {
+					event.target.setCustomValidity(``);
+				}
 				// if (!value.match(/^[0-9.,]+$/)) {
 				// 	event.target.setCustomValidity(`Insert numbers only`);
 				// } else
@@ -125,8 +131,7 @@ const AdressForm = (active) => {
 				setOrderInfo({ ...orderInfo, expiration: value });
 				break;
 			case "CVC":
-				if (value.length !== 3) {
-					console.log(value.length);
+				if (value.replace(/ /g, "").length !== 3) {
 					event.target.setCustomValidity(`incorrect Information`);
 				} else {
 					event.target.setCustomValidity(``);
@@ -222,7 +227,6 @@ const AdressForm = (active) => {
 					{() => (
 						<TextField
 							required
-							onChange={handleChange}
 							style={{ width: "225px" }}
 							id="phoneNumber"
 							label="Phone number"
@@ -281,9 +285,11 @@ const AdressForm = (active) => {
 						mask="999 999 999 999"
 						disabled={false}
 						maskChar=" "
-						onChange={handleChange}>
+						onChange={handleChange}
+						id="cardNumber">
 						{() => (
 							<TextField
+								onChange={handleChange}
 								required
 								id="cardNumber"
 								label="Card Number"
@@ -301,7 +307,6 @@ const AdressForm = (active) => {
 							<TextField
 								required
 								id="expiration"
-								onChange={handleChange}
 								label="MM/YY"
 								placeholder="Expiration Date"
 								variant="outlined"
@@ -316,6 +321,7 @@ const AdressForm = (active) => {
 						onChange={handleChange}>
 						{() => (
 							<TextField
+								// onChange={handleChange}
 								required
 								id="CVC"
 								label="CVC"

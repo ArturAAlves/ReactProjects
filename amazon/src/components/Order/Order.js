@@ -53,7 +53,10 @@ const Order = () => {
 			});
 
 			setTimeout(function () {
-				window.open("/", "_self");
+				window.open(
+					"https://www.arturalves.com/projects/amazonclone/",
+					"_self"
+				);
 			}, 2500);
 
 			// browserHistory.push("/");
