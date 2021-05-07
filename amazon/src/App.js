@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
 import Home from "./components/Home/Home";
 import Checkout from "./components/Checkout/Checkout";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+// import { HashRouter, Route, Link, Switch } from 'react-router-dom';
+// or
+// import { MemoryRouter, Route, Link, Switch } from 'react-router-dom';
+
 import Login from "./components/Login/Login";
 import Profile from "./components/Profile/Profile";
 import { auth } from "./firebase";
