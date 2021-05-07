@@ -14,7 +14,7 @@ import AddressForm from "../AddressForm/AddressForm";
 
 const Order = () => {
 	const [
-		{ user, basket, contacts, purchase, total },
+		{ user, basket, contacts, purchase, total }, //eslint ignoreline
 		dispatch,
 	] = useStateValue();
 

@@ -64,10 +64,10 @@ const AddressItem = ({ contantIfo, id, select, active }) => {
 								<span>Card:</span> {contantIfo.cardN}
 							</li>
 							<li>
-								<span>Year:</span> {contantIfo.year}
+								<span>Date</span> {contantIfo.expiration}
 							</li>
 							<li>
-								<span>Code:</span> {contantIfo.code}
+								<span>CVC:</span> {contantIfo.CVC}
 							</li>
 						</ul>
 					</div>
