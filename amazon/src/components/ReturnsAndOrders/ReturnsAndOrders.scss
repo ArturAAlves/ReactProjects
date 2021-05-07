@@ -1,6 +1,6 @@
 .orders-and-returns {
 	display: flex !important;
-	min-height: calc(120vh - 60px);
+	min-height: calc(80vh - 60px);
 
 	padding-bottom: 50px;
 	flex-direction: column;
@@ -9,11 +9,6 @@
 	@media only screen and(max-width:"799px") {
 		flex-wrap: wrap;
 	}
-}
-
-.orders-container {
-	margin: 0 5%;
-	padding: 50px;
 }
 
 .order-container {
@@ -182,5 +177,25 @@
 	margin-left: 95px;
 	span {
 		font-weight: 600;
+	}
+}
+
+.shoppingCart-empty {
+	justify-content: center;
+	align-items: center;
+	@media only screen and (max-width: 800px) {
+		flex-direction: column;
+		img {
+			width: 80%;
+		}
+	}
+}
+
+.orders-container {
+	margin: 0 5%;
+	padding: 50px;
+	@media only screen and (max-width: 800px) {
+		flex-direction: column;
+		padding: 10px;
 	}
 }
