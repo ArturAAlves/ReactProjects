@@ -4,14 +4,15 @@ import CurrencyFormat from "react-currency-format";
 import { getBasketTotal } from "../../reducer";
 import { useEffect, useState } from "react";
 import CheckIcon from "@material-ui/icons/Check";
-import CardGiftcardIcon from "@material-ui/icons/CardGiftcard";
+// import CardGiftcardIcon from "@material-ui/icons/CardGiftcard";
 import { Link } from "react-router-dom";
 import { getTotalProducs } from "../../reducer";
 
 let initial;
 
 const AddedToCart = ({ id, title, image, rating, price }) => {
-	const [{ basket, user }, dispatch] = useStateValue();
+	// eslint-disable-next-line no-unused-vars
+	const [{ basket }, dispatch] = useStateValue();
 	const [itemDisplay, setItemDisplay] = useState("");
 	const [loaded, setLoaded] = useState(false);
 
@@ -30,6 +31,7 @@ const AddedToCart = ({ id, title, image, rating, price }) => {
 			setItemDisplay(basket);
 		}
 		return () => {};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [basket]);
 
 	return itemDisplay.length > 0 ? (
@@ -84,7 +86,7 @@ const AddedToCart = ({ id, title, image, rating, price }) => {
 						)}
 					</div>
 
-					<div className="addedToCart-description-bottom">
+					{/* <div className="addedToCart-description-bottom">
 						<input type="checkbox" name="" id="" disabled />
 
 						<p>
@@ -93,7 +95,7 @@ const AddedToCart = ({ id, title, image, rating, price }) => {
 							</span>{" "}
 							This is a gift
 						</p>
-					</div>
+					</div> */}
 				</div>
 				<div className="addedToCart-description-buttons">
 					<Link to="./checkout">

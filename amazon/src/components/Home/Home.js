@@ -2,7 +2,6 @@ import "./Home.scss";
 import Product from "../Product/Product";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { useStateValue } from "../../StateProvider";
 
 // carousell img
 //https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Hero/Fuji_TallHero_Toys_en_US_1x._CB431858161_.jpg
@@ -11,8 +10,6 @@ import { useStateValue } from "../../StateProvider";
 //https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Hero/Fuji_TallHero_45M_v2_1x._CB432458380_.jpg
 
 function Home() {
-	const [{ basket, user }, dispatch] = useStateValue();
-
 	return (
 		<div className="home">
 			<div className="home-carousel">

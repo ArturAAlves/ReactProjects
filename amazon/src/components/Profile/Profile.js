@@ -8,8 +8,10 @@ import AddressItem from "./../AddressItem/AdressItem";
 //line 355
 
 const Profile = () => {
+	// eslint-disable-next-line no-unused-vars
 	const [{ user, contacts }, dispatch] = useStateValue();
 
+	// eslint-disable-next-line no-unused-vars
 	const [submited, setSubmited] = useState(false);
 	const [selectedAdress, setSelectedAdress] = useState("");
 	const [addContactActive, setAddContactActive] = useState(false);

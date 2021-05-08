@@ -14,7 +14,7 @@ import AddressForm from "../AddressForm/AddressForm";
 
 const Order = () => {
 	const [
-		{ user, basket, contacts, purchase, total }, //eslint ignoreline
+		{ user, basket, contacts, purchase }, //eslint ignoreline
 		dispatch,
 	] = useStateValue();
 
@@ -28,10 +28,7 @@ const Order = () => {
 	//Purchase
 	const handlePurchase = (e) => {
 		e.preventDefault();
-
 		let address = contacts.filter((contact) => contact.id === selectedAdress);
-
-		console.log("address", address);
 		let date = GetDate();
 		if (basket.length > 0 && contacts.length > 0) {
 			setSubmited(true);
@@ -53,10 +50,7 @@ const Order = () => {
 			});
 
 			setTimeout(function () {
-				window.open(
-					"https://www.arturalves.com/projects/amazonclone/",
-					"_self"
-				);
+				window.open("./");
 			}, 2500);
 
 			// browserHistory.push("/");

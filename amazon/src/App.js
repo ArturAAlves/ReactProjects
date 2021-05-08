@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
 import Home from "./components/Home/Home";
 import Checkout from "./components/Checkout/Checkout";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
 // import { HashRouter, Route, Link, Switch } from 'react-router-dom';
 // or
@@ -80,38 +80,29 @@ const App = () => {
 
 	return (
 		<Router>
-			<div className="app">
-				<Switch>
-					<Route path="/login">
-						<Login />
-					</Route>
-
-					<Route path="/order">
-						<Header />
-						<Order />
-					</Route>
-
-					<Route path="/checkout">
-						<Header />
-						<Checkout />
-					</Route>
-					<Route path="/profile">
-						<Header />
-						<Profile />
-					</Route>
-					<Route path="/returns&orders">
-						<Header />
-						<ReturnsAndOrders />
-					</Route>
-					<Route path="/">
-						<AddedToCart />
-						<Header />
-						<Home />
-					</Route>
-				</Switch>
-				<Footer />
-				{/* Fix Header component Duplication */}
-			</div>
+			<Header />
+			<Switch>
+				<Route path="/login">
+					<Login />
+				</Route>
+				<Route path="/order">
+					<Order />
+				</Route>
+				<Route path="/checkout">
+					<Checkout />
+				</Route>
+				<Route path="/profile">
+					<Profile />
+				</Route>
+				<Route path="/returns&orders">
+					<ReturnsAndOrders />
+				</Route>
+				<Route path="/">
+					<AddedToCart />
+					<Home />
+				</Route>
+			</Switch>
+			<Footer />
 		</Router>
 	);
 };

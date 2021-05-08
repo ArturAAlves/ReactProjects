@@ -59,7 +59,7 @@ const AdressForm = (active) => {
 				break;
 			case "city":
 				if (value.match(/\d+/g)) {
-					event.target.setCustomValidity(` ${val} can only include letters`);
+					event.target.setCustomValidity(`This field can only include letters`);
 				} else if (value.length <= 0) {
 					event.target.setCustomValidity(`This field cannot be empty`);
 				} else {
@@ -68,16 +68,16 @@ const AdressForm = (active) => {
 				setOrderInfo({ ...orderInfo, city: value });
 				break;
 			case "postal":
-				if (value.match(/^[0-9.,]+$/)) {
+				if (value.replace(/ /g, "").length <= 3) {
+					event.target.setCustomValidity(`Insert at least 4 digits`);
+				} else if (value.match(/^[0-9.,]+$/)) {
 					event.target.setCustomValidity(`Insert numbers only`);
 				} else if (value.length < 4) {
 					event.target.setCustomValidity(`This field cannot be empty`);
 				} else {
 					event.target.setCustomValidity(``);
 				}
-				let str = value;
-				let parts = str.match(/.{1,4}/g);
-				value = parts.join("-"); //returns 123-456-789
+
 				setOrderInfo({ ...orderInfo, postal: value });
 				break;
 			case "phoneNumber":
@@ -107,11 +107,9 @@ const AdressForm = (active) => {
 				} else {
 					event.target.setCustomValidity(``);
 				}
-
 				setOrderInfo({ ...orderInfo, cardN: value });
 				break;
 			case "expiration":
-				console.log(value.replace(/ /g, ""));
 				if (value.replace(/ /g, "").length === 1) {
 					event.target.setCustomValidity(`Cannot be empty`);
 				} else if (value.replace(/ /g, "").length !== 5) {
@@ -119,15 +117,6 @@ const AdressForm = (active) => {
 				} else {
 					event.target.setCustomValidity(``);
 				}
-				// if (!value.match(/^[0-9.,]+$/)) {
-				// 	event.target.setCustomValidity(`Insert numbers only`);
-				// } else
-				// if (value.length !== 4) {
-				// 	console.log(value.length);
-				// 	event.target.setCustomValidity(`incorrect Information`);
-				// } else {
-				// 	event.target.setCustomValidity(``);
-				// }
 				setOrderInfo({ ...orderInfo, expiration: value });
 				break;
 			case "CVC":
@@ -202,10 +191,10 @@ const AdressForm = (active) => {
 					/>
 
 					<InputMask
-						mask="9999-999"
 						disabled={false}
 						maskChar=""
-						onChange={handleChange}>
+						onChange={handleChange}
+						mask="9999-999">
 						{() => (
 							<TextField
 								required

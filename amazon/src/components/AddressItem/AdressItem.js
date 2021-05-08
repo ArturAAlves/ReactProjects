@@ -6,6 +6,7 @@ import Visa from "./img/visa.png";
 import { useStateValue } from "../../StateProvider";
 
 const AddressItem = ({ contantIfo, id, select, active }) => {
+	// eslint-disable-next-line no-unused-vars
 	const [{ contacts }, dispatch] = useStateValue();
 
 	function imgSelector(img) {
