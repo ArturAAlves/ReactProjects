@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import "./Header.scss";
 import AmazonLogo from "./img/amazon-logo.png";
 import SearchIcon from "@material-ui/icons/Search";
@@ -10,6 +9,7 @@ import { getTotalProducs } from "../../reducer";
 import DropDown from "../DropDown/DropDown";
 
 function Header() {
+	// eslint-disable-next-line no-unused-vars
 	const [{ basket, user }, dispatch] = useStateValue();
 
 	function scrollTop() {

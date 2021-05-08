@@ -7,6 +7,7 @@ import { getTotalProducs } from "../../reducer";
 import { Link } from "react-router-dom";
 
 const Subtotal = () => {
+	// eslint-disable-next-line no-unused-vars
 	const [{ basket, user }, dispatch] = useStateValue();
 	return (
 		<div className="subtotal">

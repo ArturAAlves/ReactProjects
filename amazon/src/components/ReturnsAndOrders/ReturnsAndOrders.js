@@ -24,29 +24,6 @@ const ReturnsAndOrders = () => {
 				break;
 		}
 	}
-	// if (purchase[0]) {
-	// 	let { basket, purchaseID, address, presentNote } = purchase[0];
-	// 	console.log(purchase);
-	// }
-
-	// const timer = (countDownDate) => {
-	// 	let newDate = parseInt(countDownDate);
-	// 	console.log(countDownDate);
-
-	// 	let now = new Date();
-
-	// 	let timeleft = newDate - now;
-	// 	let days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
-	// 	var hours = Math.floor(
-	// 		(timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-	// 	);
-	// 	// let minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
-	// 	// let seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
-	// 	// console.log(timeleft);
-
-	// 	// let day = now.getDay();
-	// 	// console.log(day);
-	// };
 
 	return (
 		<div className="orders-and-returns">
@@ -90,14 +67,14 @@ const ReturnsAndOrders = () => {
 							</div>
 
 							<div className="order-contact-info">
-								<p className="order-tittle">Send To</p>
-								<p>{order.name}</p>
-								<p>{order.address.address}</p>
+								<p className="order-tittle">Sent To</p>
+								<p>{order.address[0].name}</p>
+								<p>{order.address[0].address}</p>
 								<p>
-									{order.address.city}, {order.address.postal}
+									{order.address[0].city}, {order.address[0].postal}
 								</p>
 
-								<p>{order.address.phone}</p>
+								<p>{order.address[0].phone}</p>
 							</div>
 							<div className="order-payment-info">
 								<div className="order-payment-tittle order-tittle">
@@ -105,18 +82,18 @@ const ReturnsAndOrders = () => {
 								</div>
 								<div className="order-payment-type">
 									<img
-										src={imgSelector(order.address.method)}
-										alt={order.address.method}
+										src={imgSelector(order.address[0].method)}
+										alt={order.address[0].method}
 									/>
 									<ul>
 										<li>
-											<span>Card:</span> {order.address.cardN}
+											<span>Card:</span> {order.address[0].cardN}
 										</li>
 										<li>
-											<span>Year:</span> {order.address.year}
+											<span>Year:</span> {order.address[0].expiration}
 										</li>
 										<li>
-											<span>Code:</span> {order.address.code}
+											<span>Code:</span> {order.address[0].CVC}
 										</li>
 									</ul>
 								</div>
