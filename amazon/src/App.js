@@ -2,12 +2,6 @@ import React, { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
 import Home from "./components/Home/Home";
 import Checkout from "./components/Checkout/Checkout";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
-
-// import { HashRouter, Route, Link, Switch } from 'react-router-dom';
-// or
-// import { MemoryRouter, Route, Link, Switch } from 'react-router-dom';
-
 import Login from "./components/Login/Login";
 import Profile from "./components/Profile/Profile";
 import { auth } from "./firebase";
@@ -18,10 +12,20 @@ import "./index.scss";
 import Order from "./components/Order/Order";
 import ReturnsAndOrders from "./components/ReturnsAndOrders/ReturnsAndOrders";
 
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
+
+// import { HashRouter, Route, Link, Switch } from 'react-router-dom';
+// import { createBrowserHistory } from "history";
+
 const App = () => {
+	// const history = createBrowserHistory({ forceRefresh: true });
+	// let history = useHistory();
+	// const location = useLocation();
+	// const pathName = location.pathname;
+	// console.log(pathName, history, location);
+
 	const [{ basket, contacts, purchase }, dispatch] = useStateValue();
 	const [loaded, setLoaded] = useState(true);
-
 	useEffect(() => {
 		//Purchase
 		const localpurchaseData = localStorage.getItem("purchase");
@@ -75,9 +79,20 @@ const App = () => {
 				});
 			}
 		});
-		return () => {};
 	}, []); // eslint-disable-line
 
+	// let hist = useHistory;
+
+	// console.log(history);
+	// const handleClick = (e) => {
+	// 	console.log(e.view.location.pathname);
+	// 	history.push(e.view.location.pathname);
+	// };
+	// const history = createBrowserHistory();
+	// console.log("main", history);
+	// const handleClick = () => {
+	// 	hist().push("./login");
+	// };
 	return (
 		<Router>
 			<Header />
