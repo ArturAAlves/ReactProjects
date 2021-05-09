@@ -50,7 +50,7 @@ const Order = () => {
 			});
 
 			setTimeout(function () {
-				window.open("./");
+				window.open(".#/returns&orders");
 			}, 2500);
 
 			// browserHistory.push("/");
@@ -180,18 +180,19 @@ const Order = () => {
 											/>
 											<p>This order contains a Gift</p>
 										</div>
-										{present ? (
-											<div className="gift-details">
+										<div className="gift-details">
+											{present ? (
 												<textarea
-													name=""
-													id=""
-													rows="4"
+													className="gift-details-textarea"
+													name="giftDetails"
+													id="giftDetails"
+													rows="3"
 													onChange={(e) => setPresentNote(e.target.value)}
 												/>
-											</div>
-										) : (
-											""
-										)}
+											) : (
+												""
+											)}
+										</div>
 									</div>
 								</div>
 							</div>

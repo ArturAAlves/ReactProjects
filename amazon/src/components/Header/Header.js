@@ -21,6 +21,12 @@ function Header() {
 			auth.signOut();
 		}
 	};
+	// let history = useHistory();
+	// 	const handleClick = (e) => {
+	// 		// console.log(e.view.location.pathname);
+	// 		history.push("/login");
+	// 	};
+	// onClick={(e) => handleClick(e)}
 
 	return (
 		<div className="header" onClick={() => scrollTop()}>
