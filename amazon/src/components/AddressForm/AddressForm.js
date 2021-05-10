@@ -159,10 +159,7 @@ const AdressForm = (active) => {
 
 	return (
 		<>
-			<form
-				onSubmit={handleSubmitAddress}
-				// className={active ? "" : "disaply-none"}
-			>
+			<form onSubmit={handleSubmitAddress}>
 				<TextField
 					onChange={handleChange}
 					id="name"

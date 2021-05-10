@@ -68,11 +68,11 @@
 
 // Shopping cart
 .CheckoutCart {
-	width: 98% !important;
+	max-width: 99% !important;
 	padding: 10px;
 	display: flex;
 	flex-direction: column;
-	margin-top: 20px;
+	margin-top: 25px !important;
 	width: 100%;
 	display: flex;
 	background-color: white;
@@ -100,6 +100,10 @@
 		float: right;
 		transform: translateY(-25px);
 		color: rgb(100, 100, 100);
+	}
+	@media only screen and(max-width:"500px") {
+		width: 95% !important;
+		margin: inherit auto;
 	}
 }
 

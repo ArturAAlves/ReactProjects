@@ -14,11 +14,10 @@ const Product = ({ id, title, image, price, rating, qty }) => {
 				image: image,
 				price: price,
 				rating: rating,
-				qty: qty,
+				qty: 1,
 			},
 		});
 	};
-
 	return (
 		<div className="product">
 			<div className="product-info">
