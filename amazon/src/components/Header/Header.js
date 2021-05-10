@@ -7,10 +7,17 @@ import { useStateValue } from "../../StateProvider";
 import { auth } from "../../firebase";
 import { getTotalProducs } from "../../reducer";
 import DropDown from "../DropDown/DropDown";
+import products from "../../products";
+import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 function Header() {
+	let history = useHistory();
+
 	// eslint-disable-next-line no-unused-vars
 	const [{ basket, user }, dispatch] = useStateValue();
+	const [searchInput, setSearchInput] = useState("");
+	const [searched, setSearched] = useState(products);
 
 	function scrollTop() {
 		window.scrollTo(0, 0);
@@ -21,23 +28,69 @@ function Header() {
 			auth.signOut();
 		}
 	};
-	// let history = useHistory();
-	// 	const handleClick = (e) => {
-	// 		// console.log(e.view.location.pathname);
-	// 		history.push("/login");
-	// 	};
-	// onClick={(e) => handleClick(e)}
+
+	const hadleSubmit = (e) => {
+		if (history.location.pathname !== "/") {
+			history.push("/");
+		}
+		setSearchInput("");
+		if (searchInput === "Your search is empty" || !searchInput) {
+			setSearchInput("Your search is empty");
+			setSearched(products);
+			setTimeout(() => {
+				setSearchInput("");
+			}, 2000);
+		} else if (searchInput) {
+			e.preventDefault();
+			let value = searchInput.toLowerCase();
+			let result = products.filter((product) => {
+				let tittle = product.title.toLowerCase();
+				let avaluate = tittle.search(value);
+				return avaluate >= 0;
+			}, []);
+			if (result.length === 0) {
+				setSearchInput("No item was found");
+				setSearched((e) => (e = products));
+				setTimeout(() => {
+					setSearchInput("");
+				}, 2000);
+			} else {
+				setSearched((e) => (e = result));
+				setSearchInput("");
+			}
+		}
+	};
+
+	const handleReset = () => {
+		setSearched((e) => (e = products));
+	};
+
+	useEffect(() => {
+		dispatch({
+			type: "SET_SEARCH",
+			products: searched,
+		});
+		return () => {};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [searched]);
 
 	return (
 		<div className="header" onClick={() => scrollTop()}>
-			<Link to="./">
+			<Link to="./" onClick={handleReset}>
 				<img alt="amazon-logo" className="header-logo" src={AmazonLogo} />
 			</Link>
 
-			<div className="header-search">
-				<input className="header-search-input" type="text"></input>
-				<SearchIcon className="header-search-icon" />
-			</div>
+			<form className="header-search" onSubmit={hadleSubmit}>
+				<input
+					className="header-search-input"
+					type="text"
+					onChange={(e) => setSearchInput(e.target.value)}
+					value={searchInput}
+				/>
+				<button type="submit">
+					<SearchIcon className="header-search-icon" />
+				</button>
+			</form>
 
 			<div className="header-nav">
 				<div className="header-nav-option">

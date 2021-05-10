@@ -4,6 +4,7 @@ export const initialState = {
 	user: null,
 	contacts: [],
 	purchase: [],
+	search: [],
 };
 
 const reducer = (state, action) => {
@@ -111,6 +112,12 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				purchase: tempPurchase,
+			};
+
+		case "SET_SEARCH":
+			return {
+				...state,
+				search: action.products,
 			};
 
 		default:

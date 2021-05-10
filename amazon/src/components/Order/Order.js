@@ -50,8 +50,8 @@ const Order = () => {
 			});
 
 			setTimeout(function () {
-				window.open(".#/returns&orders");
-			}, 2500);
+				window.open(".#/returns&orders", "_self");
+			}, 2000);
 
 			// browserHistory.push("/");
 		} else if (basket.length <= 0) {
@@ -61,13 +61,14 @@ const Order = () => {
 
 	const hangleSelectedAddress = (e) => {
 		setSelectedAdress(e);
-		// console.log("order,console", e);
 	};
 
 	useEffect(() => {
-		if (!user) {
-			window.open("/", "_self");
-		}
+		setTimeout(function () {
+			if (!user) {
+				window.open("./", "_self");
+			}
+		}, 2500);
 	}, []); // eslint-disable-line
 
 	useEffect(() => {
