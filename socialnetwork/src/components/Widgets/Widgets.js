@@ -1,7 +1,7 @@
 import React from "react";
 import "./widgets.scss";
 const Widgets = () => {
-	return <div></div>;
+	return <div className="widgets"></div>;
 };
 
 export default Widgets;

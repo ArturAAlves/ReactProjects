@@ -1,0 +1,14 @@
+.main {
+	width: 1200px;
+	justify-content: center;
+	margin: 30px;
+	background-color: rgb(226, 226, 231);
+}
+
+.main-container {
+	min-width: 680px;
+	width: 680px;
+	height: 100vh;
+	margin: auto;
+	flex-direction: column;
+}

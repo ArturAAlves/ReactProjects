@@ -2,9 +2,9 @@
 	display: flex;
 	position: sticky;
 	top: 0;
-	margin: 15px 20px;
 	background-color: white;
-	padding-bottom: 10px;
+	padding: 15px 15px;
+	z-index: 999;
 }
 
 .header-left,
@@ -15,6 +15,7 @@
 }
 //left
 .header-left {
+	width: 250px;
 	div {
 		display: flex;
 		background-color: rgb(240, 240, 240);
@@ -40,6 +41,7 @@
 .header-center {
 	justify-content: center;
 	flex: 1;
+	min-width: 680px;
 }
 
 .header-info {
@@ -55,7 +57,7 @@
 	text-align: center;
 	cursor: pointer;
 	width: 20%;
-	max-width: 150px;
+	max-width: 136px;
 	min-width: 60px;
 }
 
@@ -81,4 +83,8 @@
 	border-bottom: 3px solid #1877f2;
 	background-color: white !important;
 	border-radius: 0px !important;
+}
+
+.header-right {
+	width: 350px;
 }
