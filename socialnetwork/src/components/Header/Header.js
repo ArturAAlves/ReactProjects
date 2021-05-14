@@ -12,7 +12,10 @@ import { IconButton } from "@material-ui/core";
 import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
 import ForumIcon from "@material-ui/icons/Forum";
 import AddIcon from "@material-ui/icons/Add";
+import { useStateValue } from "../../StateProvider";
 const Header = () => {
+	const [{ user }, dispach] = useStateValue();
+	console.log("header", user);
 	return (
 		<div className="header">
 			<div className="header-left">
@@ -44,14 +47,14 @@ const Header = () => {
 			</div>
 			<div className="header-right">
 				<div className="header-info">
-					<h4>Zuk tha boy</h4>
+					<h4>{user.displayName}</h4>
 					<IconButton color="primary">
 						<ExpandMoreIcon />
 					</IconButton>
 					<Avatar
 						style={{ margin: "0 10px" }}
-						alt="zuk"
-						src="https://conteudo.imguol.com.br/c/noticias/bd/2018/09/03/o-ceo-do-facebook-mark-zuckerberg-ao-ser-questionado-no-capitolio-em-abril-sobre-a-falha-do-facebook-em-impedir-a-propagacao-do-discurso-de-odio-em-myanmar-1536017613993_v2_450x337.jpg"
+						alt={user.displayName}
+						src={user.photoURL}
 					/>
 				</div>
 				<div className="header-right-options">

@@ -1,0 +1,27 @@
+.embed-title {
+	display: flex;
+	align-items: center;
+	margin: 5px;
+	color: rgb(124, 121, 121);
+	h4 {
+		vertical-align: center;
+	}
+}
+.embed-title-text {
+	flex: 1;
+	cursor: pointer;
+}
+.embed-title-link {
+	margin: 0 10px;
+	cursor: pointer;
+}
+.embed-title-link:hover {
+	color: rgb(71, 67, 67);
+}
+
+iframe,
+embed {
+	border-radius: 3px;
+	border: none;
+	margin-bottom: 10px;
+}
