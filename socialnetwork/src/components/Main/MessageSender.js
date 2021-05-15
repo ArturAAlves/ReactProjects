@@ -17,6 +17,20 @@ const MessageSender = (props) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		// var washingtonRef = db.collection("posts").doc("vG1GdCtkd9AJWDR1wAOx");
+
+		// // Set the "capital" field of the city 'DC'
+		// return washingtonRef
+		// 	.update({
+		// 		message: messageInput,
+		// 	})
+		// 	.then(() => {
+		// 		console.log("Document successfully updated!");
+		// 	})
+		// 	.catch((error) => {
+		// 		// The document probably doesn't exist.
+		// 		console.error("Error updating document: ", error);
+		// 	});
 		db.collection("posts").add({
 			message: messageInput,
 			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
@@ -27,7 +41,6 @@ const MessageSender = (props) => {
 		});
 	};
 
-	console.log(messageInput);
 	return (
 		<div className="messagesender">
 			<div className="messagesender-top">

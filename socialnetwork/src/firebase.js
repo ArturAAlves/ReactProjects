@@ -1,20 +1,42 @@
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 import firebase from "firebase";
-const firebaseKey = process.env.REACT_APP_API_KEY;
+import "firebase/auth";
+// const firebaseKey = process.env.REACT_APP_API_KEY;
+
 const firebaseConfig = {
-	apiKey: firebaseKey,
-	authDomain: "socialnetwork-e14ac.firebaseapp.com",
-	projectId: "socialnetwork-e14ac",
-	storageBucket: "socialnetwork-e14ac.appspot.com",
-	messagingSenderId: "177288168480",
-	appId: "1:177288168480:web:c6fd76f6689d83266ee845",
-	measurementId: "G-FLKF8FCKCB",
+	apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+	authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
+	projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
+	storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
+	messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGINGSENDERID,
+	appId: process.env.REACT_APP_FIREBASE_APPID,
+	measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT,
 };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
 const auth = firebase.auth();
-const provider = new firebase.auth.GoogleAuthProvider();
+const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-export { auth, provider };
+export { auth, googleProvider };
 export default db;
+
+// function setPersistenceNone() {
+// 	// [START auth_set_persistence_none]
+// 	firebase
+// 		.auth()
+// 		.setPersistence(firebase.auth.Auth.Persistence.NONE)
+// 		.then(() => {
+// 			var provider = new firebase.auth.GoogleAuthProvider();
+// 			// In memory persistence will be applied to the signed in Google user
+// 			// even though the persistence was set to 'none' and a page redirect
+// 			// occurred.
+// 			return firebase.auth().signInWithRedirect(provider);
+// 		})
+// 		.catch((error) => {
+// 			// Handle Errors here.
+// 			var errorCode = error.code;
+// 			var errorMessage = error.message;
+// 		});
+// 	// [END auth_set_persistence_none]
+// }
