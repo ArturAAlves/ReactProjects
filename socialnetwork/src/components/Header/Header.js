@@ -13,11 +13,28 @@ import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
 import ForumIcon from "@material-ui/icons/Forum";
 import AddIcon from "@material-ui/icons/Add";
 import { useStateValue } from "../../StateProvider";
+// import { getAuth, signOut } from "firebase/auth";
+
+import { auth, signOut } from "../../firebase";
+
 const Header = () => {
 	const [{ user }, dispach] = useStateValue();
-	console.log("header", user);
+
+	// const hadleLogout = () => {
+	// 	signOut(auth)
+	// 		.then(() => {
+	// 			// Sign-out successful.
+	// 		})
+	// 		.catch((error) => {
+	// 			// An error happened.
+	// 		});
+	// };
 	return (
 		<div className="header">
+			<div>
+				<button>X</button>
+			</div>
+
 			<div className="header-left">
 				<img
 					src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1365px-Facebook_f_logo_%282019%29.svg.png"

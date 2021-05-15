@@ -1,23 +1,34 @@
 import React from "react";
 import "./login.scss";
-import { auth, provider } from "./firebase";
+import { auth, googleProvider } from "./firebase";
 import { useStateValue } from "./StateProvider";
 import { actionTypes } from "./reducer";
 
 const Login = () => {
 	const [state, dispach] = useStateValue();
-
 	const handleSignIn = () => {
 		auth
-			.signInWithPopup(provider)
+			.signInWithPopup(googleProvider)
 			.then((result) => {
+				console.log("login", result);
 				dispach({
 					type: actionTypes.SET_USER,
 					user: result.user,
 				});
 			})
-			.catch((error) => error.message);
+
+			.catch((error) => {
+				// // Handle Errors here.
+				// var errorCode = error.code;
+				// var errorMessage = error.message;
+				// // The email of the user's account used.
+				// var email = error.email;
+				// // The firebase.auth.AuthCredential type that was used.
+				// var credential = error.credential;
+				// // ...
+			});
 	};
+
 	return (
 		<div className="login">
 			<button type="submit" onClick={handleSignIn}>
