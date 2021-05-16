@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./commentfeed.scss";
-import db from "../../firebase";
+import { db } from "../../firebase";
 import { useStateValue } from "../../StateProvider";
 const CommentFeed = ({ id }) => {
 	const [{ user }, dispach] = useStateValue();
@@ -37,7 +37,9 @@ const CommentFeed = ({ id }) => {
 		<div className="commentFeed">
 			{commentFeed
 				? commentFeed.map((item) => (
-						<div className="comment">{item.data.message}</div>
+						<div className="comment" key={item.id}>
+							{item.data.message}
+						</div>
 				  ))
 				: "jeeeasda"}
 		</div>

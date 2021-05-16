@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./feed.scss";
 import Post from "./Post";
-import db from "../../firebase";
+import { db } from "../../firebase";
 import { useStateValue } from "../../StateProvider";
 
 const Feed = () => {

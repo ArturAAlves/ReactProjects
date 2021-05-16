@@ -3,7 +3,7 @@ import React from "react";
 import "./post.scss";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
-import db from "../../firebase";
+import { db } from "../../firebase";
 // import firebase from "firebase";
 import SendComment from "./SendComment";
 import CommentFeed from "./CommentFeed";
@@ -39,9 +39,13 @@ const Post = ({ image, message, profilePic, timestamp, username, id }) => {
 			<div className="post-text">
 				<p>{message}</p>
 			</div>
-			<div className="post-img">
-				<img src={image} alt={message} />
-			</div>
+			{image ? (
+				<div className="post-img">
+					<img src={image} alt={message} />
+				</div>
+			) : (
+				""
+			)}
 			<div className="post-reaction">
 				<div className="post-reaction-left">
 					<p>❤👍 Reactions</p>
