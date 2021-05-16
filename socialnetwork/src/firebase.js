@@ -1,6 +1,8 @@
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 import firebase from "firebase";
+import "firebase/firebase";
 import "firebase/auth";
+
 // const firebaseKey = process.env.REACT_APP_API_KEY;
 
 const firebaseConfig = {
@@ -13,13 +15,16 @@ const firebaseConfig = {
 	measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT,
 };
 
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-const db = firebaseApp.firestore();
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const storage = firebase.storage();
 const auth = firebase.auth();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-export { auth, googleProvider };
-export default db;
+export { auth, googleProvider, storage, db, firebase as default };
+// // export default db;
+
+// gs://socialnetwork-e14ac.appspot.com/
 
 // function setPersistenceNone() {
 // 	// [START auth_set_persistence_none]

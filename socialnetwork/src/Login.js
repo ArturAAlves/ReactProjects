@@ -1,8 +1,8 @@
 import React from "react";
 import "./login.scss";
 import { auth, googleProvider } from "./firebase";
-import { useStateValue } from "./StateProvider";
 import { actionTypes } from "./reducer";
+import { useStateValue } from "./StateProvider";
 
 const Login = () => {
 	const [state, dispach] = useStateValue();
@@ -10,7 +10,6 @@ const Login = () => {
 		auth
 			.signInWithPopup(googleProvider)
 			.then((result) => {
-				console.log("login", result);
 				dispach({
 					type: actionTypes.SET_USER,
 					user: result.user,

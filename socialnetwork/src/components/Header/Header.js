@@ -15,23 +15,17 @@ import AddIcon from "@material-ui/icons/Add";
 import { useStateValue } from "../../StateProvider";
 // import { getAuth, signOut } from "firebase/auth";
 
-import { auth, signOut } from "../../firebase";
+import { auth } from "../../firebase";
 
 const Header = () => {
 	const [{ user }, dispach] = useStateValue();
 
-	// const hadleLogout = () => {
-	// 	signOut(auth)
-	// 		.then(() => {
-	// 			// Sign-out successful.
-	// 		})
-	// 		.catch((error) => {
-	// 			// An error happened.
-	// 		});
-	// };
+	const hadleLogout = () => {
+		auth.signOut();
+	};
 	return (
 		<div className="header">
-			<div>
+			<div onClick={hadleLogout}>
 				<button>X</button>
 			</div>
 

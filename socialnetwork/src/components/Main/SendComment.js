@@ -2,7 +2,7 @@ import { Avatar } from "@material-ui/core";
 import React, { useState } from "react";
 import SendIcon from "@material-ui/icons/Send";
 import "./sendcomment.scss";
-import db from "../../firebase";
+import { db } from "../../firebase";
 import firebase from "firebase";
 import { useStateValue } from "../../StateProvider";
 import "./sendcomment.scss";
