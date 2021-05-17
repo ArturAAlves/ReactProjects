@@ -6,7 +6,6 @@ import FlagIcon from "@material-ui/icons/Flag";
 import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
 import SubscriptionsIcon from "@material-ui/icons/Subscriptions";
 import StorefrontIcon from "@material-ui/icons/Storefront";
-import Avatar from "@material-ui/core/Avatar";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { IconButton } from "@material-ui/core";
 import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
@@ -14,22 +13,19 @@ import ForumIcon from "@material-ui/icons/Forum";
 import AddIcon from "@material-ui/icons/Add";
 import { useStateValue } from "../../StateProvider";
 // import { getAuth, signOut } from "firebase/auth";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 import { auth } from "../../firebase";
+import AvatarImg from "../../Elements/AvatarImg";
 
 const Header = () => {
 	const [{ user }, dispach] = useStateValue();
-
 	const hadleLogout = () => {
 		auth.signOut();
 	};
 	return (
 		<div className="header">
-			<div onClick={hadleLogout}>
-				<button>X</button>
-			</div>
-
-			<div className="header-left">
+			{/* <div className="header-left">
 				<img
 					src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1365px-Facebook_f_logo_%282019%29.svg.png"
 					alt="fb-logo"
@@ -55,28 +51,24 @@ const Header = () => {
 				<div className="header-option">
 					<SupervisedUserCircleIcon />
 				</div>
-			</div>
+			</div> */}
 			<div className="header-right">
 				<div className="header-info">
 					<h4>{user.displayName}</h4>
 					<IconButton color="primary">
 						<ExpandMoreIcon />
 					</IconButton>
-					<Avatar
-						style={{ margin: "0 10px" }}
-						alt={user.displayName}
-						src={user.photoURL}
-					/>
+					<AvatarImg />
 				</div>
 				<div className="header-right-options">
 					<IconButton color="primary">
 						<NotificationsActiveIcon />
 					</IconButton>
 					<IconButton color="primary">
-						<ForumIcon />
+						<AddIcon />
 					</IconButton>
 					<IconButton color="primary">
-						<AddIcon />
+						<ExitToAppIcon onClick={hadleLogout} className="signout-button" />
 					</IconButton>
 				</div>
 			</div>

@@ -2,11 +2,13 @@
 	display: flex;
 	width: 100%;
 	flex-direction: column;
-	background-color: antiquewhite;
-	border: 1px solid rgb(182, 182, 182);
-	border-radius: 4px;
-	box-shadow: 11px 11px 10px -9px rgba(0, 0, 0, 0.109);
 	margin: 10px 0;
+	border: 1px solid rgb(197, 197, 197);
+	border-radius: 4px;
+	box-shadow: 6px 7px 16px -7px rgba(0, 0, 0, 0.15);
+	background-color: rgba(246, 242, 233, 0.596);
+	transition: transform 0.3s ease;
+	transition: box-shadow 0.3s ease;
 }
 
 .post-user {
@@ -23,6 +25,21 @@
 	}
 }
 
+.post-user-delete {
+	flex: 1;
+	text-align: right;
+	margin: 0 !important;
+	button {
+		background-color: transparent;
+		color: rgb(200, 117, 117);
+	}
+}
+
+.post-data {
+	font-size: 13px;
+	font-weight: 600;
+}
+
 .post-text {
 	margin: 10px 15px;
 	margin-top: 0;
@@ -31,16 +48,25 @@
 }
 
 .post-img {
-	margin-bottom: 10px;
+	max-height: 550px;
+	max-width: 660px;
+	margin: 0;
+	padding: 0;
+	border: none;
+	text-align: center;
+	overflow: hidden;
+
 	img {
 		object-fit: contain;
-		max-width: 660px;
+		max-height: 550px;
+		max-width: 661px;
 	}
 }
 
 .post-reaction {
 	display: flex;
 	color: #65676b;
+	margin-top: 10px;
 
 	div {
 		margin: 0 15px;

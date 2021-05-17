@@ -3,6 +3,7 @@
 	width: 120px;
 	transition: transform 0.5s ease-in-out;
 	background-color: rgba(255, 255, 255, 0) !important;
+	cursor: pointer;
 }
 
 .story:hover {
@@ -12,6 +13,8 @@
 .story-img {
 	object-fit: cover;
 	max-width: 120px;
+	max-height: 211px;
+	height: 200px;
 	border-radius: 15px;
 	background-color: transparent;
 	box-shadow: 11px 11px 36px -9px rgba(0, 0, 0, 0.23);
@@ -31,4 +34,13 @@
 	bottom: 20px;
 	left: 10%;
 	max-width: 60px;
+}
+
+.story-add {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 45px !important;
+	color: white;
 }
