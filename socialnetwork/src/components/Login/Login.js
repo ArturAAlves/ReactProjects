@@ -3,6 +3,7 @@ import "./login.scss";
 import { auth, googleProvider } from "../../firebase";
 import { useStateValue } from "../../StateProvider";
 import { Link, useHistory } from "react-router-dom";
+import google from "./img/googlesigin.png";
 
 const Login = () => {
 	// const history = useHistory();
@@ -92,29 +93,19 @@ const Login = () => {
 						Sign In
 					</button>
 				</form>
-				<p>
-					{/* By continuing, you agree to Amazon's Clone{" "}
-					<a href="https://www.amazon.com/gp/help/customer/display.html/ref=ap_signin_notification_condition_of_use?ie=UTF8&nodeId=508088">
-						Conditions of Use
-					</a>{" "}
-					and{" "}
-					<a href="https://www.amazon.com/gp/help/customer/display.html/ref=ap_signin_notification_privacy_notice?ie=UTF8&nodeId=468496">
-						Privacy Notice
-					</a>{" "}
-					. */}
-				</p>
+			</div>
+			<div className="login-bar"></div>
+			<div className="login-google">
+				<button type="submit" onClick={handleSignIn} className="google-submit">
+					<img src={google} alt="google" className="google-sign-in" />
+				</button>
 			</div>
 			<div className="login-bar">
-				<p>New to Amazon?</p>
+				<p>New to SocialNetwork?</p>
 			</div>
 			<div className="login-createAcc">
 				<button type="button" onClick={register}>
-					Create your Amazon account
-				</button>
-			</div>
-			<div className="login-google">
-				<button type="submit" onClick={handleSignIn}>
-					Log in
+					Create New Acc
 				</button>
 			</div>
 		</div>

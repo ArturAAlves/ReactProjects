@@ -7,8 +7,20 @@ import { db } from "../../firebase";
 // import firebase from "firebase";
 import SendComment from "./SendComment";
 import CommentFeed from "./CommentFeed";
+import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import { useStateValue } from "../../StateProvider";
 
-const Post = ({ image, message, profilePic, timestamp, username, id }) => {
+const Post = ({
+	image,
+	message,
+	profilePic,
+	timestamp,
+	username,
+	id,
+	email,
+}) => {
+	const [{ user }, dispach] = useStateValue();
+
 	const handleDelete = (e) => {
 		e.preventDefault();
 		db.collection("posts")
@@ -22,19 +34,27 @@ const Post = ({ image, message, profilePic, timestamp, username, id }) => {
 			});
 	};
 
-	// ek1MvIYeG1DcNsrLEGti;
-
+	console.log(email);
 	return (
 		<div className="post">
 			<div className="post-user">
 				<Avatar src={profilePic} alt={username} />
 				<div>
 					<h4> {username}</h4>
-					<p> {new Date(timestamp?.toDate()).toUTCString()}</p>
+					<p className="post-data">
+						{" "}
+						{new Date(timestamp?.toDate()).toUTCString()}
+					</p>
 				</div>
-				<div>
-					<button onClick={handleDelete}>X</button>
-				</div>
+				{user.email === email ? (
+					<div className="post-user-delete">
+						<button onClick={handleDelete}>
+							<DeleteOutlineIcon />
+						</button>
+					</div>
+				) : (
+					""
+				)}
 			</div>
 			<div className="post-text">
 				<p>{message}</p>

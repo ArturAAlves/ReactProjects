@@ -26,6 +26,7 @@ const Feed = () => {
 				? posts.map((post) => (
 						<Post
 							key={post.id}
+							email={post.data.id}
 							username={post.data.username}
 							timestamp={post.data.timestamp}
 							message={post.data.message}

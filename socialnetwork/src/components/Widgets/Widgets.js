@@ -25,7 +25,7 @@ const Widgets = () => {
 
 	return (
 		<div className="widgets">
-			{/* {embeeds.map((item, i) => {
+			{embeeds.map((item, i) => {
 				return (
 					<Embed
 						title={item.title}
@@ -35,7 +35,7 @@ const Widgets = () => {
 						height={item.height}
 					/>
 				);
-			})} */}
+			})}
 		</div>
 	);
 };

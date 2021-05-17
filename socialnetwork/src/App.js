@@ -7,6 +7,8 @@ import "./app.scss";
 import { useStateValue } from "./StateProvider";
 import { useEffect } from "react";
 import { auth } from "./firebase";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import Profile from "./components/Profile/Profile";
 
 function App() {
 	const [{ user }, dispatch] = useStateValue();
@@ -31,20 +33,29 @@ function App() {
 
 	console.log(user);
 	return (
-		<div className="app">
-			{!user ? (
-				<Login />
-			) : (
-				<>
-					<Header />
-					<div className="app-body">
-						<Sidebar />
-						<Main />
-						<Widgets />
+		<Router>
+			<Switch>
+				<Route path="/profile">
+					<Profile />
+				</Route>
+				<Route path="/">
+					<div className="app">
+						{!user ? (
+							<Login />
+						) : (
+							<>
+								<Header />
+								<div className="app-body">
+									<Sidebar />
+									<Main />
+									<Widgets />
+								</div>
+							</>
+						)}
 					</div>
-				</>
-			)}
-		</div>
+				</Route>
+			</Switch>
+		</Router>
 	);
 }
 

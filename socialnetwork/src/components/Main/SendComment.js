@@ -18,23 +18,28 @@ const SendComment = (id) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		db.collection("comments").add({
-			responseTo: id,
-			message: messageInput,
-			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-			profilePic: user.photoURL,
-			username: user.displayName,
-			image:
-				"https://images.newscientist.com/wp-content/uploads/2021/03/04154355/04-march_frog-lungs.jpg",
-		});
+		if (messageInput !== "" && messageInput !== null) {
+			db.collection("comments").add({
+				responseTo: id,
+				message: messageInput,
+				timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+				profilePic: user.photoURL,
+				username: user.displayName,
+				usernameID: user.email,
+				image:
+					"https://images.newscientist.com/wp-content/uploads/2021/03/04154355/04-march_frog-lungs.jpg",
+			});
+		}
+		setMessageInput("");
 	};
 
-	// console.log("messageInput", messageInput);
+	console.log("messageInput", messageInput);
 	return (
 		<div className="post-reply">
 			<Avatar
-				src="https://exame.com/wp-content/uploads/2021/04/Elon-Musk.jpg"
-				alt="elon"
+				style={{ margin: "0 10px" }}
+				alt={user.displayName}
+				src={user.photoURL}
 			/>
 			<div className="post-reply-input">
 				<form onSubmit={handleSubmit}>
@@ -44,8 +49,8 @@ const SendComment = (id) => {
 						value={messageInput}
 						onChange={handleChange}
 					/>
-					<button type="submit">
-						<SendIcon></SendIcon>
+					<button type="submit" className="messagesender-submit">
+						<SendIcon />
 					</button>
 				</form>
 			</div>
