@@ -33,6 +33,7 @@ const Feed = () => {
 							image={post.data.image}
 							profilePic={post.data.profilePic}
 							id={post.id}
+							likes={post.data.likes}
 						/>
 				  ))
 				: ""}

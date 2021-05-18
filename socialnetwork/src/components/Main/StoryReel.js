@@ -9,7 +9,8 @@ import firebase from "firebase";
 import { db, storage } from "../../firebase";
 import PhotoLibraryIcon from "@material-ui/icons/PhotoLibrary";
 import SendIcon from "@material-ui/icons/Send";
-import { Avatar } from "@material-ui/core";
+import { Avatar, IconButton } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 
 const StoryReel = () => {
 	const [{ user }, dispach] = useStateValue();
@@ -47,6 +48,7 @@ const StoryReel = () => {
 				id: user.email,
 			});
 			cleanUp();
+			setStoryPopUp((e) => (e = !e));
 		}
 	};
 
@@ -97,7 +99,7 @@ const StoryReel = () => {
 		}
 	}, []);
 
-	console.log("stories", user.photoURL);
+	console.log("stories", stories);
 	return (
 		<div className="storyreel">
 			<button onClick={handleStoryPopUp}>
@@ -112,7 +114,7 @@ const StoryReel = () => {
 				? stories.map((story) => (
 						<Story
 							id={story.id}
-							tittle={story.data.tittle}
+							message={story.data.message}
 							image={story.data.image}
 							profile={story.data.profilePic}
 						/>
@@ -122,6 +124,10 @@ const StoryReel = () => {
 			{storyPopUp ? (
 				<div className="storyPopUp">
 					<div className="storyPopUpSender">
+						<IconButton className="close-button" onClick={handleStoryPopUp}>
+							<CloseIcon />
+						</IconButton>
+
 						<div className="storyPopUpSender-top">
 							<Avatar src={user.photoURL} alt="zuk" />
 							<h4>{user.displayName}</h4>

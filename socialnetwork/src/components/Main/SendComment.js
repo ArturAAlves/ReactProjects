@@ -37,7 +37,7 @@ const SendComment = (id) => {
 	return (
 		<div className="post-reply">
 			<Avatar
-				style={{ margin: "0 10px" }}
+				style={{ margin: "0 0 0 20px" }}
 				alt={user.displayName}
 				src={user.photoURL}
 			/>
