@@ -1,7 +1,7 @@
 import { Avatar } from "@material-ui/core";
 import React from "react";
 import "./story.scss";
-const Story = ({ id, tittle, image, profile }) => {
+const Story = ({ id, message, image, profile }) => {
 	return (
 		<div className="story">
 			<img src={image} alt="" className="story-img" />
@@ -9,7 +9,7 @@ const Story = ({ id, tittle, image, profile }) => {
 				<Avatar src={profile} alt="" />
 			</div>
 			<div className="story-tittle-container">
-				<h4>{tittle}</h4>
+				<h4>{message}</h4>
 			</div>
 		</div>
 	);

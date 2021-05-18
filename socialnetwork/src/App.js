@@ -46,9 +46,9 @@ function App() {
 							<>
 								<Header />
 								<div className="app-body">
-									<Sidebar />
-									<Main />
 									<Widgets />
+									<Main />
+									<Sidebar />
 								</div>
 							</>
 						)}

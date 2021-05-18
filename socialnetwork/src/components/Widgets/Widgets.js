@@ -4,9 +4,9 @@ import Embed from "./Embed";
 const Widgets = () => {
 	let embeeds = [
 		{
-			type: "iframe",
-			title: "Amazon Clone",
-			url: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:6797818690164396032",
+			type: "embed",
+			title: "Artur Alves Website",
+			url: "https://www.arturalves.com/#projetos-websites",
 			height: 400,
 		},
 		{
@@ -16,15 +16,18 @@ const Widgets = () => {
 			height: "",
 		},
 		{
-			type: "embed",
-			title: "Artur Alves Website",
-			url: "https://www.arturalves.com/#projetos-websites",
+			type: "iframe",
+			title: "Linked In Post",
+			url: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:6797818690164396032",
 			height: 400,
 		},
 	];
 
 	return (
 		<div className="widgets">
+			<div className="widgets-tittle">
+				<h3>Feed</h3>
+			</div>
 			{embeeds.map((item, i) => {
 				return (
 					<Embed

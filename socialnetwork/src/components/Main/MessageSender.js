@@ -35,6 +35,7 @@ const MessageSender = (props) => {
 				username: user.displayName,
 				image: imageLink,
 				id: user.email,
+				likes: [],
 			});
 			cleanUp();
 		}

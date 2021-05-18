@@ -1,5 +1,5 @@
 import { Avatar } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import "./post.scss";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
@@ -18,9 +18,15 @@ const Post = ({
 	username,
 	id,
 	email,
+	likes,
 }) => {
 	const [{ user }, dispach] = useStateValue();
-
+	const [youLike, setYouLike] = useState([]);
+	// likes
+	// 	? likes.filter((item) => {
+	// 			return item === user.email;
+	// 	  })
+	// 	: "";
 	const handleDelete = (e) => {
 		e.preventDefault();
 		db.collection("posts")
@@ -34,7 +40,28 @@ const Post = ({
 			});
 	};
 
-	console.log(email);
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		let testeLike = likes.filter((item) => {
+			return item === user.email;
+		});
+		setYouLike(testeLike);
+		const washingtonRef = db.collection("posts").doc(id);
+		if (testeLike.length > 0) {
+			let removeLike = likes.filter((item) => {
+				return item !== user.email;
+			});
+			return washingtonRef.update({
+				likes: removeLike,
+			});
+		} else {
+			return washingtonRef.update({
+				likes: [...likes, user.email],
+			});
+		}
+	};
+	console.log("youLike", likes);
 	return (
 		<div className="post">
 			<div className="post-user">
@@ -68,17 +95,20 @@ const Post = ({
 			)}
 			<div className="post-reaction">
 				<div className="post-reaction-left">
-					<p>❤👍 Reactions</p>
+					{likes ? <p>👍 {likes.length}</p> : ""}
+					{youLike.length === 0 ? <p>You like this post</p> : ""}
 				</div>
+
 				<div className="post-reaction-right">
 					<p>Comments</p>
 				</div>
 			</div>
 			<div className="post-divider-1"></div>
 			<div className="post-actions">
-				<div className="post-action-like">
+				<button onClick={handleSubmit} className="post-action-like">
 					<ThumbUpIcon />
-				</div>
+				</button>
+
 				<div className="post-action-comment">
 					<ChatBubbleOutlineIcon />
 				</div>
