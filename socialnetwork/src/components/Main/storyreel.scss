@@ -1,13 +1,22 @@
 .storyreel {
+	position: relative;
+	z-index: 600;
 	display: flex;
 	max-width: 680px;
 	padding: 10px;
+	overflow: hidden;
+
+	@media only screen and (max-width: 760px) {
+		max-width: 500px;
+	}
+	@media only screen and (max-width: 660px) {
+		max-width: 400px;
+	}
 	button {
 		background-color: transparent;
 		margin: 0;
 		padding: 0;
 	}
-	overflow: hidden;
 }
 
 .storyPopUp {

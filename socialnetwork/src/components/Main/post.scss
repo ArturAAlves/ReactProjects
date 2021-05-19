@@ -55,11 +55,23 @@
 	border: none;
 	text-align: center;
 	overflow: hidden;
+	@media only screen and (max-width: 760px) {
+		max-width: 500px;
+	}
+	@media only screen and (max-width: 660px) {
+		max-width: 400px;
+	}
 
 	img {
-		object-fit: contain;
+		object-fit: cover !important;
 		max-height: 550px;
 		max-width: 661px;
+		@media only screen and (max-width: 760px) {
+			max-width: 500px;
+		}
+		@media only screen and (max-width: 660px) {
+			max-width: 400px;
+		}
 	}
 }
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./login.scss";
 import { auth, googleProvider } from "../../firebase";
 import { useStateValue } from "../../StateProvider";
+// eslint-disable-next-line no-unused-vars
 import { Link, useHistory } from "react-router-dom";
 import google from "./img/googlesigin.png";
 
@@ -11,6 +12,7 @@ const Login = () => {
 
 	const [email, setEmail] = useState("");
 	const [password, setpassword] = useState("");
+	// eslint-disable-next-line no-unused-vars
 	const [state, dispatch] = useStateValue();
 
 	const signIn = (e) => {
@@ -49,7 +51,7 @@ const Login = () => {
 		auth
 			.signInWithPopup(googleProvider)
 			.then((result) => {
-				console.log("login", result);
+				// console.log("login", result);
 				dispatch({
 					type: "SET_USER",
 					user: result.user,

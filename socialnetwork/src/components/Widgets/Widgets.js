@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./widgets.scss";
 import Embed from "./Embed";
 const Widgets = () => {
+	const [width, setWidth] = useState(window.innerWidth);
+
 	let embeeds = [
 		{
 			type: "embed",
@@ -22,9 +24,20 @@ const Widgets = () => {
 			height: 400,
 		},
 	];
+	// const handleOpen = () => {
+	// 	setSidebarOpen((e) => (e = !e));
+	// };
+
+	useEffect(() => {
+		function handleResize() {
+			setWidth(window.innerWidth);
+		}
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, [width]);
 
 	return (
-		<div className="widgets">
+		<div className={width >= 1160 ? "widgets" : "widgets widgets-mobile"}>
 			<div className="widgets-tittle">
 				<h3>Feed</h3>
 			</div>

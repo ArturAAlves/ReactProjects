@@ -12,10 +12,10 @@ import Profile from "./components/Profile/Profile";
 
 function App() {
 	const [{ user }, dispatch] = useStateValue();
-	console.log(user);
+	// console.log(user);
 
 	useEffect(() => {
-		console.log(user);
+		// console.log(user);
 		auth.onAuthStateChanged((authUser) => {
 			if (authUser) {
 				dispatch({
@@ -29,9 +29,9 @@ function App() {
 				});
 			}
 		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	console.log(user);
 	return (
 		<Router>
 			<Switch>
