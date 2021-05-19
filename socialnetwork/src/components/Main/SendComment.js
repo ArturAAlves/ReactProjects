@@ -12,7 +12,6 @@ const SendComment = (id) => {
 	const [{ user }, dispach] = useStateValue();
 
 	const handleChange = (e) => {
-		console.log("hello world");
 		setMessageInput(e.target.value);
 	};
 
@@ -33,11 +32,10 @@ const SendComment = (id) => {
 		setMessageInput("");
 	};
 
-	console.log("messageInput", messageInput);
 	return (
 		<div className="post-reply">
 			<Avatar
-				style={{ margin: "0 0 0 20px" }}
+				style={{ margin: "0 0 0 15px" }}
 				alt={user.displayName}
 				src={user.photoURL}
 			/>

@@ -9,10 +9,12 @@ import SendIcon from "@material-ui/icons/Send";
 // import storage from "../../firebase";
 
 const MessageSender = (props) => {
+	// eslint-disable-next-line no-unused-vars
 	const [{ user }, dispach] = useStateValue();
 	const [messageInput, setMessageInput] = useState("");
 	const [imageToUpload, setImageToUpload] = useState("");
 	const [imageLink, setImageLink] = useState("");
+	// eslint-disable-next-line no-unused-vars
 	const [progress, setProgress] = useState(0);
 
 	const inputChange = (e) => {

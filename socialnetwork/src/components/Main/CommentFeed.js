@@ -23,18 +23,12 @@ const CommentFeed = ({ id }) => {
 
 	useEffect(() => {
 		if (user && comments) {
-			// console.log("id do post principal", id.id);
-			// console.log(comments);
 			let result = comments.filter((item) =>
-				// (item) => console.log(item.data.responseTo.id)
 				id === item.data.responseTo.id ? item : ""
 			);
 			setCommentFeed(result);
-
-			// console.log("result", result);
 		}
 	}, [comments]);
-	// console.log("result-on commnetfeed", commentFeed);
 
 	const handleDelete = (item) => {
 		db.collection("comments")

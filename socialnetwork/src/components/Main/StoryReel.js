@@ -99,7 +99,6 @@ const StoryReel = () => {
 		}
 	}, []);
 
-	console.log("stories", stories);
 	return (
 		<div className="storyreel">
 			<button onClick={handleStoryPopUp}>
@@ -110,6 +109,11 @@ const StoryReel = () => {
 					profileImg={user.photoURL}
 				/>
 			</button>
+			<Story id="1" message="Hello" image={background1} profilePic={person1} />
+			<Story id="1" message="Hello" image={background1} profilePic={person1} />
+			<Story id="1" message="Hello" image={background1} profilePic={person1} />
+			<Story id="1" message="Hello" image={background1} profilePic={person1} />
+
 			{stories
 				? stories.map((story) => (
 						<Story
@@ -127,7 +131,6 @@ const StoryReel = () => {
 						<IconButton className="close-button" onClick={handleStoryPopUp}>
 							<CloseIcon />
 						</IconButton>
-
 						<div className="storyPopUpSender-top">
 							<Avatar src={user.photoURL} alt="zuk" />
 							<h4>{user.displayName}</h4>
@@ -172,11 +175,6 @@ const StoryReel = () => {
 			) : (
 				""
 			)}
-
-			{/* <Story id="1" tittle="Hello my boy" img={background1} profile={person1} />
-			<Story id="1" tittle="Hello my boy" img={background1} profile={person1} />
-			<Story id="1" tittle="Hello my boy" img={background1} profile={person1} />
-			<Story id="1" tittle="Hello my boy" img={background1} profile={person1} /> */}
 		</div>
 	);
 };
