@@ -1,11 +1,10 @@
-.app {
-	width: 100%;
-}
-
 .app-body {
 	min-height: 91vh;
 	display: flex;
 	background-color: #faf9f7;
+	@media only screen and (max-width: 650px) {
+		justify-content: center;
+	}
 }
 
 //Boxes	background-color: rgb(246, 242, 233);

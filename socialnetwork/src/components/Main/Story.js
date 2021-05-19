@@ -1,11 +1,19 @@
 import { Avatar } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import "./story.scss";
 const Story = ({ id, message, image, profilePic }) => {
-	console.log("story-img", image);
+	const [maximized, setMaximized] = useState(false);
+
+	// const handleClick = () => {
+	// 	setMaximized((e) => (e = !e));
+	// };
 	return (
 		<div className="story">
-			<img src={image} alt="" className="story-img" />
+			<img
+				src={image}
+				alt=""
+				className={maximized ? "story-img-large" : "story-img"}
+			/>
 			<div className="story-avatar-container">
 				<Avatar src={profilePic} alt="" />
 			</div>

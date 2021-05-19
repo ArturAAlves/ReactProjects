@@ -140,7 +140,7 @@ const Post = ({
 						""
 					)}
 					{youLike.length !== 0 ? (
-						<p className="post-reaction-youLiked">You like this post</p>
+						<p className="post-reaction-youLiked">You liked</p>
 					) : (
 						""
 					)}

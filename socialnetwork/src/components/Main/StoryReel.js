@@ -2,7 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./storyreel.scss";
 import Story from "./Story";
 import person1 from "./img/austin.jpg";
+import person2 from "./img/hanna.jpg";
+import person3 from "./img/jacob.jpg";
+import person4 from "./img/rodrigo.jpg";
 import background1 from "./img/background1.jpg";
+import background2 from "./img/background2.jpg";
+import background3 from "./img/background3.jpg";
+import background4 from "./img/background4.jpg";
+
 import { useStateValue } from "../../StateProvider";
 import AddStory from "./AddStory";
 import firebase from "firebase";
@@ -13,17 +20,19 @@ import { Avatar, IconButton } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 
 const StoryReel = () => {
+	// eslint-disable-next-line no-unused-vars
 	const [{ user }, dispach] = useStateValue();
 	const [storyPopUp, setStoryPopUp] = useState(false);
 	const [messageInput, setMessageInput] = useState("");
 	const [imageToUpload, setImageToUpload] = useState("");
 	const [imageLink, setImageLink] = useState("");
+	// eslint-disable-next-line no-unused-vars
 	const [progress, setProgress] = useState(0);
 	const [stories, setStories] = useState("");
 
 	const handleStoryPopUp = (e) => {
 		e.preventDefault();
-		setStoryPopUp((e) => (e = !e));
+		// setStoryPopUp((e) => (e = !e));
 	};
 
 	const inputChange = (e) => {
@@ -97,22 +106,39 @@ const StoryReel = () => {
 					);
 				});
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
 		<div className="storyreel">
 			<button onClick={handleStoryPopUp}>
 				<AddStory
-					id="1"
+					className="storyreel-button"
+					id="14"
 					tittle="Add Story"
 					img={background1}
 					profileImg={user.photoURL}
 				/>
 			</button>
-			<Story id="1" message="Hello" image={background1} profilePic={person1} />
-			<Story id="1" message="Hello" image={background1} profilePic={person1} />
-			<Story id="1" message="Hello" image={background1} profilePic={person1} />
-			<Story id="1" message="Hello" image={background1} profilePic={person1} />
+			<Story
+				id="144"
+				message="Sup team?"
+				image="https://airows.com/.image/t_share/MTMxODIwNzM0MTMyNzExMzk0/screen-shot-2015-07-24-at-92535-ampng.png"
+				profilePic={person1}
+			/>
+			<Story id="444" message="Hey!" image={background2} profilePic={person2} />
+			<Story
+				id="1444"
+				message="Like it?"
+				image={background3}
+				profilePic={person3}
+			/>
+			<Story
+				id="144"
+				message="Nice!"
+				image={background4}
+				profilePic={person4}
+			/>
 
 			{stories
 				? stories.map((story) => (
