@@ -1,13 +1,13 @@
 .storyreel {
 	display: flex;
-	flex: auto;
-	justify-content: space-around;
-
+	max-width: 680px;
+	padding: 10px;
 	button {
 		background-color: transparent;
 		margin: 0;
 		padding: 0;
 	}
+	overflow: hidden;
 }
 
 .storyPopUp {

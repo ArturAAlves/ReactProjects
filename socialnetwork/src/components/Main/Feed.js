@@ -5,6 +5,7 @@ import { db } from "../../firebase";
 import { useStateValue } from "../../StateProvider";
 
 const Feed = () => {
+	// eslint-disable-next-line no-unused-vars
 	const [{ user }, dispach] = useStateValue();
 	const [posts, setPosts] = useState(null);
 
@@ -18,8 +19,8 @@ const Feed = () => {
 					);
 				});
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-
 	return (
 		<div className="feed">
 			{posts

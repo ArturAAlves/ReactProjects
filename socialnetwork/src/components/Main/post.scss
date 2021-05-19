@@ -6,9 +6,9 @@
 	border: 1px solid rgb(197, 197, 197);
 	border-radius: 4px;
 	box-shadow: 6px 7px 16px -7px rgba(0, 0, 0, 0.15);
-	background-color: rgba(246, 242, 233, 0.596);
 	transition: transform 0.3s ease;
 	transition: box-shadow 0.3s ease;
+	background-color: white;
 }
 
 .post-user {
@@ -63,25 +63,16 @@
 	}
 }
 
-.post-reaction {
-	display: flex;
-	color: #65676b;
-	margin-top: 10px;
-
-	div {
-		margin: 0 15px;
-		flex: 1;
-	}
-}
-
 .post-reaction-right {
+	flex: 1;
 	text-align: right;
+	padding-right: 15px;
 }
 
 .post-actions {
 	display: flex;
 
-	div {
+	button {
 		margin: 5px;
 		flex: 1;
 		cursor: pointer;
@@ -90,12 +81,18 @@
 		align-items: center;
 		justify-content: center;
 		border-radius: 10px;
-
+		background-color: white;
 		transition: background-color 0.2s ease;
 		color: #65676b;
 	}
-	div:hover {
-		background-color: #eee6e6;
+
+	.MuiSvgIcon-root {
+		color: #7dabb4;
+	}
+
+	button:hover:hover {
+		background-color: rgba(243, 232, 221, 0.596);
+		color: #7f898b;
 	}
 }
 
@@ -103,7 +100,7 @@
 .post-divider-2 {
 	width: 98%;
 	height: 1px;
-	background-color: rgb(187, 187, 187);
+	background-color: rgba(187, 187, 187, 0.349);
 	margin: auto;
 }
 .post-divider-1 {
@@ -121,4 +118,30 @@
 		margin: 10px 15px;
 		margin-bottom: 15px;
 	}
+}
+
+.post-reaction-left {
+	display: flex;
+	flex: 1;
+}
+
+.post-reaction {
+	display: flex;
+	margin-left: 10px;
+	p {
+		margin: 0 5px;
+	}
+}
+
+.post-reaction-like {
+	transform: translateY(-2px);
+}
+.post-reaction-youLiked {
+	margin-left: 5px;
+}
+
+.post-reaction-container {
+	display: flex;
+	color: #65676b;
+	margin-top: 10px;
 }

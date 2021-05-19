@@ -6,23 +6,22 @@
 	padding: 15px;
 	border: 1px solid rgb(197, 197, 197);
 	border-radius: 4px;
-	-webkit-box-shadow: 6px 7px 16px -7px rgba(0, 0, 0, 0.35);
-	-moz-box-shadow: 6px 7px 16px -7px rgba(0, 0, 0, 0.35);
-	box-shadow: 6px 7px 16px -7px rgba(0, 0, 0, 0.35);
-	background-color: rgb(246, 242, 233);
+	-webkit-box-shadow: 6px 7px 16px -7px rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 6px 7px 16px -7px rgba(0, 0, 0, 0.15);
+	box-shadow: 6px 7px 16px -7px rgba(0, 0, 0, 0.15);
+	background-color: white;
 }
 
 .messagesender:hover {
-	transform: translate(1px, 1px);
-	-webkit-box-shadow: 6px 7px 16px -8px rgba(0, 0, 0, 0.61);
-	-moz-box-shadow: 6px 7px 16px -8px rgba(0, 0, 0, 0.61);
-	box-shadow: 6px 7px 16px -8px rgba(0, 0, 0, 0.61);
+	-webkit-box-shadow: 6px 7px 16px -8px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 6px 7px 16px -8px rgba(0, 0, 0, 0.3);
+	box-shadow: 6px 7px 16px -8px rgba(0, 0, 0, 0.3);
 }
 
 .messagesender-divider {
 	width: 98%;
 	height: 1px;
-	background-color: rgb(187, 187, 187);
+	background-color: rgba(187, 187, 187, 0.424);
 	margin: 15px auto;
 }
 
@@ -44,7 +43,7 @@
 	flex-direction: column;
 	margin: 10px 0;
 	height: auto;
-	background-color: white;
+	background-color: #faf7f2;
 	border-radius: 5px;
 	padding: 10px;
 	color: rgb(182, 182, 182);
@@ -55,12 +54,13 @@
 		height: 30px;
 		outline: none;
 		margin: 5px;
+		background-color: #faf7f2;
 		// caret-color: transparent;
 		// color: transparent;
 		// text-shadow: 0 0 0 #979797;
-		font-size: 20px;
+		font-size: 17px;
 		border: none;
-		color: rgb(168, 168, 168);
+		color: rgb(100, 97, 97);
 	}
 }
 
