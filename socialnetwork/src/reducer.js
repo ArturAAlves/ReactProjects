@@ -1,5 +1,6 @@
 export const initialState = {
 	user: null,
+	profileAuth: null,
 };
 
 const reducer = (state, action) => {
@@ -10,8 +11,16 @@ const reducer = (state, action) => {
 				user: action.user,
 			};
 
+		case "SET_PROFILE":
+			console.log("autenticateReducer", action);
+			return {
+				...state,
+				profileAuth: action.user,
+			};
+
 		default:
 			return state;
 	}
 };
+
 export default reducer;

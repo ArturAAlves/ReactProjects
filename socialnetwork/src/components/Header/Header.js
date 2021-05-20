@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./header.scss";
 import SearchIcon from "@material-ui/icons/Search";
 import HomeIcon from "@material-ui/icons/Home";
@@ -17,49 +17,48 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 import { auth } from "../../firebase";
 import AvatarImg from "../../Elements/AvatarImg";
+import { Link } from "react-router-dom";
 
 const Header = () => {
+	const [width, setWidth] = useState(window.innerWidth);
+
 	const [{ user }, dispach] = useStateValue();
 	const hadleLogout = () => {
 		auth.signOut();
 	};
+
+	useEffect(() => {
+		function handleResize() {
+			setWidth(window.innerWidth);
+		}
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, [width]);
+
 	return (
 		<div className="header">
-			{/* <div className="header-left">
-				<img
-					src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1365px-Facebook_f_logo_%282019%29.svg.png"
-					alt="fb-logo"
-				/>
-				<div>
-					<SearchIcon />
-					<input type="text" />
+			{width <= 1450 ? (
+				<div className="header-left">
+					<Link to="./feed">
+						<div>
+							<h4>Feed</h4>
+						</div>
+					</Link>
 				</div>
-			</div>
-			<div className="header-center">
-				<div className="header-option  option-border-active">
-					<HomeIcon className="option-active" />
-				</div>
-				<div className="header-option">
-					<FlagIcon />
-				</div>
-				<div className="header-option">
-					<SubscriptionsIcon />
-				</div>
-				<div className="header-option">
-					<StorefrontIcon />
-				</div>
-				<div className="header-option">
-					<SupervisedUserCircleIcon />
-				</div>
-			</div> */}
+			) : (
+				""
+			)}
+
 			<div className="header-right">
-				<div className="header-info">
-					<h4>{user.displayName}</h4>
-					<IconButton color="primary">
-						<ExpandMoreIcon />
-					</IconButton>
-					<AvatarImg />
-				</div>
+				<Link to="/">
+					<div className="header-info">
+						<h4>{user.displayName ? user.displayName : user.email}</h4>
+						<IconButton color="primary">
+							<ExpandMoreIcon />
+						</IconButton>
+						<AvatarImg />
+					</div>
+				</Link>
 				<div className="header-right-options">
 					<IconButton color="primary">
 						<NotificationsActiveIcon />
