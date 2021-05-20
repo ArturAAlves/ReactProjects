@@ -9,7 +9,6 @@ import google from "./img/googlesigin.png";
 const Login = () => {
 	// const history = useHistory();
 	const history = useHistory();
-
 	const [email, setEmail] = useState("");
 	const [password, setpassword] = useState("");
 	// eslint-disable-next-line no-unused-vars

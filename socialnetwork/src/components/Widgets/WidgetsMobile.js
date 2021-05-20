@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./widgets.scss";
 import Embed from "./Embed";
-const Widgets = () => {
+const WidgetsMobile = () => {
 	const [width, setWidth] = useState(window.innerWidth);
 
 	let embeeds = [
@@ -40,30 +40,24 @@ const Widgets = () => {
 	}, [width]);
 
 	return (
-		<>
-			{width >= 1450 ? (
-				<div className="widgets">
-					<div className="widgets-tittle">
-						<h3>Feed</h3>
-					</div>
-					{embeeds.map((item, i) => {
-						return (
-							<Embed
-								title={item.title}
-								type={item.type}
-								embedUrl={item.url}
-								key={i}
-								height={item.height}
-								link={item.link}
-							/>
-						);
-					})}
-				</div>
-			) : (
-				""
-			)}
-		</>
+		<div className="widgetsMobile">
+			<div className="widgets-tittle">
+				<h3>Feed</h3>
+			</div>
+			{embeeds.map((item, i) => {
+				return (
+					<Embed
+						title={item.title}
+						type={item.type}
+						embedUrl={item.url}
+						key={i}
+						height={item.height}
+						link={item.link}
+					/>
+				);
+			})}
+		</div>
 	);
 };
 
-export default Widgets;
+export default WidgetsMobile;

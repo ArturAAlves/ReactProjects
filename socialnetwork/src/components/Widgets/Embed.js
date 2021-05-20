@@ -1,19 +1,23 @@
 import React from "react";
 import "./embed.scss";
 // import TouchAppIcon from "@material-ui/icons/TouchApp";
-const Embed = ({ type, embedUrl, title, height }) => {
+const Embed = ({ type, embedUrl, title, height, link }) => {
 	// const heightValue = () => {
 	// 	return height ? height : (height = "100%");
 	// };
 
 	return (
 		<div className="embed">
-			<div className="embed-title">
+			<a
+				className="embed-title"
+				href={`https://${link}`}
+				rel="noreferrer"
+				target="_blank">
 				<div className="embed-title-text">
-					<h4>{title}</h4>
+					<p>{title}</p>
 				</div>
 				<div className="embed-title-link">{/* <TouchAppIcon /> */}</div>
-			</div>
+			</a>
 
 			{type === "iframe" ? (
 				<iframe

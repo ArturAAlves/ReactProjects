@@ -10,14 +10,15 @@
 	height: auto;
 	margin: auto;
 	flex-direction: column;
+
 	@media only screen and (max-width: 860px) {
 		width: 600px;
+		transform: translateX(-30px);
 	}
 	@media only screen and (max-width: 760px) {
 		width: 500px;
 	}
 	@media only screen and (max-width: 660px) {
 		width: 400px;
-		margin-left: 110px;
 	}
 }

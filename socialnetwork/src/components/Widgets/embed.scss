@@ -2,16 +2,18 @@ iframe,
 embed {
 	border-radius: 3px;
 	border: none;
-	margin-bottom: 25px;
+	margin-bottom: 50px;
 }
 
 .embed-title {
 	display: flex;
 	align-items: center;
 	margin: 5px;
-	color: rgb(124, 121, 121);
-	h4 {
-		vertical-align: center;
+	p {
+		text-align: center;
+		font-size: 18px;
+		font-weight: 500;
+		color: rgb(107, 162, 167) !important;
 	}
 }
 .embed-title-text {

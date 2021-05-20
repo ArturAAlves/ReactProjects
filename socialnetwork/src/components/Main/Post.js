@@ -4,7 +4,6 @@ import "./post.scss";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import { db } from "../../firebase";
-// import firebase from "firebase";
 import SendComment from "./SendComment";
 import CommentFeed from "./CommentFeed";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
@@ -32,7 +31,7 @@ const Post = ({
 
 	const handleDelete = (e) => {
 		e.preventDefault();
-		db.collection("posts")
+		db.collection("posts", "desc")
 			.doc(id)
 			.delete()
 			.then(() => {
