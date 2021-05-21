@@ -51,7 +51,7 @@ function App() {
 			let searchUser = profile.filter((user) => {
 				return user.email === user.id;
 			});
-			console.log("searchUser", searchUser);
+			// console.log("searchUser", searchUser);
 			if (searchUser.length === 0) {
 				db.collection("profile").add({
 					timestamp: firebase.firestore.FieldValue.serverTimestamp(),
@@ -68,7 +68,7 @@ function App() {
 		if (checked <= 2) {
 			setChecked((e) => (e = e + 1));
 		}
-		console.log("profileAuth", profileAuth);
+		// console.log("profileAuth", profileAuth);
 	}, [profile]);
 
 	// console.log(profile);

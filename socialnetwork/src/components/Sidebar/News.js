@@ -12,7 +12,7 @@ const News = ({ imgLink, name, link, linkName }) => {
 				<img src={imgLink} alt={name} />
 			</div>
 			<div className="news-bottom">
-				<h5>{name}</h5>
+				<p>{name}</p>
 			</div>
 		</a>
 	);

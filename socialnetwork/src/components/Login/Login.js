@@ -75,13 +75,14 @@ const Login = () => {
 		<div className="login">
 			<div className="login-form">
 				<h1>Sign-In</h1>
-				<form className="login-form-container">
+				{/* <form className="login-form-container">
 					<h5>Email</h5>
 					<input
 						type="text"
 						placeholder="Enter your Email"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
+						disabled
 					/>
 					<h5>password</h5>
 					<input
@@ -89,11 +90,12 @@ const Login = () => {
 						placeholder="password"
 						value={password}
 						onChange={(e) => setpassword(e.target.value)}
+						disabled
 					/>
-					<button type="button" onClick={signIn}>
+					<button type="button" onClick={signIn} disabled>
 						Sign In
 					</button>
-				</form>
+				</form> */}
 			</div>
 			<div className="login-bar"></div>
 			<div className="login-google">
@@ -101,14 +103,14 @@ const Login = () => {
 					<img src={google} alt="google" className="google-sign-in" />
 				</button>
 			</div>
-			<div className="login-bar">
+			{/* <div className="login-bar">
 				<p>New to SocialNetwork?</p>
 			</div>
 			<div className="login-createAcc">
 				<button type="button" onClick={register}>
 					Create New Acc
 				</button>
-			</div>
+			</div> */}
 		</div>
 	);
 };

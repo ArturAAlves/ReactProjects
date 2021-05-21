@@ -12,7 +12,7 @@ const reducer = (state, action) => {
 			};
 
 		case "SET_PROFILE":
-			console.log("autenticateReducer", action);
+			// console.log("autenticateReducer", action);
 			return {
 				...state,
 				profileAuth: action.user,
