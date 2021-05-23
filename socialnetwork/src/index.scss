@@ -21,6 +21,8 @@
 }
 
 body {
+	position: relative;
+
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
 		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
 		sans-serif;
@@ -36,5 +38,5 @@ code {
 }
 
 html {
-	// overflow-x: hidden !important;
+	overflow-x: hidden !important;
 }
