@@ -6,7 +6,6 @@ import firebase from "firebase";
 import { db, storage } from "../../firebase";
 import PhotoLibraryIcon from "@material-ui/icons/PhotoLibrary";
 import SendIcon from "@material-ui/icons/Send";
-// import storage from "../../firebase";
 
 const MessageSender = (props) => {
 	// eslint-disable-next-line no-unused-vars

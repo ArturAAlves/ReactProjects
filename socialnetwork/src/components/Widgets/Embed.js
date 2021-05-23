@@ -8,6 +8,16 @@ const Embed = ({ type, embedUrl, title, height, link }) => {
 
 	return (
 		<div className="embed">
+			{type === "iframe" ? (
+				<iframe
+					src={embedUrl}
+					width="380px"
+					height={height ? height : (height = "auto")}
+					allowfullscreen="false"
+					title="Embeded publication"></iframe>
+			) : (
+				<embed src="https://www.arturalves.com" scrolling="no"></embed>
+			)}
 			<a
 				className="embed-title"
 				href={`https://${link}`}
@@ -18,23 +28,6 @@ const Embed = ({ type, embedUrl, title, height, link }) => {
 				</div>
 				<div className="embed-title-link">{/* <TouchAppIcon /> */}</div>
 			</a>
-
-			{type === "iframe" ? (
-				<iframe
-					src={embedUrl}
-					width="350px"
-					height={height ? height : (height = "auto")}
-					allowfullscreen="true"
-					title="Embeded publication"></iframe>
-			) : (
-				<embed
-					src="https://www.arturalves.com"
-					style={{
-						height: height ? height : (height = "100%"),
-						width: "350px",
-					}}
-				/>
-			)}
 		</div>
 	);
 };

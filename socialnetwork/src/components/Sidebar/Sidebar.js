@@ -30,7 +30,7 @@ const Sidebar = () => {
 		{
 			imgLink:
 				"https://quatrorodas.abril.com.br/wp-content/uploads/2021/01/Tesla-Model-S-2021-5.jpeg?quality=70&strip=info",
-			name: "Tesla",
+			name: "Tesla New car",
 			link: "tesla.com/",
 			linkName: "tesla.com",
 		},
@@ -54,7 +54,7 @@ const Sidebar = () => {
 		{
 			imgLink:
 				"https://quatrorodas.abril.com.br/wp-content/uploads/2021/01/Tesla-Model-S-2021-5.jpeg?quality=70&strip=info",
-			name: "Tesla",
+			name: "So good, so eletric!",
 			link: "tesla.com/",
 			linkName: "tesla.com",
 		},

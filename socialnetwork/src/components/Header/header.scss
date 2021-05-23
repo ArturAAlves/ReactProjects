@@ -22,18 +22,19 @@
 	align-items: center;
 	flex: 1;
 	justify-content: flex-end;
+	@media only screen and(max-width:"500px") {
+		padding-right: 10px;
+	}
 }
 
 .header-left {
 	display: flex;
 	align-items: center;
 	margin-left: 15%;
-	// @media only screen and(max-width:"990px") {
-	// 	margin-left: 35%;
-	// }
-	// @media only screen and(max-width:"600px") {
-	// 	margin-left: 15%;
-	// }
+	color: #3f51b5;
+	@media only screen and(max-width:"450px") {
+		margin: 0px !important;
+	}
 }
 
 //left
