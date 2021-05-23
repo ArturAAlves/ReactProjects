@@ -4,6 +4,7 @@ import { db } from "../../firebase";
 import { useStateValue } from "../../StateProvider";
 import { Avatar } from "@material-ui/core";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+
 const CommentFeed = ({ id }) => {
 	const [{ user }, dispach] = useStateValue();
 	const [comments, setComments] = useState(null);

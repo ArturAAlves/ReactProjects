@@ -30,6 +30,9 @@
 		border-right: 0px;
 		border-top: 0px;
 		transform: translateX(310px);
+		@media only screen and (max-width: 500px) {
+			transform: translateX(320px);
+		}
 	}
 
 	h3 {
