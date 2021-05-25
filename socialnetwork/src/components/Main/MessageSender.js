@@ -15,6 +15,7 @@ const MessageSender = (props) => {
 	const [imageLink, setImageLink] = useState("");
 	// eslint-disable-next-line no-unused-vars
 	const [progress, setProgress] = useState(0);
+	const [uploadError, SetuploadError] = useState("");
 
 	const inputChange = (e) => {
 		setMessageInput(e.target.value);
@@ -22,7 +23,17 @@ const MessageSender = (props) => {
 
 	const onFileChange = (e) => {
 		if (e.target.files[0]) {
-			setImageToUpload(e.target.files[0]);
+			let regex = /\.(jpe?g|png|gif|bmp)$/gi;
+			let photoName = e.target.files[0].name;
+			let result = photoName.match(regex);
+			if (result) {
+				setImageToUpload(e.target.files[0]);
+			} else {
+				SetuploadError("The file you are trying to upload is not a picture.");
+				setTimeout(function () {
+					SetuploadError("");
+				}, 3000);
+			}
 		}
 	};
 
@@ -94,6 +105,7 @@ const MessageSender = (props) => {
 							onChange={(e) => inputChange(e)}
 							value={messageInput}
 						/>
+						<p style={{ color: "#CA3433" }}>{uploadError}</p>
 						<input type="file" onChange={onFileChange} id="upload" hidden />
 						<label for="upload" className="messagesender-uploadButton">
 							{/* {imageToUpload ? imageToUpload.name : ""} */}
