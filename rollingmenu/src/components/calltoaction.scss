@@ -1,0 +1,36 @@
+.calltoaction {
+	position: relative;
+	z-index: 999;
+	display: flex;
+	flex-direction: column;
+	width: 350px;
+	color: rgb(47, 47, 47);
+	margin-top: 175px;
+}
+
+.calltoaction-time {
+	font-size: 30px;
+	font-weight: 500;
+}
+
+.calltoaction-tittle {
+	font-size: 24px;
+	font-weight: 500;
+	margin: 5px 0;
+	letter-spacing: 1.2px;
+}
+
+.calltoaction-text {
+	font-size: 18px;
+}
+
+.calltoaction-btn {
+	margin-top: 10px;
+	font-size: 16px;
+	font-weight: 600;
+	border: none;
+	width: 180px;
+	padding: 15px 20px;
+	border-radius: 25px;
+	color: white;
+}
