@@ -1,4 +1,5 @@
 import "./App.scss"
+import React from "react"
 import Header from "./components/Header"
 import FoodTable from "./components/FoodTable"
 import CallToAction from "./components/CallToAction"
@@ -9,10 +10,9 @@ function App() {
 	const getColor = (item) => {
 		setColor((color) => (color = item))
 	}
-
 	return (
 		<div className="app">
-			<Header />
+			<Header color={color} />
 			<div className="app-hero-container">
 				<CallToAction color={color} />
 				<FoodTable getColor={getColor} />

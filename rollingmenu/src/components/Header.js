@@ -1,12 +1,15 @@
 import React from "react"
 import "./header.scss"
+import Logo from "./img/cooking-on-fire-2.svg"
 
-const Header = () => {
+const Header = (color) => {
+	// console.log(color)
 	return (
 		<div className="header">
 			<div className="header-left">
 				<div className="header-left-logo">
-					<p>Food Inc</p>
+					<img src={Logo} alt="logo" style={{ color }}></img>
+					<p>Food Inc.</p>
 				</div>
 				<div className="header-left-menu">
 					<ul>
