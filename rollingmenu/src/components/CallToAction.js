@@ -5,10 +5,10 @@ const CallToAction = (color) => {
 	return (
 		<div className="calltoaction">
 			<div className="calltoaction-time">
-				<p style={color}>5 Min</p>
+				<p style={color}>Cooked under 5 Min</p>
 			</div>
 			<div className="calltoaction-tittle">
-				<p> Good food, good mood</p>
+				<p>Good food, good mood</p>
 			</div>
 			<div className="calltoaction-text">
 				<p>
